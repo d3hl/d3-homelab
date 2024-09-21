@@ -1,7 +1,7 @@
 terraform {
 
   cloud {
-    organization ="d3hl"
+    organization ="ncdv-org"
 
     workspaces {
       name = "d3-homelab"
