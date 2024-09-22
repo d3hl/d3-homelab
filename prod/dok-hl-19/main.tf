@@ -10,7 +10,7 @@ terraform {
   required_version = ">= 0.6.0"
 }
 module "lxc" {
-  source = "/../modules/lxc"
+  source = "../../modules/lxc"
   lxc-vars = var.lxc-vars
   network = var.network
 }

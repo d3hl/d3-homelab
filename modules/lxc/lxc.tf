@@ -8,6 +8,34 @@ terraform {
   required_version = ">= 0.6.0"
 }
 
+variable "lxc-vars"  {
+    type = object({
+    ct_datastore_template_location      = string 
+    ct_datastore_storage_location       = string
+    ct_source_file_path                 = string
+    node_name                           = string
+    hostname                            = string
+    dns_domain                          = string
+    os_type                             = string
+    time_zone                           = string
+    sockets                             = string
+    cores                               = number
+    memory                              = number
+    ballon                              = number 
+    disksize                            = number
+    vga                                 = string
+    })
+}
+variable "network" {
+    type = object({
+    vlan_id   = number 
+    subnet    = string
+    bridge    = string
+    gateway   = string
+    dns       = string 
+  })
+}
+
 resource "random_password" "container_root_password" {
   length           = 24
   override_special = "_%@"
