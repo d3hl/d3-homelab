@@ -1,6 +1,6 @@
 
 module "lxc" {
-  source = "../modules/lxc"
+  source = "../../modules/lxc"
   lxc-vars = var.lxc-vars
   network = var.network
 }
