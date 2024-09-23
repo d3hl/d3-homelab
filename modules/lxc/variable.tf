@@ -1,4 +1,24 @@
+variable "lxc-vars"  {
+    type = object({
+    dns_domain                          = string
+    os_type                             = string
+    time_zone                           = string
+    sockets                             = string
+    memory                              = number
+    ballon                              = number 
+    vga                                 = string
+    })
+}
 
+variable "network" {
+    type = object({
+    vlan_id   = ""
+    subnet    = ""
+    bridge    = ""
+    gateway   = "" 
+    dns       = ""
+  })
+}
 
 variable "project_name" {
   description = "Name of the project."
