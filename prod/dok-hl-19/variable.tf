@@ -4,7 +4,6 @@ variable "lxc-vars"  {
     os_type                             = string
     time_zone                           = string
     sockets                             = string
-    memory                              = number
     ballon                              = number 
     vga                                 = string
     })
