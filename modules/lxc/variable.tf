@@ -12,11 +12,11 @@ variable "lxc-vars"  {
 
 variable "network" {
     type = object({
-    vlan_id   = ""
-    subnet    = ""
-    bridge    = ""
-    gateway   = "" 
-    dns       = ""
+    vlan_id   = number
+    subnet    = string
+    bridge    = string
+    gateway   = string 
+    dns       = string
   })
 }
 
