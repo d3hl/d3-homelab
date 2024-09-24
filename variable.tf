@@ -4,5 +4,9 @@ variable "d3-pve-credentials" {
       pve_user     = string
       pve_password = string 
     })
-  
+    default = {
+      endpoint     = ""
+      pve_user     = ""
+      pve_password = ""
+    }
 }
