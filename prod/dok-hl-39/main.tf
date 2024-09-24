@@ -5,7 +5,7 @@ variable "lxc_lxc-common" {
   
 }
 module "lxc" {
-  source  = "app.terraform.io/ncdv-org/lxc/proxmox"
+  source  = "app.terraform.io/ncdv-org/proxmox/bpg"
   version = "1.0.0"
   lxc-common = "${var.lxc_lxc-common}"
   node_name = "${var.lxc-common.node_name}"
