@@ -9,8 +9,8 @@ terraform {
 variable "proxmox_lxc-common" {
   
 }
-module "proxmox" {
-  source  = "app.terraform.io/ncdv-org/proxmox/bpg"
+module "pve" {
+  source  = "app.terraform.io/ncdv-org/pve/d3"
   version = "1.0.0"
   lxc-common = "${var.proxmox_lxc-common}"
   node_name = "${var.lxc-common.node_name}"
