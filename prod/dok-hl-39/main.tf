@@ -11,7 +11,7 @@ terraform {
 #  source = "../../modules/lxc"
 #}
 module "lxc" {
-  source  =, "app.terraform.io/ncdv-org/lxc/proxmox"
+  source  = "app.terraform.io/ncdv-org/lxc/proxmox"
   version = "1.0.0"
   node_name = "${var.lxc-common.node_name}"
   vm_id     = "${var.lxc-common.vm_id}" 
