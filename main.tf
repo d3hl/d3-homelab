@@ -3,6 +3,6 @@
 #}
 
 
-module "dok-hl-19" {
-  source = "./prod/dok-hl-19"
+module "dok-hl-39" {
+  source = "./prod/dok-hl-39"
 }
