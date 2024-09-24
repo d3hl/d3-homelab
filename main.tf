@@ -1,6 +1,6 @@
-locals {
-    name_suffix = "${var.resource_tags["projects"]}-${var.resource_tags["environment"]}"
-}
+#locals {
+#    name_suffix = "${var.resource_tags["projects"]}-${var.resource_tags["environment"]}"
+#}
 
 
 module "dok-hl-19" {

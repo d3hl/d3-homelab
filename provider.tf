@@ -1,10 +1,10 @@
     provider "proxmox" {
-        endpoint = endpoint 
-        username = pve_user
-        password = pve_password 
+        endpoint = var.credentials.endpoint 
+        username = var.credentials.pve_user
+        password = var.credentials.pve_password 
         insecure = true 
     ssh {
         agent = true
-        username = var.pve_user
+        username = var.credentials.pve_user
       }
       }
