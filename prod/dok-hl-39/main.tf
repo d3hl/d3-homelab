@@ -1,9 +1,13 @@
 #module "lxc" {
 #  source = "../../modules/lxc"
 #}
+variable "lxc_lxc-common" {
+  
+}
 module "lxc" {
   source  = "app.terraform.io/ncdv-org/lxc/proxmox"
   version = "1.0.0"
+  lxc-common = "${var.lxc_lxc-common}"
   node_name = "${var.lxc-common.node_name}"
   vm_id     = "${var.lxc-common.vm_id}" 
   cores     = "${var.lxc-common.cores}"
