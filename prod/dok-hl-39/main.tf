@@ -1,6 +1,11 @@
-#module "lxc" {
-#  source = "../../modules/lxc"
-#}
+terraform {
+  required_providers {
+    proxmox = {
+      source = "bpg/proxmox"
+      version = "0.65.0"
+    }
+  }
+}
 variable "lxc_lxc-common" {
   
 }
