@@ -22,58 +22,58 @@ output "container_root_password" {
 
 resource "proxmox_virtual_environment_file" "debian_container_template" {
   content_type = "vztmpl"
-  datastore_id = var.ct_datastore_template_location
+  datastore_id = local.ct_datastore_template_location
   node_name    = "pve11"
 
   source_file {
-    path = var.ct_source_file_path
+    path = local.ct_source_file_path
   }
 }
 
 resource "proxmox_virtual_environment_container" "debian_container" {
   description   = "Managed by Terraform"
-  node_name     = "pve11"
+  node_name     = "${var.lxc-common.node_name}"
   start_on_boot = true
   tags          = ["terraform", "lxc"]
   unprivileged  = true
-  vm_id         = 117
+  vm_id         = "${var.lxc-common.vm_id}"
   
   cpu {
     architecture = "amd64"
-    cores        = var.cores
+    cores        = "${var.lxc-common.cores}"
   }
 
   disk {
-    datastore_id = var.ct_datastore_storage_location
-    size         = var.disksize
+    datastore_id = local.ct_datastore_storage_location
+    size         = "${var.lxc-common.disksize}"
   }
 
   memory {
-    dedicated = var.memory
+    dedicated = "${var.lxc-common.memory}"
     swap      = 0
   }
 
   operating_system {
     template_file_id = proxmox_virtual_environment_file.debian_container_template.id
-    type             = var.os_type
+    type             = local.os_type
   }
 
   initialization {
-    hostname = var.hostname
+    hostname = "${var.lxc-common.hostname}"
 
     dns {
-      domain = var.dns_domain
-      servers = var.dns
+      domain = "${var.dns_domain}"
+      servers = "${var.dns}"
     }
 
     ip_config {
       ipv4 {
-        address = var.ipv4
-        gateway = var.gateway
+        address = "${var.lxc-common.ipv4}"
+        gateway = "${var.lxc-common.gateway}"
       }
     }
     user_account {
-      keys     = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII3/K4Fk9hgVBYcQjpOM83nRwxAE8yPhFzD1Y1ur+2JF d3"]
+      keys     = var.d3-pve-credentials.publickey
       password = random_password.container_root_password.result
     }
   }
