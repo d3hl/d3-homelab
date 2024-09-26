@@ -9,4 +9,14 @@ variable "lxc-common" {
     ipv4 = string
     ct_bridge = string
   })
+  default = {
+    node_name = ""
+    vm_id = null
+    hostname = ""
+    cores = null 
+    disk = null
+    memory = null
+    ipv4 = ""
+    ct_bridge = ""
+  }
   }
