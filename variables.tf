@@ -1,17 +1,9 @@
-variable "d3-pve-credentials" {
-    type=object({
-      endpoint     = string
-      pve_user     = string
-      pve_password = string
-      publickey = string 
-    })
-    default = {
-      endpoint     = ""
-      pve_user     = ""
-      pve_password = ""
-      publickey = ""
-    }
-}
+variable "endpoint" {}
+variable "publickey" {}
+variable "pve_api_token" {}
+variable "password" {}
+variable "pve_user" {}
+variable "vm_user" {}
 variable "lxc-common" {
   type=object({
     node_name = string
