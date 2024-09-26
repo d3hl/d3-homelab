@@ -1,6 +1,6 @@
 variable "endpoint" {}
-variable "password" {}
-variable "pve_user" {}
+variable "pvepassword" {}
+variable "pveuser" {}
 variable "lxc-common" {
   type=object({
     node_name = string
