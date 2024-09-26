@@ -20,3 +20,17 @@ variable "lxc-common" {
     ct_bridge = ""
   }
   }
+variable "d3-pve-credentials" {
+    type=object({
+      endpoint     = string
+      pve_user     = string
+      pve_password = string
+      publickey = string 
+    })
+    default = {
+      endpoint     = ""
+      pve_user     = ""
+      pve_password = ""
+      publickey = ""
+    }
+}
