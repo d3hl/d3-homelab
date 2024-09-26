@@ -6,11 +6,13 @@ terraform {
     }
   }
 }
-
+variable "pve-lxc" {
+  
+}
 
 module "pve" {
   source  = "app.terraform.io/ncdv-org/pve/d3"
   version = "1.0.0"
-  lxc-common = var.pve_lxc-common
+  lxc-common = var.pve-lxc
 
 }
