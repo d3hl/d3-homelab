@@ -27,9 +27,5 @@ terraform {
 module "pve" {
   source  = "app.terraform.io/ncdv-org/pve/d3"
   version = "1.0.0"
-  memory = var.memory
-  cores = var.cores
-  ipv4 = var.ipv4
-  hostname = var.hostname
-  ct_bridge = var.ct_bridge
+  lxc-common = dok-common
 }
