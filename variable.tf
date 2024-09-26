@@ -23,10 +23,10 @@ variable "lxc-common" {
   })
   default = {
     node_name = ""
-    vm_id     = {}
-    cores     = {} 
-    disk      = {}
-    memory    = {}
+    vm_id     = 0
+    cores     = 0 
+    disk      = 0
+    memory    = 0
     ipv4      = ""
     ct_bridge = "" 
   }
