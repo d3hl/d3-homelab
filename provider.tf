@@ -21,6 +21,10 @@ terraform {
       source = "bpg/proxmox"
       version = "0.65.0"
     }
+    tfe = {
+      source = "hashicorp/tfe"
+      version = "0.58.1"
+    }
   }
 
 }
@@ -35,3 +39,8 @@ terraform {
 
       }
       }
+
+     provider "tfe" {
+       token    = var.AxQJLqA1JqErGw.atlasv1.WBbcPSwM5fI6jqyczb1jzukzPaipgUCRR0MjAfGcwbQA5dmdBY2k9bzyPYZu8lQNeVM
+       version  = "~> 0.58.1"
+} 
