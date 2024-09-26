@@ -10,7 +10,3 @@ variable "d3-pve-credentials" {
       pve_password = ""
     }
 }
-
-variable "pve_lxc-common" {
-
-}
