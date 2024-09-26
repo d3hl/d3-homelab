@@ -1,4 +1,6 @@
-variable "endpoint" {}
+variable "endpoint" {
+  default = "https://192.168.2.11:8006/"
+}
 variable "pvepassword" {}
 variable "pveuser" {}
 variable "lxc-common" {
