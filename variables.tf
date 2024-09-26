@@ -1,9 +1,6 @@
 variable "endpoint" {}
-variable "publickey" {}
-variable "pve_api_token" {}
 variable "password" {}
 variable "pve_user" {}
-variable "vm_user" {}
 variable "lxc-common" {
   type=object({
     node_name = string
