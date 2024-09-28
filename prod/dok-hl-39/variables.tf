@@ -18,3 +18,6 @@ variable "lxc-common" {
     ipv4 = ""
   }
   }
+  variable "publickey" {
+    type=list()
+  }
