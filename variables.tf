@@ -13,6 +13,7 @@ variable "lxc-common" {
     memory = number
     ipv4 = string
     ct_bridge = string
+    vm_id = number
   })
   default = {
     node_name = ""
@@ -22,7 +23,7 @@ variable "lxc-common" {
     disk = 0
     memory = 0
     ipv4 = ""
-    ct_bridge = ""
+    vm_id = null
   }
   }
 
