@@ -19,5 +19,5 @@ variable "lxc-common" {
   }
   }
   variable "publickey" {
-    type=list()
+    type=list(string)
   }
