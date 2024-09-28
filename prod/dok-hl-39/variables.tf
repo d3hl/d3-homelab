@@ -1,4 +1,4 @@
-variable "dok-common" {
+variable "lxc-common" {
   type=object({
     node_name = string
     vm_id = number
