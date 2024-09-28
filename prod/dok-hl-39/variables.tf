@@ -20,4 +20,5 @@ variable "lxc-common" {
   }
   variable "publickey" {
     type=list(string)
+    default = [ "","" ]
   }
