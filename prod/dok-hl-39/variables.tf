@@ -21,4 +21,3 @@ variable "lxc-common" {
 variable "pvepassword" {}
 variable "pveuser" {}
 variable "api_token" {}
-variable "endpoint" {}

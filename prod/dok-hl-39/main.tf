@@ -30,5 +30,4 @@ module "pve" {
   lxc-common = var.lxc-common
   api_token  = var.api_token
   pveuser    = var.pveuser
-  endpoint   = var.endpoint
 }
