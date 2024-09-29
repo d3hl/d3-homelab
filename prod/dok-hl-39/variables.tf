@@ -18,3 +18,7 @@ variable "lxc-common" {
     ipv4 = ""
   }
   }
+variable "pvepassword" {}
+variable "pveuser" {}
+variable "api_token" {}
+variable "endpoint" {}
