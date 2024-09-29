@@ -31,4 +31,5 @@ module "pve" {
   api_token  = var.api_token
   pveuser    = var.pveuser
   endpoint   = var.endpoint
+  pvepassword = var.pvepassword
 }
