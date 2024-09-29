@@ -22,10 +22,8 @@ variable "pvepassword" {
   default = ""
 }
 variable "pveuser" {
-  default = ""
 }
 variable "api_token" {
-  default = ""
 }
 variable "endpoint" {
   default = "https://192.168.2.11:8006/"
