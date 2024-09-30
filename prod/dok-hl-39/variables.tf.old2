@@ -1,20 +1,26 @@
-variable "hostname" {
-  type = string
-  default = ""
-}
-variable "cores" {
-  type = number
-  default = null
-}
-variable "memory" {
-  type = number
-  default = null
-}
-variable "ipv4" {
-  type = string
-  default = ""
-}
-variable "ct_bridge" {
-  type = string
-  default = ""
+terraform {
+
+  cloud {
+    organization ="ncdv-org"
+
+    workspaces {
+      project = "ncdv-hl"
+      name = "d3-homelab"
+    }
+  }
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "2.5.2"
+    }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "4.0.6"
+    }
+    proxmox = {
+      source = "bpg/proxmox"
+      version = "0.65.0"
+    }
+  }
+
 }

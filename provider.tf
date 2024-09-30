@@ -1,14 +1,14 @@
 terraform {
-
+  required_version = ">= 1.5.0"
   cloud {
     organization ="ncdv-org"
-
     workspaces {
       project = "ncdv-hl"
       name = "d3-homelab"
     }
   }
   required_providers {
+
     local = {
       source  = "hashicorp/local"
       version = "2.5.2"
