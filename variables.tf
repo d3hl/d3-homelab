@@ -40,7 +40,6 @@ variable "lxc-common" {
   }
 }
 
-variable "default_gateway" {}
 variable "talos_ips" {
   type=map(string)
   default = {
