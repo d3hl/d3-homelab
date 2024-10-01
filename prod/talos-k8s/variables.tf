@@ -25,7 +25,6 @@ variable "endpoint" {
   default = "https://192.168.2.11:8006/"
 }
 
-variable "default_gateway" {}
 
 variable "talos_ips" {
   type=map(string)
