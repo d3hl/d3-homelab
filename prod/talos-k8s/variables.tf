@@ -28,10 +28,10 @@ variable "endpoint" {
 variable "default_gateway" {}
 
 variable "talos_ips" {
-  type=map(object({
-    talos_cp_01_ip_addr = "192.168.2.70"
-    talos_wk_01_ip_addr = "192.168.2.71"
-  })
-  )
+  type=map(string)
+  default = {
+    talos_cp_01_ip_addr = ""
+    talos_wk_01_ip_addr = ""
+  }
   
-}
+  }
