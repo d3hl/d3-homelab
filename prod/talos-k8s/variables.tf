@@ -9,11 +9,9 @@ variable "talos-common" {
   default = {
     node_name = ""
     vm_id = null
-    hostname = ""
-    cores = null 
-    disk = null
+    cp_cores = null 
+    wk_cores = null 
     memory = null
-    ipv4 = ""
   }
 }
 
