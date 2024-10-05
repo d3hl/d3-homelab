@@ -61,8 +61,8 @@ variable "talos-common" {
 variable "talos_ips" {
   type=map(string)
   default = {
-    talos_cp_01_ip_addr = ""
-    talos_wk_01_ip_addr = ""
+    talos_cp_1_ip_addr = ""
+    talos_wk_1_ip_addr = ""
   }
   
   }
