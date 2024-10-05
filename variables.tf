@@ -19,14 +19,12 @@ variable "endpoint" {
 variable "pvepassword" {}
 variable "pveuser" {}
 variable "api_token" {}
-variable "lxc-common" {
+variable "talos-common" {
   type=object({
     node_name = string
-    hostname = string
-    cores = number 
-    disk = number
+    cp_cores = number 
+    wk_cores = number 
     memory = number
-    ipv4 = string
     vm_id = number
   })
   default = {
@@ -43,8 +41,8 @@ variable "lxc-common" {
 variable "talos_ips" {
   type=map(string)
   default = {
-    talos_cp_01_ip_addr = "192.168.2.70"
-    talos_wk_01_ip_addr = "192.168.2.71"
+    talos_cp_01_ip_addr = ""
+    talos_wk_01_ip_addr = ""
   }
   
   }
