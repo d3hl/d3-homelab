@@ -13,5 +13,4 @@ module "talos-k8s" {
   api_token = var.api_token
   pveuser = var.pveuser
   talos_ips = talos_ips
-  talos-common = var.talos-common
   }

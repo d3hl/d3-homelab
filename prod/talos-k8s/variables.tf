@@ -1,12 +1,10 @@
-variable "lxc-common" {
+variable "talos-common" {
   type=object({
     node_name = string
-    vm_id = number
-    hostname = string
-    cores = number 
-    disk = number
+    cp_cores = number 
+    wk_cores = number 
     memory = number
-    ipv4 = string
+    vm_id = number
   })
   default = {
     node_name = ""
@@ -17,7 +15,8 @@ variable "lxc-common" {
     memory = null
     ipv4 = ""
   }
-  }
+}
+
 variable "pvepassword" {}
 variable "pveuser" {}
 variable "api_token" {}
