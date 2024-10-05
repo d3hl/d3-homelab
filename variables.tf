@@ -13,9 +13,7 @@ variable "resource_tags" {
 }
 
 
-variable "endpoint" {
-  default = "https://192.168.2.11:8006/"
-}
+variable "endpoint" {}
 variable "pvepassword" {}
 variable "pveuser" {}
 variable "vm_user" {}

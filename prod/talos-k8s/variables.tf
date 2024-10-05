@@ -35,9 +35,7 @@ variable "pvepassword" {}
 variable "pveuser" {}
 variable "vm_user" {}
 variable "api_token" {}
-variable "endpoint" {
-  default = "https://192.168.2.11:8006/"
-}
+variable "endpoint" {}
 
 
 variable "talos_ips" {
