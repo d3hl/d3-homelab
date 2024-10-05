@@ -1,5 +1,5 @@
 locals {
-  os_type                        ="l26"
+  os_type                        = "l26"
   datastore_id                   = "zvm"
   ct_datastore_template_location = "local"
   ct_datastore_storage_location  = "local"
