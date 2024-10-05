@@ -18,6 +18,7 @@ variable "endpoint" {
 }
 variable "pvepassword" {}
 variable "pveuser" {}
+variable "vm_user" {}
 variable "api_token" {}
 variable "lxc-common" {
   type=object({
