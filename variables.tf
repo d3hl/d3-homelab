@@ -42,6 +42,7 @@ variable "lxc-common" {
 variable "talos-common" {
   type=object({
     node_name = string
+    cluster_name = string
     vm_id = number
     cp_cores = number 
     wk_cores = number 
@@ -49,6 +50,7 @@ variable "talos-common" {
   })
   default = {
     node_name = ""
+    cluster_name = ""
     vm_id = null
     cp_cores = null 
     wk_cores = null 
