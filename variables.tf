@@ -1,55 +1,11 @@
-variable "project_name" {
-  type        = string
-  default     = "ncdv-hl"
-}
-
-variable "workspace" {
-  type        = string
-  default     = "d3-homelab"
-}
-variable "resource_tags" {
-  type        = map(string)
-  default     = { } 
-}
-
-
-variable "endpoint" {}
-variable "pvepassword" {}
-variable "pveuser" {}
-variable "vm_user" {}
-variable "publickey" {}
-variable "api_token" {}
-variable "lxc-common" {
-  type=object({
-    node_name = string
-    vm_id = number
-    hostname = string
-    cores = number 
-    disk = number
-    memory = number
-    ipv4 = string
-    ct_bridge = string
-  })
-  default = {
-    node_name = ""
-    vm_id = null
-    hostname = ""
-    cores = null 
-    disk = null
-    memory = null
-    ipv4 = ""
-    ct_bridge = ""
-  }
-  }
-
 variable "talos-common" {
   type=object({
     node_name = string
     cluster_name = string
-    vm_id = number
     cp_cores = number 
     wk_cores = number 
     memory = number
+    vm_id = number
   })
   default = {
     node_name = ""
@@ -60,12 +16,16 @@ variable "talos-common" {
     memory = null
   }
 }
-
 variable "talos_ips" {
   type=map(string)
   default = {
     talos_cp_1_ip_addr = ""
     talos_wk_1_ip_addr = ""
   }
-  
   }
+
+variable "pvepassword" {}
+variable "pveuser" {}
+variable "vm_user" {}
+variable "api_token" {}
+variable "endpoint" {}
