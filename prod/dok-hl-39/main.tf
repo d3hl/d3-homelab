@@ -1,4 +1,3 @@
-}
 module "lxc" {
   source  = "app.terraform.io/ncdv-org/lxc/pve"
   version = "1.0.0"
