@@ -4,7 +4,7 @@ module "k8s" {
   talos-common = var.talos-common
   talos_ips = var.talos_ips
   pveuser = var.pveuser
-  endpoint = var.endpoint
+  endpoint = "https://192.168.2.11:8006"
   pvepassword = var.pvepassword
   api_token = var.api_token
   vm_user = var.vm_user
