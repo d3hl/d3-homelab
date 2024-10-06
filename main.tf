@@ -6,6 +6,7 @@ module "dok-hl-39" {
   api_token = var.api_token
   pveuser = var.pveuser
   vm_user = var.vm_user
+  publickey = var.publickey
  }
 module "talos-k8s" {
   source = "./prod/talos-k8s"
@@ -15,4 +16,5 @@ module "talos-k8s" {
   pveuser = var.pveuser
   talos_ips = var.talos_ips
   vm_user = var.vm_user
+  publickey = var.publickey
   }
