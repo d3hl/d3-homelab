@@ -26,3 +26,4 @@ variable "pveuser" {}
 variable "api_token" {}
 variable "endpoint" {}
 variable "vm_user" {}
+variable "publickey" {}
