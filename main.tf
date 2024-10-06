@@ -5,6 +5,7 @@ module "dok-hl-39" {
   pvepassword = var.pvepassword
   api_token = var.api_token
   pveuser = var.pveuser
+  vm_user = var.vm_user
  }
 module "talos-k8s" {
   source = "./prod/talos-k8s"
