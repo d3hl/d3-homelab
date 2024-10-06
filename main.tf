@@ -16,5 +16,4 @@ module "talos-k8s" {
   pveuser = var.pveuser
   talos_ips = var.talos_ips
   vm_user = var.vm_user
-  publickey = var.publickey
   }
