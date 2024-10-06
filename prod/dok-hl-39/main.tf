@@ -1,3 +1,14 @@
+terraform {
+  
+  required_providers {
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.65.0"
+    }
+  }
+
+  required_version = ">= 0.6.0"
+}
 module "lxc" {
   source  = "app.terraform.io/ncdv-org/lxc/pve"
   version = "1.0.0"
