@@ -1,5 +1,5 @@
-module "dok-hl-39" {
-  source = "./prod/dok-hl-39"
+module "dok-hl-39-1" {
+  source = "./prod/dok-hl-39_delete"
   lxc-common = var.lxc-common
   endpoint   = var.endpoint
   pvepassword = var.pvepassword
