@@ -5,6 +5,8 @@ module "lxc" {
   endpoint   = var.endpoint
   api_token = var.api_token
   pveuser = var.pveuser
+  pvepassword = var.pvepassword
+  vm_user = var.vm_user
 }
 
 
