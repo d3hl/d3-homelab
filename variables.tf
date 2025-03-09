@@ -2,18 +2,18 @@ variable "talos-common" {
   type=object({
     node_name = string
     cluster_name = string
+    vm_id = number
     cp_cores = number 
     wk_cores = number 
     memory = number
-    vm_id = number
   })
   default = {
     node_name = ""
     cluster_name = ""
-    vm_id = null
     cp_cores = null 
     wk_cores = null 
     memory = null
+    vm_id = null
   }
 }
 variable "talos_ips" {
@@ -32,12 +32,3 @@ variable "credentials" {
     api_token = string
   })
 }
-
-
-
-
-#variable "pvepassword" {}
-#variable "pveuser" {}
-#variable "vm_user" {}
-#variable "api_token" {}
-#variable "endpoint" {}

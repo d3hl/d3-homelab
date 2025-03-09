@@ -10,10 +10,10 @@ variable "talos-common" {
   default = {
     node_name = ""
     cluster_name = ""
-    vm_id = null
     cp_cores = null 
     wk_cores = null 
     memory = null
+    vm_id = null
   }
 }
 variable "talos_ips" {
