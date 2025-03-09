@@ -25,7 +25,7 @@ terraform {
 
 }
 module "lxc" {
-  source  = "app.terraform.io/ncdv-org/lxc/pve"
+  source  = "app.terraform.io/d3-org/lxc/pve"
   version = "1.0.0"
   lxc-common = var.lxc-common
   endpoint   = var.endpoint
