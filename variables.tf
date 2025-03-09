@@ -24,8 +24,20 @@ variable "talos_ips" {
   }
   }
 
-variable "pvepassword" {}
-variable "pveuser" {}
-variable "vm_user" {}
-variable "api_token" {}
-variable "endpoint" {}
+variable "credentials" {
+  type=object({
+    endpoint =  string
+    pveuser  =  string
+    pvepassword = string
+    api_token = string
+  })
+}
+
+
+
+
+#variable "pvepassword" {}
+#variable "pveuser" {}
+#variable "vm_user" {}
+#variable "api_token" {}
+#variable "endpoint" {}

@@ -10,13 +10,16 @@ terraform {
 
 }
     provider "proxmox" {
-      endpoint = var.endpoint 
-      username = var.pveuser
-      password = var.pvepassword
+#      endpoint = var.endpoint 
+#      username = var.pveuser
+#      password = var.pvepassword
+      endpoint = var.credentials.endpoint
+      username = var.credentials.pveuser
+      password = var.credentials.pvepassword
       insecure = true 
     ssh {
         agent = true
-        username = var.pveuser
+        username = var.vmuser
 
       }
       }
