@@ -1,5 +1,5 @@
 # Add talos module
-module "talos-k8s" {
+module "k8s" {
   source = "./prod/talos-k8s"
   talos-common = var.talos-common
   credentials = var.credentials
