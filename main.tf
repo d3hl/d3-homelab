@@ -4,9 +4,9 @@ module "talos-k8s" {
   talos-common = var.talos-common
   credentials = var.credentials
   talos_ips = var.talos_ips
-  #credentials = var.credentials.pveuser
-  #credentials = var.credentials.pvepassword 
-  #credentials = var.credentials.api_token
+#  pveuser = var.credentials.pveuser
+#  pvepassword = var.credentials.pvepassword 
+#  api_token= var.credentials.api_token
   #credentials = var.credentials.endpoint
   #pveuser = var.pveuser
   #endpoint = var.endpoint
