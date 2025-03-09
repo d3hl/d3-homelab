@@ -7,14 +7,14 @@ variable "talos-common" {
     memory = number
     vm_id = number
   })
-  default = {
-    node_name = ""
-    cluster_name = ""
-    cp_cores = null 
-    wk_cores = null 
-    memory = null
-    vm_id = null
-  }
+#  default = {
+#    node_name = ""
+#    cluster_name = ""
+#    cp_cores = null 
+#    wk_cores = null 
+#    memory = null
+#    vm_id = null
+#  }
 }
 variable "talos_ips" {
   type=map(string)
