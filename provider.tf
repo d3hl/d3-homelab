@@ -1,10 +1,10 @@
 terraform {
   required_version = ">= 1.5.0"
   cloud {
-    organization ="ncdv-org"
+    organization ="d3-org"
     workspaces {
-      project = "ncdv-hl"
-      name = "d3-homelab"
+      project = "hl-proj"
+      name = "homelab"
     }
   }
 
