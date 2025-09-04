@@ -4,7 +4,7 @@ terraform {
     organization ="d3-org"
     workspaces {
       project = "hl-proj"
-      name = "homelab"
+      name = "d3-homelab"
     }
   }
 
@@ -13,7 +13,7 @@ terraform {
   endpoint=var.virtual_environment_endpoint
     ssh {
         agent = true
-        username = var.vmuser
+        ssh_username = var.virtual_environment_ssh_username
 
       }
       }
