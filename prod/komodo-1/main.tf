@@ -1,6 +1,6 @@
 module "vm" {
   source  = "app.terraform.io/d3-org/vm/pve"
-  version = "1.0.4"
+  version = "1.0.5"
    virtual_environment_endpoint=var.virtual_environment_endpoint
    virtual_environment_api_token=var.virtual_environment_api_token
   
