@@ -1,10 +1,10 @@
 module "komodo-1" {
   source  = "app.terraform.io/d3-org/vm/pve"
   version = "1.0.6"
-#  endpoint=var.virtual_environment_endpoint
-  #api=var.virtual_environment_api_token
-  #nodename= var.virtual_environment_node_name
-  #insecure=var.virtual_environment_insecure
-  #storage=virtual_environment_storage
-  #url=var.latest_debian_13_bookworm_qcow2_img_url
+  virtual_environment_api_token = "${var.virtual_environment_api_token}"
+  virtual_environment_endpoint = "${var.virtual_environment_endpoint}"
+  virtual_environment_node_name = "pve10"
+  virtual_environment_ssh_username = "d3"
+  virtual_environment_storage = "cephfs"
+  virtual_environment_username = "root@pam"
   }
