@@ -12,8 +12,8 @@ terraform {
     required_version = "~> 1.13.1"
 }
     provider "proxmox" {
-        endpoint = var.virtual_environment_endpoint
-        api_token = var.virtual_environment_api_token
+        virtual_environment_endpoint = var.virtual_environment_endpoint
+        virtual_environment_api_token = var.virtual_environment_api_token
         insecure = var.virtual_environment_insecure
     ssh {
         agent = true
