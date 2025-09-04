@@ -1,15 +1,7 @@
 # Add talos module
-module "k8s" {
-  source = "./prod/talos-k8s"
-  talos-common = var.talos-common
-  credentials = var.credentials
-  talos_ips = var.talos_ips
-#  pveuser = var.credentials.pveuser
-#  pvepassword = var.credentials.pvepassword 
-#  api_token= var.credentials.api_token
-  #credentials = var.credentials.endpoint
-  #pveuser = var.pveuser
-  #endpoint = var.endpoint
-  #pvepassword = var.pvepassword
-  #api_token = var.api_token
+module "komodo-1" {
+  source  = "app.terraform.io/d3-org/vm/pve"
+  username = var.virtual_environment_username
+  api=var.virtual_environment_api_token
+  insecure=var.virtual_environment_insecure
   }

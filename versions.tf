@@ -1,5 +1,11 @@
 terraform {
-  
+    cloud {
+    organization ="d3-org"
+    workspaces {
+      project = "komodo"
+      name = "d3-homelab"
+    }
+  }
   required_providers {
     local = {
       source  = "hashicorp/local"
@@ -11,11 +17,7 @@ terraform {
     }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.73.0"
-    }
-    talos = {
-      source = "siderolabs/talos"
-      version = "0.5.0"
+      version = "0.83.0"
     }
   }
 
