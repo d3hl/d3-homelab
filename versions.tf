@@ -1,19 +1,15 @@
 terraform {
-
   required_providers {
     local = {
       source  = "hashicorp/local"
-      version = "2.5.2"
+      version = "2.5.3"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.6"
+      version = "4.1.0"
     }
     proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.83.0"
+      source = "bpg/proxmox"
     }
   }
-
-  required_version = ">= 1.1.0"
 }

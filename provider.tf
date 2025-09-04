@@ -13,7 +13,7 @@ terraform {
   endpoint=var.virtual_environment_endpoint
     ssh {
         agent = true
-        ssh_username = var.virtual_environment_ssh_username
+        username = var.virtual_environment_ssh_username
 
       }
       }
