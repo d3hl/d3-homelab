@@ -1,7 +1,7 @@
 module "komodo-1" {
   source  = "app.terraform.io/d3-org/vm/pve"
   version = "1.0.0"
-   endpoint=var.virtual_environment_endpoint
+   virtual_environment_endpoint=var.virtual_environment_endpoint
 #  username = var.virtual_environment_username
    virtual_environment_api_token=var.virtual_environment_api_token
 #  endpoint=var.virtual_environment_endpoint

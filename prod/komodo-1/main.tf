@@ -1,9 +1,9 @@
 module "vm" {
   source  = "app.terraform.io/d3-org/vm/pve"
   version = "1.0.0"
-   endpoint=var.virtual_environment_endpoint
+   virtual_environment_endpoint=var.virtual_environment_endpoint
 #  username = var.virtual_environment_username
-   api_token = var.virtual_environment_api_token
+   virtual_environment_api_token=var.virtual_environment_api_token
  # ssh_username = var.virtual_environment_ssh_username
  # nodename= var.virtual_environment_node_name
  # insecure=var.virtual_environment_insecure
