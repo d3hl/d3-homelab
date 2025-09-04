@@ -14,5 +14,6 @@ module "vm" {
   virtual_environment_node_name = "true"
   virtual_environment_ssh_username = "d3"
   virtual_environment_storage = "cephfs"
-  virtual_environment_username = "root@pam" 
+  virtual_environment_username = "root@pam"
+  debian_cloud_image= "http://cloud.debian.org/images/cloud/trixie/latest/debian-13-generic-arm64.qcow2"
 }
