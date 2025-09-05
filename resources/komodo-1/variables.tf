@@ -22,11 +22,7 @@ variable "virtual_environment_api_token" {
   sensitive   = true
 }
 
-variable "virtual_environment_ssh_username" {
-  description = "The username for the Proxmox Virtual Environment API"
-  type        = string
-  default     = "d3"
-}
+
 
 variable "virtual_environment_node_name" {
   description = "Name of the Proxmox node"

@@ -8,3 +8,8 @@ variable "virtual_environment_api_token" {
   sensitive   = true
 }
 
+variable "virtual_environment_node_name" {
+  type        = string
+  description = "The node name for the Proxmox Virtual Environment API"
+  default     = "pve"
+}
