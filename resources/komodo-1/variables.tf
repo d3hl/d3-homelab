@@ -34,3 +34,6 @@ variable "datastore_id" {
   description = "Datastore for VM disks"
   default     = "cephfs"
 }
+variable "ssh_public_key)" {
+  type = string
+}
