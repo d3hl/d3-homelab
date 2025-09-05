@@ -1,6 +1,6 @@
-module "komodo-1" {
+module "debian-vm" {
   #source  = "app.terraform.io/d3-org/vm/pve"
-  source  = "./resources/komodo-1"
+  source  = "./resources/debian-vm"
   virtual_environment_endpoint = "${var.virtual_environment_endpoint}"
   virtual_environment_api_token = "${var.virtual_environment_api_token}"
   virtual_environment_node_name = "${var.virtual_environment_node_name}"

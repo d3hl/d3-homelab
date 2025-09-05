@@ -1,5 +1,4 @@
 variable "virtual_environment_endpoint" {
-  description = "The endpoint for the Proxmox Virtual Environment API (example: https://host:port)"
   type        = string
 }
 
