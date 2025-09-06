@@ -1,6 +1,6 @@
-data "local_file" "ssh_public_key" {
-  filename = "./.ssh/id_ed.pub" # local public key
-}
+#data "local_file" "ssh_public_key" {
+#  filename = "./.ssh/id_ed.pub" # local public key
+#}
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
@@ -20,6 +20,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
         shell: /bin/bash
         ssh_authorized_keys:
           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGs1xDYF4e7bYIrD4I2ERSUTRQSOKEMecLz1vYEvK0io d3_Terraform
+          - ${trimspace(var.ssh_public_key.content)}
         sudo: ALL=(ALL) NOPASSWD:ALL
     package_update: true
     packages:
