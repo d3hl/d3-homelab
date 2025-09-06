@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
           - sudo
         shell: /bin/bash
         ssh_authorized_keys:
-           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGs1xDYF4e7bYIrD4I2ERSUTRQSOKEMecLz1vYEvK0io d3_Terraform
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGs1xDYF4e7bYIrD4I2ERSUTRQSOKEMecLz1vYEvK0io d3_Terraform
         sudo: ALL=(ALL) NOPASSWD:ALL
     package_update: true
     packages:
