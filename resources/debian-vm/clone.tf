@@ -1,5 +1,5 @@
-resource "proxmox_virtual_environment_vm" "debian_clone" {
-  name      = "debian-clone"
+resource "proxmox_virtual_environment_vm" "komodo_1" {
+  name      = "Komodo_1"
   node_name = var.virtual_environment_node_name
 
   clone {
@@ -25,7 +25,7 @@ resource "proxmox_virtual_environment_vm" "debian_clone" {
     }
     ip_config {
       ipv4 {
-        address = "10.10.10.31/24"
+        address = "10.10.10.25/24"
         gateway = "10.10.10.2"
       }
     }
@@ -33,5 +33,5 @@ resource "proxmox_virtual_environment_vm" "debian_clone" {
 }
 
 output "vm_ipv4_address" {
-  value = proxmox_virtual_environment_vm.debian_clone.ipv4_addresses[1][0]
+  value = proxmox_virtual_environment_vm.debian_clone.ipv4_addresses
 }
