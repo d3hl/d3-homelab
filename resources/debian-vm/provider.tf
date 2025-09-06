@@ -17,6 +17,6 @@ terraform {
         insecure = true 
     ssh {
         agent = true
-#        username = "root"  #user
+        username = var.virtual_environment_username
       }
       }
