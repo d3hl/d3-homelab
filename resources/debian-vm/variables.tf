@@ -31,7 +31,7 @@ variable "virtual_environment_node_name" {
 variable "datastore_id" {
   type        = string
   description = "Datastore for VM disks"
-  default     = "cephfs"
+  default     = "cVM"
 }
 variable "ssh_public_key" {
   type = string

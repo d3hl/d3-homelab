@@ -34,10 +34,8 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
     disk {
-    datastore_id = "cephfs"
-    # qcow2 image downloaded from https://cloud.debian.org/images/cloud/bookworm/latest/ and renamed to *.img
-    # the image is not of import type, so provider will use SSH client to import it
-    file_id   = "cephfs:iso/debian-13-nocloud-amd64.img"
+    datastore_id = "cVM"
+    file_id   = proxmox_virtual_environment_download_file.debian_cloud_image.id
     interface = "virtio0"
     iothread  = true
     discard   = "on"
