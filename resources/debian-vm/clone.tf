@@ -33,5 +33,5 @@ resource "proxmox_virtual_environment_vm" "komodo_1" {
 }
 
 output "vm_ipv4_address" {
-  value = proxmox_virtual_environment_vm.debian_clone.ipv4_addresses
+  value = proxmox_virtual_environment_vm.komodo_1.ipv4_addresses
 }
