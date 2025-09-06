@@ -17,6 +17,6 @@ terraform {
         insecure = true 
     ssh {
         agent = true
-        username = "d3"
+        username = "root@pam"
       }
       }
