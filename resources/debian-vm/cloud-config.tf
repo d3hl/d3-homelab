@@ -1,5 +1,5 @@
 data "local_file" "ssh_public_key" {
-  filename = "./.ssh/id_ed.pub"
+  filename = "./.ssh/id_ed.pub" # local public key
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
