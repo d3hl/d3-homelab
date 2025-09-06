@@ -25,7 +25,8 @@ resource "proxmox_virtual_environment_vm" "debian_clone" {
     }
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "10.10.10.31/24"
+        gatteway = "10.10.10.2"
       }
     }
   }
