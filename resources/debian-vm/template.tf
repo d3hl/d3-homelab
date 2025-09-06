@@ -5,8 +5,6 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
   template = true
   started  = false
 
-
-
   machine     = "q35"
   bios        = "ovmf"
   description = "Managed by Terraform"
