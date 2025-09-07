@@ -1,3 +1,8 @@
+# see https://registry.terraform.io/providers/bpg/proxmox/0.81.0/docs/data-sources/virtual_environment_vms
+data "proxmox_virtual_environment_vms" "debian_template" {
+  tags = ["debian", "template"]
+}
+
 resource "proxmox_virtual_environment_vm" "debian-template" {
   name      = "debian-template"
   node_name = var.virtual_environment_node_name
