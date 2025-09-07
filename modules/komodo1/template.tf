@@ -5,7 +5,7 @@ data "proxmox_virtual_environment_vms" "debian_template" {
 
 resource "proxmox_virtual_environment_vm" "debian-template" {
   name      = "debian-template"
-  node_name = var.virtual_environment_node_name
+  node_name = var.virtual_environment_node1_name
   # should be true if qemu agent is not installed / enabled on the VM
   template = true
   started  = false

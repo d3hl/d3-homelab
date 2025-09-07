@@ -1,6 +1,7 @@
 resource "proxmox_virtual_environment_vm" "komodo1" {
   name      = "komodo1"
-  node_name = var.virtual_environment_node_name
+  node_name = var.virtual_environment_node1_name
+  tags      = sort(["debian", "terraform","komodo"])
 
   clone {
     vm_id = proxmox_virtual_environment_vm.debian-template.id
@@ -15,9 +16,6 @@ resource "proxmox_virtual_environment_vm" "komodo1" {
   }
 
   initialization {
-    dns {
-      servers = ["1.1.1.1"]
-    }
     ip_config {
       ipv4 {
         address = "dhcp"

@@ -5,7 +5,7 @@ data "local_file" "ssh_public_key" {
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
-  node_name    = var.virtual_environment_node_name
+  node_name    = var.virtual_environment_node1_name
 
   source_raw {
     data = <<-EOF

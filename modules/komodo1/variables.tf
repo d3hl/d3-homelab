@@ -20,10 +20,20 @@ variable "virtual_environment_api_token" {
   sensitive   = true
 }
 
-variable "virtual_environment_node_name" {
+variable "virtual_environment_node1_name" {
   description = "Name of the Proxmox node"
   type        = string
   default     = "pve10"
+}
+variable "virtual_environment_node2_name" {
+  description = "Name of the Proxmox node"
+  type        = string
+  default     = "pve11"
+}
+variable "virtual_environment_node3_name" {
+  description = "Name of the Proxmox node"
+  type        = string
+  default     = "pve14"
 }
 variable "datastore_id" {
   type        = string
