@@ -43,3 +43,6 @@ resource "proxmox_virtual_environment_vm" "komodo2" {
     meta_data_file_id = proxmox_virtual_environment_file.meta2_data_cloud_config.id
   }
 }
+output "vm2_ipv4_address" {
+  value = proxmox_virtual_environment_vm.komodo2.ipv4_addresses[1][0]
+}
