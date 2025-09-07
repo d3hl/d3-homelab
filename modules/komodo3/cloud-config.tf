@@ -5,15 +5,13 @@ data "local_file" "ssh_public_key" {
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
-  node_name    = var.virtual_environment_node3_name
+  node_name    = var.virtual_environment_node1_name
 
   source_raw {
     data = <<-EOF
     #cloud-config
-    hostname: komodo3
     timezone: Asia/Singapore
     users:
-      - default
       - name: d3
         groups:
           - sudo
@@ -34,4 +32,5 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
 
     file_name = "user-data-cloud-config.yaml"
   }
+
 }

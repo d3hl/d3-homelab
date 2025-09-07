@@ -10,7 +10,6 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    hostname: komodo2
     timezone: Asia/Singapore
     users:
       - name: d3
@@ -33,4 +32,5 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
 
     file_name = "user-data-cloud-config.yaml"
   }
+
 }
