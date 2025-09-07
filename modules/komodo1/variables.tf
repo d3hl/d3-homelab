@@ -5,7 +5,6 @@ variable "virtual_environment_endpoint" {
 variable "virtual_environment_username" {
   description = "Proxmox User for API Access"
   type        = string
-  default     = "root@pam"
 }
 
 #variable "virtual_environment_password" {
@@ -20,8 +19,6 @@ variable "virtual_environment_api_token" {
   type        = string
   sensitive   = true
 }
-
-
 
 variable "virtual_environment_node_name" {
   description = "Name of the Proxmox node"
