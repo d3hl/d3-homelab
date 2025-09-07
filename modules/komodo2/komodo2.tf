@@ -69,5 +69,5 @@ resource "proxmox_virtual_environment_vm" "komodo2" {
 
 }
 output "vm_ipv4_address" {
-  value = proxmox_virtual_environment_vm.komodo1.ipv4_addresses[1][0]
+  value = proxmox_virtual_environment_vm.komodo2.ipv4_addresses[1][0]
 }
