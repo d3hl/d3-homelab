@@ -10,7 +10,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    hostname: komodo1
+    hostname: komodo2
     timezone: Asia/Singapore
     users:
       - default
