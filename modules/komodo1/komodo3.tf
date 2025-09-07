@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "meta3_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
   node_name    = var.virtual_environment_node3_name
@@ -38,7 +38,7 @@ resource "proxmox_virtual_environment_vm" "komodo3" {
 
     datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-    meta_data_file_id = proxmox_virtual_environment_file.meta_data_cloud_config.id
+    meta3_data_file_id = proxmox_virtual_environment_file.meta3_data_cloud_config.id
   }
 }
 
