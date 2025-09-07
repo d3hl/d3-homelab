@@ -1,6 +1,6 @@
 # see https://registry.terraform.io/providers/bpg/proxmox/0.81.0/docs/data-sources/virtual_environment_vms
 data "proxmox_virtual_environment_vms" "windows_templates" {
-  tags = ["windows-2025-uefi", "template"]
+  tags = ["windows-2025-uefi", "template"] #tag
 }
 
 data "proxmox_virtual_environment_vm" "windows_template" {
