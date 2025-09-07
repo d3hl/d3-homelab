@@ -19,7 +19,11 @@ variable "virtual_environment_api_token" {
   type        = string
   sensitive   = true
 }
-
+variable "virtual_environment_node_name" {
+  description = "Name of the Proxmox node"
+  type        = string
+  default     = "pve10"
+}
 variable "virtual_environment_node1_name" {
   description = "Name of the Proxmox node"
   type        = string
