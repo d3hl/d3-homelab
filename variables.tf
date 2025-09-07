@@ -18,7 +18,3 @@ variable "virtual_environment_username" {
   description = "The node name for the Proxmox Virtual Environment API"
   default     = "pve"
 }
-variable "ssh_public_key" {
-  type = string
-  sensitive = true
-}
