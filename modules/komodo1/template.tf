@@ -46,6 +46,7 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
   }
   network_device {
     bridge = "vmbr0"
+    vlan_id = 10
   }
 
 }
