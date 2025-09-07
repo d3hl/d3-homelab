@@ -1,21 +1,46 @@
 variable "virtual_environment_endpoint" {
-  description = "The endpoint for the Proxmox Virtual Environment API (example: https://host:port)"
   type        = string
 }
+
+variable "virtual_environment_username" {
+  description = "Proxmox User for API Access"
+  type        = string
+}
+
+#variable "virtual_environment_password" {
+#  description = "Password for Proxmox API User"
+#  type        = string
+#  sensitive   = true
+#  default     = "don not use default passwords!"
+#}
+
 variable "virtual_environment_api_token" {
   description = "The API token for the Proxmox Virtual Environment API"
   type        = string
   sensitive   = true
 }
 
-variable "virtual_environment_node_name" {
+variable "virtual_environment_node1_name" {
+  description = "Name of the Proxmox node"
   type        = string
-  description = "The node name for the Proxmox Virtual Environment API"
+  default     = "pve10"
 }
-variable "virtual_environment_username" {
+variable "virtual_environment_node2_name" {
+  description = "Name of the Proxmox node"
   type        = string
-  description = "The node name for the Proxmox Virtual Environment API"
+  default     = "pve11"
+}
+variable "virtual_environment_node3_name" {
+  description = "Name of the Proxmox node"
+  type        = string
+  default     = "pve14"
+}
+variable "datastore_id" {
+  type        = string
+  description = "Datastore for VM disks"
+  default     = "cVM"
 }
 variable "ssh_public_key" {
-  type        = string
+  type = string
+  sensitive = true
 }
