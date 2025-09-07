@@ -1,3 +1,27 @@
+resource "proxmox_virtual_environment_vm" "komodo1" {
+  name      = "Komodo1"
+  node_name = var.virtual_environment_node_name
+
+  clone {
+    vm_id = proxmox_virtual_environment_vm.debian-template.id
+  }
+
+  agent {
+    enabled = true
+  }
+
+  memory {
+    dedicated = 4096
+  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+}
 data "local_file" "ssh_public_key" {
   filename = "/home/d3/.ssh/id_ed.pub" 
 }
@@ -10,7 +34,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    hostname: Komodo1
+    hostname: Komodo3
     timezone: Asia/Singapore
     users:
       - default
@@ -35,3 +59,6 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
     file_name = "user-data-cloud-config.yaml"
   }
 }
+#output "vm_ipv4_address" {
+  #value = proxmox_virtual_environment_vm.komodo1.ipv4_addresses[0]
+#}
