@@ -1,0 +1,7 @@
+---
+- name: Install docker.
+  hosts: '{{ custom_hosts }}'
+  gather_facts: no
+  roles:
+    - docker
+  become: true

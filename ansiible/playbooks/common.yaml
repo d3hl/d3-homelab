@@ -1,0 +1,7 @@
+---
+- name: Update package and config.  
+  hosts: '{{ custom_hosts }}'
+  gather_facts: no
+  roles:
+    - update_package
+  become: true
