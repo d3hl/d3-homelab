@@ -1,5 +1,5 @@
 resource "proxmox_virtual_environment_vm" "komodo1" {
-  name      = "Komodo1"
+  name      = "komodo1"
   node_name = var.virtual_environment_node_name
 
   clone {
