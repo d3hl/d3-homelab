@@ -1,9 +1,9 @@
 data "local_file" "ssh_public_key" {
   filename = "/home/d3/.ssh/id_ed.pub" 
 }
-module "komodo2" {
+module "komodo" {
   #source  = "app.terraform.io/d3-org/vm/pve"
-  source  = "./modules/komodo2"
+  source  = "./modules/komodo"
   virtual_environment_endpoint = var.virtual_environment_endpoint
   virtual_environment_api_token = var.virtual_environment_api_token
   virtual_environment_node1_name = var.virtual_environment_node1_name
