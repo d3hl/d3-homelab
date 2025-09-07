@@ -6,15 +6,15 @@ resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    local-hostname: komodo1
+    local-hostname: komodo2
     EOF
 
     file_name = "meta-data-cloud-config.yaml"
   }
 }
-resource "proxmox_virtual_environment_vm" "komodo1" {
-  name      = "komodo1"
-  node_name = var.virtual_environment_node1_name
+resource "proxmox_virtual_environment_vm" "komodo2" {
+  name      = "komodo2"
+  node_name = var.virtual_environment_node2_name
   tags      = sort(["debian", "terraform","komodo"])
 
   clone {
@@ -43,5 +43,5 @@ resource "proxmox_virtual_environment_vm" "komodo1" {
 }
 
 output "vm_ipv4_address" {
-  value = proxmox_virtual_environment_vm.komodo1.ipv4_addresses[1][0]
+  value = proxmox_virtual_environment_vm.komodo2.ipv4_addresses[1][0]
 }
