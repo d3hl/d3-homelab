@@ -21,6 +21,9 @@ resource "proxmox_virtual_environment_vm" "komodo1" {
         address = "dhcp"
       }
     }
+
+    datastore_id = var.datastore_id
+    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
 }
 
