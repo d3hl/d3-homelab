@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_file" "meta3_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
-  node_name    = var.virtual_environment_node1_name
+  node_name    = var.virtual_environment_node3_name
 
   source_raw {
     data = <<-EOF
@@ -16,9 +16,9 @@ resource "proxmox_virtual_environment_file" "meta3_data_cloud_config" {
 
 resource "proxmox_virtual_environment_vm" "komodo3" {
   name      = "komodo3"
-  node_name = var.virtual_environment_node1_name
+  node_name = var.virtual_environment_node3_name
   tags      = sort(["debian", "terraform","komodo"])
-#  migrate   = true
+  migrate   = true
 
   clone {
     vm_id = proxmox_virtual_environment_vm.debian-template.id
