@@ -5,10 +5,10 @@
 
   - name: install common packages
     apt:
-      name:
       - ceph-common
       - vim
       state: latest
+
   - name: add Ceph to apt source
     ansible.builtin.shell: |
     echo "Types: deb" >> /etc/apt/sources.list.d/ceph.list
