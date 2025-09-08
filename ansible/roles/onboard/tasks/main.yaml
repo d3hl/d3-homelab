@@ -12,13 +12,13 @@
 
   - name: add Ceph source
     ansible.builtin.blockinfile:
-    path: /etc/apt/sources.list.d/ceph.list
-    block: |
-      Types: deb
-      URIs: http://download.proxmox.com/debian/ceph-squid
-      Suites: trixie
-      Components: no-subscription
-      Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
-    create: yes
-    become: true
+      path: /etc/apt/sources.list.d/ceph.list
+      block: |
+        Types: deb
+        URIs: http://download.proxmox.com/debian/ceph-squid
+        Suites: trixie
+        Components: no-subscription
+        Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
+      create: yes
+      become: true
   
