@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_file" "meta2_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
-  node_name    = var.virtual_environment_node2_name
+  node_name    = var.virtual_environment_node1_name
 
   source_raw {
     data = <<-EOF
