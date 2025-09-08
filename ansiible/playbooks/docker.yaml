@@ -1,6 +1,6 @@
 ---
 - name: Install docker.
-##  hosts: '{{ custom_hosts }}'
+  hosts: komodo
   become: true
   gather_facts: no
   roles:
