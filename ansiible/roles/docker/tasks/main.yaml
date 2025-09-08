@@ -1,0 +1,54 @@
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+      - ceph-common
+    state: latest
+    update_cache: true
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    #repo: deb https://download.docker.com/linux/ubuntu focal stable
+    repo: "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian trixie stable"
+    state: present
+    filename: docker.list
+
+- name: Install Docker Engine, CLI, containerd, and Docker Compose plugin
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: latest
+    update_cache: true
+
+- name: Add current user to docker group (optional, for non-root Docker usage)
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: true
+  when: ansible_user is defined and ansible_user != 'root'
+
+- name: Verify Docker installation
+  ansible.builtin.command: docker run hello-world
+  register: docker_hello_world_output
+  changed_when: false # This command doesn't change the system state
+  ignore_errors: true # Allow the playbook to continue if this fails initially
+
+- name: Display Docker verification output
+  ansible.builtin.debug:
+    var: docker_hello_world_output.stdout_lines
+  when: docker_hello_world_output.stdout is defined
