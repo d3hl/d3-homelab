@@ -55,9 +55,3 @@
     name: docker
     state: started
     enabled: yes
-
-- name: Add ubuntu user to docker group
-  ansible.builtin.user:
-    name: d3
-    groups: docker
-    ppend: yes
