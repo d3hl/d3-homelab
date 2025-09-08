@@ -1,0 +1,1 @@
+ ansible-playbook ./playbooks/docker.yaml -i inventory --user=d3
