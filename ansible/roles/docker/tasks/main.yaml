@@ -4,7 +4,7 @@
       - apt-transport-https
       - ca-certificates
       - curl
-#      - software-properties-common
+      - software-properties-common
       - python3-pip
       - virtualenv
       - python3-setuptools
@@ -13,16 +13,9 @@
     update_cache: true
 
 - name: Add Docker GPG apt Key
-  ansible.builtin.get_url:
-  #apt_key:
+  apt_key:
     url: https://download.docker.com/linux/debian/gpg
-    dest: "/tmp/repo.key"
-    mode: '0644'
-
-- name: Add GPG key to trusted keys
-  ansible.builtin.command: "gpg --dearmor -o /etc/apt/trusted.gpg.d/repo.gpg /tmp/repo.key"
-  args:
-    creates: "/etc/apt/trusted.gpg.d/repo.gpg"
+    state: present
 
 - name: Add Docker Repository
   ansible.builtin.apt_repository:
