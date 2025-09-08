@@ -10,12 +10,15 @@
       - vim
       state: latest
 
-  - name: add Ceph to apt source
-    ansible.builtin.shell: |
-    echo "Types: deb" >> /etc/apt/sources.list.d/ceph.list
-    echo "URIs: http://download.proxmox.com/debian/ceph-squid" >> /etc/apt/sources.list.d/ceph.list
-    echo "Suites: trixie" >> /etc/apt/sources.list.d/ceph.list
-    echo "Components: no-subscription" >> /etc/apt/sources.list.d/ceph.list
-    echo "Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg" >> /etc/apt/sources.list.d/ceph.list
+  - name: add Ceph source
+    ansible.builtin.lineinfile:
+    path: /etc/apt/sources.list.d/ceph.list
+    block: |
+      Types: deb
+      URIs: http://download.proxmox.com/debian/ceph-squid
+      Suites: trixie
+      Components: no-subscription
+      Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
+    create: yes
     become: true
   
