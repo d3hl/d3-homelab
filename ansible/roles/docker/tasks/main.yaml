@@ -1,16 +1,25 @@
-- name: Install required system packages
-  apt:
-    pkg:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-      - python3-pip
-      - virtualenv
-      - python3-setuptools
-      - ceph-common
-    state: latest
-    update_cache: true
+#- name: Install required system packages
+ # apt:
+ #   pkg:
+ #     - curl
+ #     - python3-pip
+ #     - virtualenv
+ #      - python3-setuptools
+  #    - ceph-common
+   # state: latest
+    #update_cache: true
+
+#- name: Add Jenkins repo using key from URL.
+#  ansible.builtin.deb822_repository:
+#    name: python3-pip
+#    types: [deb]
+#    uris: "https://packages.debian.org/stable/python3-pip"
+#    components: [binary]
+#    signed_by: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+#    state: present
+ #   enabled: true
+
+
 
 - name: Add Docker GPG apt Key
   apt_key:
