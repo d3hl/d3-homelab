@@ -3,9 +3,18 @@
       update_cache: yes
       cache_valid_time: 3600
 
-  - name: install proxmoxer
+  - name: install common packages
     apt:
       name:
       - ceph-common
       - vim
       state: latest
+  - name: add Ceph to apt source
+    ansible.builtin.shell: |
+    echo "Types: deb" >> /etc/apt/sources.list.d/ceph.list
+    echo "URIs: http://download.proxmox.com/debian/ceph-squid" >> /etc/apt/sources.list.d/ceph.list
+    echo "Suites: trixie" >> /etc/apt/sources.list.d/ceph.list
+    echo "Components: no-subscription" >> /etc/apt/sources.list.d/ceph.list
+    echo "Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg" >> /etc/apt/sources.list.d/ceph.list
+    become: true
+  
