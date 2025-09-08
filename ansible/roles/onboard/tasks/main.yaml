@@ -7,7 +7,7 @@
     apt:
       - ceph-common
       - vim
-      state: latest
+    state: latest
 
   - name: add Ceph to apt source
     ansible.builtin.shell: |
