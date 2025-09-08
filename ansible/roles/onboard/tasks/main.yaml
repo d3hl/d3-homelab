@@ -11,7 +11,7 @@
       state: latest
 
   - name: add Ceph source
-    ansible.builtin.blocknfile:
+    ansible.builtin.blockinfile:
     path: /etc/apt/sources.list.d/ceph.list
     block: |
       Types: deb
