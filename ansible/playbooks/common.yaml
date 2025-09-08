@@ -1,6 +1,6 @@
 ---
 - name: Update package and config.  
-  hosts: all 
+  hosts: komodo 
   gather_facts: no
   roles:
     - update_package
