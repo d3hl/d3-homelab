@@ -5,6 +5,7 @@
 
   - name: install common packages
     apt:
+      name:
       - ceph-common
       - vim
     state: latest
