@@ -3,7 +3,7 @@
   roles:
     - role: bpbradley.komodo
       komodo_action: "install"
-      komodo_version: "1.19.3"
+      komodo_version: "v1.19.3"
       komodo_passkeys: 
         - !vault |
           $ANSIBLE_VAULT;1.1;AES256
