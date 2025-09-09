@@ -10,7 +10,7 @@ komodo_passkeys: []
 komodo_bind_ip: "[::]"
 
 # Replace with your komodo core IP if desired so that only core can access it
-komodo_allowed_ips: []
+komodo_allowed_ips: [10.10.10.30]
 
 # Add name/value pairs containing secrets that periphery will have internal access to
 # Example:
@@ -29,16 +29,16 @@ komodo_agent_secrets: []
 komodo_extra_env: []
 
 # Necessary if we want to enable automatic management of the periphery server in core
-enable_server_management: false
-komodo_core_url: ""
-komodo_core_api_key: ""
-komodo_core_api_secret: ""
+enable_server_management: true
+komodo_core_url: "https://komodo.d3adc3ii.cc"
+komodo_core_api_key: "K-TodnQ41FWfGBqOc0LCcUkPAR4FEfPSwwBxnNquyM"
+komodo_core_api_secret: "S-eFdzn48GRUM6e4VYCHzdMzmVTw8f8bSbfBdHCTGB"
 server_name: "{{ inventory_hostname }}"
 server_address: "" # Leave blank to try and autodetect
 server_passkey: "" # Leave blank to use global passkeys in core configuration
 generate_server_passkey: false # Allow a generation of a random passkey
 
-komodo_user: "komodo"
+komodo_user: "d3"
 komodo_group: "komodo"
 
 komodo_home: "/home/{{ komodo_user }}"
@@ -56,8 +56,8 @@ komodo_service_file_template: "periphery.service.j2"
 komodo_service_path: "{{ komodo_service_dir }}/periphery.service"
 
 periphery_port: 8120
-repo_dir: "{{ komodo_home }}/.komodo/repos"
-stack_dir: "{{ komodo_home }}/.komodo/stacks"
+repo_dir: "/mnt/cephfs/komodo/repos"
+stack_dir: "/mnt/cephfs/komodo/stacks"
 stacks_polling_rate: "5-sec"
 
 ssl_enabled: true
