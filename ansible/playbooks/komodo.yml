@@ -1,7 +1,7 @@
 - name: Manage Komodo Service
   hosts: komodo
   roles:
-      - role: bpbradley.komodo
+    - role: bpbradley.komodo
       komodo_action: "install"
       komodo_version: "latest"
       komodo_passkeys: 
