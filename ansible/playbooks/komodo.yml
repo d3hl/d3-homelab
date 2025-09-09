@@ -2,8 +2,8 @@
   hosts: komodo
   roles:
     - role: bpbradley.komodo
-      komodo_action: "install"
-      komodo_version: "latest"
+      komodo_action: "uninstall"
+      komodo_version: "1.19.3"
       komodo_passkeys: 
         - !vault |
           $ANSIBLE_VAULT;1.1;AES256
