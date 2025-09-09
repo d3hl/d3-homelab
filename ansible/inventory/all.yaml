@@ -37,7 +37,9 @@ komodo:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['komodo_host1'].ansible_host }}"
+                - 10.10.10.0/24
             komodo3:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['komodo_host1'].ansible_host }}"
+                - 10.10.10.0/24
