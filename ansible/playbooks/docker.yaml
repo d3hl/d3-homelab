@@ -1,6 +1,6 @@
 ---
 - name: Install docker.
-  hosts: komodo
+  hosts: komodo1
   become: true
   gather_facts: no
   roles:
