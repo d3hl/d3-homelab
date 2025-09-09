@@ -26,7 +26,7 @@ komodo:
         core:
           hosts:
             komodo1:
-              periphery_port: 8199
+              periphery_port: 8120
               komodo_allowed_ips:
                 - "10.10.10.30"
               #server_address: https://host.docker.internal:{{ periphery_port }}
@@ -36,13 +36,13 @@ komodo:
           hosts:
             komodo2:
               generate_server_passkey: true
-              server_address: "10.10.10.31:8120"
+              server_address: "http://10.10.10.31:8120"
               komodo_allowed_ips:
             #    - "{{ hostvars['komodo_host1'].ansible_host }}"
              #   - 10.10.10.0/24
                  - 0.0.0.0 
             komodo3:
               generate_server_passkey: true
-              server_address: "10.10.10.32:8120"
+              server_address: "http://10.10.10.32:8120"
               komodo_allowed_ips:
                  - 0.0.0.0 
