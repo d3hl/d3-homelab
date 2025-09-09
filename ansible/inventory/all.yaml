@@ -8,9 +8,6 @@ komodo:
     komodo3:
       ansible_host: 10.10.10.32
       connection: local
-    localhost:
-      ansible_host: localhost
-      connection: local
   children:
     komodo:
       vars:
