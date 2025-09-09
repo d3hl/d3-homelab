@@ -1,0 +1,128 @@
+---
+- name: Run install procedure
+  when: komodo_action == "install"
+  block:
+    - name: Ensure Komodo user exists
+      become: true
+      ansible.builtin.user:
+        name: "{{ komodo_user }}"
+        shell: /usr/sbin/nologin
+        create_home: true
+        home: "{{ komodo_home }}"
+      when: komodo_user_exists is not defined or not komodo_user_exists
+
+    - name: Create Ansible temp directory for komodo user
+      become: true
+      ansible.builtin.file:
+        path: "{{ komodo_home }}/.ansible/tmp"
+        state: directory
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+        mode: "0700"
+
+    - name: Ensure necessary directories
+      become: true
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+        mode: "0750"
+      with_items:
+        - "{{ komodo_bin_dir }}"
+        - "{{ komodo_config_dir }}"
+        - "{{ komodo_service_dir }}"
+
+    - name: Ensure Komodo base directory exists with correct ownership
+      become: true
+      ansible.builtin.file:
+        path: "/etc/komodo"
+        state: directory
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+        mode: "0750"
+
+    - name: Ensure SSL directory exists
+      become: true
+      ansible.builtin.file:
+        path: "/etc/komodo/ssl"
+        state: directory
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+        mode: "0750"
+        recurse: true
+      when: ssl_enabled | default(true)
+
+    - name: Add Komodo user to the docker group
+      become: true
+      ansible.builtin.user:
+        name: "{{ komodo_user }}"
+        groups: docker
+        append: true
+
+    - name: Enable lingering for Komodo user
+      ansible.builtin.command: loginctl enable-linger {{ komodo_user }}
+      become: true
+      changed_when: false
+
+    - name: Stop periphery service
+      ansible.builtin.shell: |
+        export XDG_RUNTIME_DIR="/run/user/$(id -u {{ komodo_user }})"
+        systemctl --user stop periphery || true
+      become_user: "{{ komodo_user }}"
+      become: true
+      changed_when: false
+
+    - name: Fail if unsupported architecture
+      ansible.builtin.fail:
+        msg: "Unsupported architecture: {{ ansible_architecture }}. Supported architectures are x86_64 and aarch64."
+      when: ansible_architecture not in ['x86_64', 'aarch64']
+
+    - name: Download Komodo Periphery Agent
+      become: true
+      ansible.builtin.get_url:
+        url: "https://github.com/moghtech/komodo/releases/download/{{ _komodo_version }}/{{ binary_name }}"
+        dest: "{{ komodo_bin_path }}"
+        mode: "0755"
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+        force: true
+
+    - name: Gather passwd entry for Komodo user (UID/GID)
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ komodo_user }}"
+
+    - name: Deploy configuration file
+      become: true
+      ansible.builtin.template:
+        src: "{{ komodo_config_file_template }}"
+        dest: "{{ komodo_config_path }}"
+        mode: "0640"
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+
+    - name: Deploy systemd user service file
+      become: true
+      ansible.builtin.template:
+        src: "{{ komodo_service_file_template }}"
+        dest: "{{ komodo_service_path }}"
+        mode: "0644"
+        owner: "{{ komodo_user }}"
+        group: "{{ komodo_group }}"
+
+    - name: Reload systemd for Komodo user
+      ansible.builtin.shell: |
+        export XDG_RUNTIME_DIR="/run/user/$(id -u {{ komodo_user }})"
+        systemctl --user daemon-reload
+      become_user: "{{ komodo_user }}"
+      become: true
+      changed_when: false
+
+    - name: Enable and start periphery service
+      become: true
+      ansible.builtin.shell: |
+        export XDG_RUNTIME_DIR="/run/user/$(id -u {{ komodo_user }})"
+        systemctl --user enable --now periphery
+      become_user: "{{ komodo_user }}"
+      changed_when: false
