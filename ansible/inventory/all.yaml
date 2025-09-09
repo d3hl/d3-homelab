@@ -14,7 +14,7 @@ komodo:
         # These variables are only needed if using the server management feature
         # This feature allows the role to automatically register and update
         # servers in komodo core in addition to deploying periphery
-        komodo_core_url: "https://komodo.d3adc3ii.cc"
+        komodo_core_url: "http://10.10.10.10:9120"
         # Encrypt these with vault!
         komodo_core_api_key: "K-TodnQ41FWfGBqOc0LCcUkPAR4FEfPSwwBxnNquyM"
         komodo_core_api_secret: "S-eFdzn48GRUM6e4VYCHzdMzmVTw8f8bSbfBdHCTGB"
