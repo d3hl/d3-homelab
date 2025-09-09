@@ -1,4 +1,4 @@
-all:
+komodo:
   # Add additonal vars: section for ssh keyfiles, etc.
   hosts:
     komodo_host1:
