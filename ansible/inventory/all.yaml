@@ -7,6 +7,10 @@ komodo:
       ansible_host: 10.10.10.31
     komodo3:
       ansible_host: 10.10.10.32
+    k-120:
+      ansible_host: 10.203.1.120
+    k-121:
+      ansible_host: 10.203.1.121
       connection: local
   children:
     komodo:
@@ -49,6 +53,14 @@ komodo:
             #    - "{{ hostvars['komodo_host1'].ansible_host }}"
              #   - 10.10.10.0/24
             komodo3:
+              generate_server_passkey: true
+              komodo_allowed_ips:
+                - "{{ hostvars['komodo1'].ansible_host }}"
+            k-120:
+              generate_server_passkey: true
+              komodo_allowed_ips:
+                - "{{ hostvars['komodo1'].ansible_host }}"
+            k-121:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['komodo1'].ansible_host }}"
