@@ -2,7 +2,7 @@
   hosts: komodo
   roles:
     - role: bpbradley.komodo
-      komodo_action: "uninstall"
+      komodo_action: "install"
       komodo_version: "1.19.3"
       komodo_passkeys: 
         - !vault |
