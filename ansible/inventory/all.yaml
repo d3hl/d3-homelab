@@ -1,0 +1,9 @@
+all:
+  # Add additonal vars: section for ssh keyfiles, etc.
+  hosts:
+    komodo_host1:
+      ansible_host: 10.10.10.30
+    komodo_host2:
+      ansible_host: 10.10.10.31
+    komodo_host3:
+      ansible_host: 10.10.10.32
