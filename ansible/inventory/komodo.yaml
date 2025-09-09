@@ -7,9 +7,9 @@ komodo:
       ansible_host: 10.10.10.31
     komodo_host3:
       ansible_host: 10.10.10.32
-    localhost:
-      ansible_host: localhost
-      connection: local
+#    localhost:
+ #     ansible_host: localhost
+  #    connection: local
   # Below we can create special komodo hosts, with komodo related variables
   # set so that each server might have its own particular behavior, or to
   # just conveniently set some defaults.
