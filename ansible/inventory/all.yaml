@@ -8,17 +8,15 @@ komodo:
     komodo3:
       ansible_host: 10.10.10.32
       connection: local
+    localhost:
+      ansible_host: localhost
+      connection: local
   children:
     komodo:
       vars:
-        # These variables are only needed if using the server management feature
-        # This feature allows the role to automatically register and update
-        # servers in komodo core in addition to deploying periphery
         komodo_core_url: "http://10.10.10.30:9120"
-        # Encrypt these with vault!
         komodo_core_api_key: "K-TodnQ41FWfGBqOc0LCcUkPAR4FEfPSwwBxnNquyM"
         komodo_core_api_secret: "S-eFdzn48GRUM6e4VYCHzdMzmVTw8f8bSbfBdHCTGB"
-        # Default to allowing server management feature. Can be overriden
         enable_server_management: true
         komodo_passkeys:
           - mailabanthan123
@@ -31,18 +29,15 @@ komodo:
                 - "10.10.10.30"
               #server_address: https://host.docker.internal:{{ periphery_port }}
               server_address: https://host.docker.internal:8120
-              komodo_bind_ip: 0.0.0.0
         periphery:
           hosts:
             komodo2:
               generate_server_passkey: true
-              server_address: "http://10.10.10.31:8120"
               komodo_allowed_ips:
+                - "::ffff:10.10.10.30"
             #    - "{{ hostvars['komodo_host1'].ansible_host }}"
              #   - 10.10.10.0/24
-              komodo_bind_ip: 0.0.0.0
             komodo3:
               generate_server_passkey: true
-              server_address: "http://10.10.10.32:8120"
               komodo_allowed_ips:
-              komodo_bind_ip: 0.0.0.0
+                - "{{ hostvars['komodo1'].ansible_host }}"
