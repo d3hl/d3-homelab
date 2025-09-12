@@ -3,6 +3,8 @@ komodo:
   hosts:
     komodo1:
       ansible_host: 10.10.10.30
+    komodo1x:
+      ansible_host: 10.10.10.33
     komodo2:
       ansible_host: 10.10.10.31
     komodo3:

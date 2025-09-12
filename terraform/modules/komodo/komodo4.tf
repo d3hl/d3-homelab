@@ -41,7 +41,7 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
 
     datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-    meta_data_file_id = proxmox_virtual_environment_file.meta3_data_cloud_config.id
+    meta_data_file_id = proxmox_virtual_environment_file.meta1x_data_cloud_config.id
   }
 }
 output "vm1x_ipv4_address" {
