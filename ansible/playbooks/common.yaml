@@ -5,3 +5,11 @@
   roles:
     - update_package
   become: true
+
+
+- name: Install neccessary packages for onboarding.
+  hosts: komodo1x
+  become: true
+  gather_facts: no
+  roles:
+    - onboard
