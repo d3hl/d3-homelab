@@ -20,4 +20,9 @@
         Components: no-subscription
         Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
       create: yes
-  
+
+  - name: download proxmox keyring
+    ansible.builtin.apt:
+      deb: http://download.proxmox.com/debian/pbs-client/dists/trixie/main/binary-amd64/proxmox-archive-keyring_4.0_all.deb
+      state: present
+      become: true
