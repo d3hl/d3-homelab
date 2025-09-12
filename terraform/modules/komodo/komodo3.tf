@@ -29,7 +29,7 @@ resource "proxmox_virtual_environment_vm" "komodo3" {
   }
 
   memory {
-    dedicated = 4096
+    dedicated = 8192
   }
 
   initialization {
