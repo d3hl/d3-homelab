@@ -1,5 +1,5 @@
 - name: Manage Komodo Service
-  hosts: komodo
+  hosts: komodo1x
   roles:
     - role: bpbradley.komodo
       komodo_action: "install"
