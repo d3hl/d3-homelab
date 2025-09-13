@@ -17,6 +17,7 @@ resource "proxmox_virtual_environment_file" "meta2_data_cloud_config" {
 resource "proxmox_virtual_environment_vm" "komodo2" {
   name      = "komodo2"
   node_name = var.virtual_environment_node2_name
+  pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
   tags      = sort(["debian", "terraform","komodo"])
   migrate   = true
   clone {
