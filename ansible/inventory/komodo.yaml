@@ -37,8 +37,6 @@ komodo:
           31383863303866343062316436653532636330316634306436343739383731386361303632643138
           6539633263363361376134633339363334363562353463303661
         enable_server_management: true
-        komodo_passkeys:
-          - mailabanthan123
       children:
         core:
           hosts:
@@ -70,5 +68,5 @@ komodo:
                 - "{{ hostvars['komodo1'].ansible_host }}"
             pangolin:
               generate_server_passkey: true
-              komodo_allowed_ips:
-                - "{{ hostvars['komodo1'].ansible_host }}"
+              komodo_allowed_ips: 0.0.0.0
+                
