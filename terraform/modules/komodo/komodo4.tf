@@ -32,6 +32,11 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
   memory {
     dedicated = 8192
   }
+  hostpci {
+    device = "extsfp1-4"
+    mapping     = "extsfp1-4"
+    pcie   = true
+  }
 
   initialization {
     ip_config {
@@ -43,11 +48,6 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
     datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
     meta_data_file_id = proxmox_virtual_environment_file.meta1x_data_cloud_config.id
-  hostpci {
-    device = "extsfp1-4"
-    mapping     = "extsfp1-4"
-    pcie   = true
-  }
   }
 }
 output "vm1x_ipv4_address" {
