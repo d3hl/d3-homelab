@@ -32,13 +32,12 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
   memory {
     dedicated = 8192
   }
+  initialization {
   hostpci {
     device = "extsfp1-4"
     mapping     = "extsfp1-4"
     pcie   = true
   }
-
-  initialization {
     ip_config {
       ipv4 {
         address = "dhcp"
