@@ -1,6 +1,6 @@
 ---
 - name: Install neccessary packages for onboarding.
-  hosts: komodo1x
+  hosts: komodo
   become: true
   gather_facts: no
   roles:
