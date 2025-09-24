@@ -30,7 +30,7 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
   }
 
   hostpci {
-    device = "extsfp1-4"
+    device = "hostpci0"
     mapping     = "extsfp1-4"
     pcie   = true
   }
