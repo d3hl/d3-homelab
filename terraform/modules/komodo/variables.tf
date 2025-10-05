@@ -38,6 +38,10 @@ variable "virtual_environment_node3_name" {
   description = "Name of the Proxmox node"
   type        = string
   default     = "pve14"
+variable "virtual_environment_nodeA_name" {
+  description = "Name of the Proxmox node"
+  type        = string
+  default     = "nodeA"
 }
 variable "datastore_id" {
   type        = string
