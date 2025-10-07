@@ -14,11 +14,11 @@ resource "proxmox_virtual_environment_file" "meta2_data_cloud_config" {
 }
 
 
-resource "proxmox_virtual_environment_vm" "komodo2" {
-  name      = "komodo2"
+resource "proxmox_virtual_environment_vm" "komodo5" {
+  name      = "komodo5"
   node_name = var.virtual_environment_node2_name
-  pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
-  tags      = sort(["debian", "terraform","komodo"])
+  pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id
+  tags      = sort(["debian", "terraform", "komodo"])
   migrate   = true
   clone {
     vm_id = proxmox_virtual_environment_vm.debian-template.id
@@ -41,9 +41,9 @@ resource "proxmox_virtual_environment_vm" "komodo2" {
 
     datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-    meta_data_file_id = proxmox_virtual_environment_file.meta2_data_cloud_config.id
+    meta_data_file_id = proxmox_virtual_environment_file.meta5_data_cloud_config.id
   }
 }
-output "vm2_ipv4_address" {
-  value = proxmox_virtual_environment_vm.komodo2.ipv4_addresses[1][0]
+output "vm5_ipv4_address" {
+  value = proxmox_virtual_environment_vm.komodo5.ipv4_addresses[1][0]
 }
