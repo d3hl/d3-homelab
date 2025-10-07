@@ -53,21 +53,21 @@ komodo:
             kmd2:
               generate_server_passkey: true
               komodo_allowed_ips:
-                - "::ffff:10.10.10.30"
+                - "{{ hostvars['kmd1'].ansible_host }}"
             #    - "{{ hostvars['komodo_host1'].ansible_host }}"
              #   - 10.10.10.0/24
             kmd3:
               generate_server_passkey: true
               komodo_allowed_ips:
-                - "{{ hostvars['komodo1'].ansible_host }}"
+                - "{{ hostvars['kmd1'].ansible_host }}"
             kmd4:
               generate_server_passkey: true
               komodo_allowed_ips:
-                - "{{ hostvars['komodo1'].ansible_host }}"
+                - "{{ hostvars['kmd1'].ansible_host }}"
             kmd5:
               generate_server_passkey: true
               komodo_allowed_ips:
-                - "{{ hostvars['komodo1'].ansible_host }}"
+                - "{{ hostvars['kmd1'].ansible_host }}"
            # pangolin:
            #   generate_server_passkey: true
            #   komodo_allowed_ips: 0.0.0.0
