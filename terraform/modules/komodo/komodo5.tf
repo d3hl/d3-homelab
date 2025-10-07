@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_file" "meta2_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "meta5_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
   node_name    = var.virtual_environment_node1_name
@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_file" "meta2_data_cloud_config" {
 
 resource "proxmox_virtual_environment_vm" "komodo5" {
   name      = "komodo5"
-  node_name = var.virtual_environment_node2_name
+  node_name = var.virtual_environment_nodeA_name
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id
   tags      = sort(["debian", "terraform", "komodo"])
   migrate   = true
