@@ -21,12 +21,12 @@ terraform {
         address = "10.10.10.10"
       }
     node {
-      name    = "pve11"
-      address = "10.10.10.11"
-    }
-    node {
       name    = "pve14"
       address = "10.10.10.14"
+    }
+    node {
+      name    = "nodeA"
+      address = "10.10.10.18"
     }
         agent = true
         username = var.virtual_environment_username
