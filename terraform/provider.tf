@@ -28,6 +28,14 @@ terraform {
       name    = "nodeA"
       address = "10.10.10.18"
     }
+    node {
+      name    = "nodeB"
+      address = "10.10.10.15"
+    }
+    node {
+      name    = "nodeC"
+      address = "10.10.10.19"
+    }
         agent = true
         username = var.virtual_environment_username
       }
