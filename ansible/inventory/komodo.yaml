@@ -11,6 +11,9 @@ komodo:
       ansible_host: 10.10.10.33
     kmd5:
       ansible_host: 10.10.10.34
+    localhost:
+      ansible_host: localhost
+      connection: local
     #k-120:
     #  ansible_host: 10.203.1.120
     #k-121:
