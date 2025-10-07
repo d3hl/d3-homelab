@@ -13,7 +13,9 @@ terraform {
 }
     provider "proxmox" {
         endpoint = var.virtual_environment_endpoint
-        api_token = var.virtual_environment_api_token
+       # api_token = var.virtual_environment_api_token
+        username  = var.virtual_environment_username
+        password  = var.virtual_environment_password
         insecure = true 
     ssh {
       node {
