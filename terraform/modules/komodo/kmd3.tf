@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_file" "meta3_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    local-hostname: komodo3
+    local-hostname: kmd3
     EOF
 
     file_name = "meta3-data-cloud-config.yaml"
@@ -14,9 +14,9 @@ resource "proxmox_virtual_environment_file" "meta3_data_cloud_config" {
 }
 
 
-resource "proxmox_virtual_environment_vm" "komodo3" {
-  name      = "komodo3"
-  node_name = var.virtual_environment_node3_name
+resource "proxmox_virtual_environment_vm" "kmd3" {
+  name      = "kmd3"
+  node_name = var.virtual_environment_nodeA_name
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
   tags      = sort(["debian", "terraform","komodo"])
   migrate   = true
@@ -46,5 +46,5 @@ resource "proxmox_virtual_environment_vm" "komodo3" {
   }
 }
 output "vm3_ipv4_address" {
-  value = proxmox_virtual_environment_vm.komodo3.ipv4_addresses[1][0]
+  value = proxmox_virtual_environment_vm.kmd3.ipv4_addresses[1][0]
 }

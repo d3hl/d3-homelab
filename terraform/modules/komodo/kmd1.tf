@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_file" "meta1x_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cephfs"
   node_name    = var.virtual_environment_node1_name
@@ -6,20 +6,17 @@ resource "proxmox_virtual_environment_file" "meta1x_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    local-hostname: komodo1x
+    local-hostname: kmd1
     EOF
 
-    file_name = "meta1x-data-cloud-config.yaml"
+    file_name = "meta-data-cloud-config.yaml"
   }
 }
-
-
-resource "proxmox_virtual_environment_vm" "komodo1x" {
-  name      = "komodo1x"
+resource "proxmox_virtual_environment_vm" "kmd1" {
+  name      = "kmd1"
   node_name = var.virtual_environment_node1_name
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
   tags      = sort(["debian", "terraform","komodo"])
-  migrate   = true
 
   clone {
     vm_id = proxmox_virtual_environment_vm.debian-template.id
@@ -29,14 +26,10 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
     enabled = true
   }
 
-  hostpci {
-    device = "hostpci0"
-    mapping     = "extsfp1-4"
-    pcie   = true
-  }
   memory {
     dedicated = 8192
   }
+
   initialization {
     ip_config {
       ipv4 {
@@ -46,9 +39,10 @@ resource "proxmox_virtual_environment_vm" "komodo1x" {
 
     datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-    meta_data_file_id = proxmox_virtual_environment_file.meta1x_data_cloud_config.id
+    meta_data_file_id = proxmox_virtual_environment_file.meta_data_cloud_config.id
   }
 }
-output "vm1x_ipv4_address" {
-  value = proxmox_virtual_environment_vm.komodo1x.ipv4_addresses[1][0]
+
+output "vm_ipv4_address" {
+  value = proxmox_virtual_environment_vm.kmd1.ipv4_addresses[1][0]
 }
