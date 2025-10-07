@@ -33,11 +33,11 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
     type         = "4m"
   }
 
-  hostpci {
-    device = "hostpci0"
-    mapping     = "hostpci0"
-    pcie   = true
-  }
+#  hostpci {
+#    device = "hostpci0"
+#    mapping     = "hostpci0"
+#    pcie   = true
+#  }
 
   initialization {
     ip_config {
