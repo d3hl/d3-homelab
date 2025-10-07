@@ -21,7 +21,7 @@ resource "proxmox_virtual_environment_vm" "kmd5" {
   tags      = sort(["debian", "terraform", "komodo"])
   migrate   = true
   clone {
-    vm_id = proxmox_virtual_environment_vm.debian-template.id
+    vm_id = proxmox_virtual_environment_vm.debian_template.id
   }
 
   agent {

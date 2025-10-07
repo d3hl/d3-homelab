@@ -22,7 +22,7 @@ resource "proxmox_virtual_environment_vm" "kmd3" {
   migrate   = true
 
   clone {
-    vm_id = proxmox_virtual_environment_vm.debian-template.id
+    vm_id = proxmox_virtual_environment_vm.debian_template.id
   }
 
   agent {
