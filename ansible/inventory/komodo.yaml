@@ -1,20 +1,22 @@
 komodo:
   # Add additonal vars: section for ssh keyfiles, etc.
   hosts:
-    komodo1:
+    kmd1:
       ansible_host: 10.10.10.30
-    komodo1x:
-      ansible_host: 10.10.10.33
-    komodo2:
+    kmd2:
       ansible_host: 10.10.10.31
-    komodo3:
+    kmd3:
       ansible_host: 10.10.10.32
-    k-120:
-      ansible_host: 10.203.1.120
-    k-121:
-      ansible_host: 10.203.1.121
-    pangolin:
-      ansible_host: 45.127.32.141
+    kmd4:
+      ansible_host: 10.10.10.33
+    kmd5:
+      ansible_host: 10.10.10.34
+    #k-120:
+    #  ansible_host: 10.203.1.120
+    #k-121:
+    #  ansible_host: 10.203.1.121
+    #pangolin:
+    #  ansible_host: 45.127.32.141
       connection: local
   children:
     komodo:
