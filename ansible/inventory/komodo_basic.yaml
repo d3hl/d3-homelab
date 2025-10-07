@@ -1,0 +1,53 @@
+komodo:
+  # Add additonal vars: section for ssh keyfiles, etc.
+  hosts:
+    kmd1:
+      ansible_host: 10.10.10.30
+    kmd2:
+      ansible_host: 10.10.10.31
+    kmd3:
+      ansible_host: 10.10.10.32
+    kmd4:
+      ansible_host: 10.10.10.33
+    kmd5:
+      ansible_host: 10.10.10.34
+    localhost:
+      ansible_host: localhost
+      connection: local
+    #k-120:
+    #  ansible_host: 10.203.1.120
+    #k-121:
+    #  ansible_host: 10.203.1.121
+    #pangolin:
+    #  ansible_host: 45.127.32.141
+   #   connection: local
+  children:
+    komodo:
+      children:
+        core:
+          hosts:
+            kmd1:
+              periphery_port: 8120
+              komodo_allowed_ips:
+                - "10.10.10.30"
+              server_address: https://host.docker.internal:{{ periphery_port }}
+        periphery:
+          hosts:
+            kmd2:
+              komodo_allowed_ips:
+                - "{{ hostvars['kmd1'].ansible_host }}"
+            #    - "{{ hostvars['komodo_host1'].ansible_host }}"
+             #   - 10.10.10.0/24
+            kmd3:
+              komodo_allowed_ips:
+                - "{{ hostvars['kmd1'].ansible_host }}"
+            kmd4:
+              komodo_allowed_ips:
+                - "{{ hostvars['kmd1'].ansible_host }}"
+            kmd5:
+              komodo_allowed_ips:
+                - "{{ hostvars['kmd1'].ansible_host }}"
+           # pangolin:
+           #   generate_server_passkey: true
+           #   komodo_allowed_ips: 0.0.0.0
+                
