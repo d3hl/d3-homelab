@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_vm" "kmd1" {
   tags      = sort(["debian", "terraform","komodo"])
 
   clone {
-    vm_id = proxmox_virtual_environment_vm.debian_template.id
+    vm_id = proxmox_virtual_environment_vm.debian-template.id
   }
 
   agent {

@@ -7,8 +7,8 @@ resource "proxmox_virtual_environment_pool" "komodo-pool" {
   pool_id = "komodo-pool"
 }
 
-resource "proxmox_virtual_environment_vm" "debian_template" {
-  name      = "debian_template"
+resource "proxmox_virtual_environment_vm" "debian-template" {
+  name      = "debian-template"
   node_name = var.virtual_environment_node1_name
 
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
