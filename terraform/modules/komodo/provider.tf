@@ -6,7 +6,7 @@ terraform {
     }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.84.0" # x-release-please-version
+      version = "0.84.1" # x-release-please-version
     }
   }
 
@@ -21,8 +21,8 @@ terraform {
         address = "10.10.10.10"
       }
     node {
-      name    = "pve11"
-      address = "10.10.10.11"
+      name    = "nodeA"
+      address = "10.10.10.18"
     }
     node {
       name    = "pve14"
