@@ -1,5 +1,5 @@
 data "local_file" "ssh_public_key" {
-  filename = "./d3_tf.pub" 
+  filename = "./id_ed.pub" 
 }
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
