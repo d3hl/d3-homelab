@@ -9,7 +9,7 @@ resource "proxmox_virtual_environment_pool" "komodo-pool" {
 
 resource "proxmox_virtual_environment_vm" "debian-template" {
   name      = "debian-template"
-  node_name = var.virtual_environment_node1_name
+  node_name = var.virtual_environment_nodeA_name
 
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
   # should be true if qemu agent is not installed / enabled on the VM
