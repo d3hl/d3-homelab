@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_vm" "kmd3" {
   node_name = var.virtual_environment_nodeC_name
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
   tags      = sort(["debian", "terraform","komodo"])
-  migrate   = true
+  #migrate   = true
 
   clone {
     vm_id = proxmox_virtual_environment_vm.debian-template.id
