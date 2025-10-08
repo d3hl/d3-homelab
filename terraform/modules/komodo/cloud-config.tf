@@ -1,10 +1,10 @@
 data "local_file" "ssh_public_key" {
-  filename = "/home/d3/.ssh/id_tf.pub" 
+  filename = "/home/d3/.ssh/d3_tf.pub" 
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
-  datastore_id = "cephfs"
+  datastore_id = "cFS"
   node_name    = var.virtual_environment_nodeA_name
 
   source_raw {

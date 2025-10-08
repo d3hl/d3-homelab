@@ -1,6 +1,6 @@
 resource "proxmox_virtual_environment_file" "meta4_data_cloud_config" {
   content_type = "snippets"
-  datastore_id = "cephfs"
+  datastore_id = "cFS"
   node_name    = var.virtual_environment_nodeA_name
 
   source_raw {

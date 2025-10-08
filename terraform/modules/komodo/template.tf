@@ -51,7 +51,7 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
     //user_data_file_id = proxmox_virtual_environment_file.cloud_config.id       
   }
     disk {
-    datastore_id = "cVM"
+    datastore_id = "cephVM"
     file_id   = proxmox_virtual_environment_download_file.debian_cloud_image.id
     interface = "virtio0"
     iothread  = true
@@ -67,7 +67,7 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
 
 resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
   content_type = "import"
-  datastore_id = "cephfs"
+  datastore_id = "cFS"
   node_name    = var.virtual_environment_nodeA_name
   #url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-nocloud-amd64.qcow2"
   url          =  "http://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2"
