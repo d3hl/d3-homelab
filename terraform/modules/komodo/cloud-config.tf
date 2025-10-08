@@ -3,7 +3,7 @@ data "local_file" "ssh_public_key" {
 }
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
-  datastore_id = "cFSfs"
+  datastore_id = "cFS"
   node_name    = var.virtual_environment_nodeA_name
 
   source_raw {

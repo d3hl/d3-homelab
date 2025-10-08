@@ -1,3 +1,6 @@
+data "local_file" "ssh_public_key" {
+  filename = "./rsa.pub" 
+}
 module "komodo" {
   #source  = "app.terraform.io/d3-org/vm/pve"
   source  = "./modules/komodo"
