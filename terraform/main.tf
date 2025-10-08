@@ -1,5 +1,5 @@
 data "local_file" "ssh_public_key" {
-  filename = "/home/d3/.ssh/id_ed.pub" 
+  filename = "/home/d3/.ssh/d3_tf.pub" 
 }
 module "komodo" {
   #source  = "app.terraform.io/d3-org/vm/pve"
