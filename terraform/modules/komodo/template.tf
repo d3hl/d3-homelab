@@ -1,6 +1,6 @@
-#data "proxmox_virtual_environment_vms" "debian_template" {
-#  tags = ["debian", "template"]
-#}
+data "proxmox_virtual_environment_vms" "debian_template" {
+  tags = ["debian", "template"]
+}
 
 resource "proxmox_virtual_environment_pool" "komodo-pool" {
   comment = "Managed by Terraform"
@@ -46,7 +46,7 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
       }
     }
 
-    datastore_id = var.datastore_id
+    #datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
     //user_data_file_id = proxmox_virtual_environment_file.cloud_config.id       
   }
