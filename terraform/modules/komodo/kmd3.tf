@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_file" "meta3_data_cloud_config" {
 
 resource "proxmox_virtual_environment_vm" "kmd3" {
   name      = "kmd3"
-  node_name = var.virtual_environment_nodeC_name
+  node_name = var.virtual_environment_nodeA_name
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
   tags      = sort(["debian", "terraform","komodo"])
   #migrate   = true
