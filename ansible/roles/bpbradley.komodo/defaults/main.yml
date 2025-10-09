@@ -12,7 +12,8 @@ komodo_passkeys: "{{ passkey | default([]) }}"
 # New to v1.17.1 which introduces IPv6 support.
 # If you have issues, set `komodo_bind_ip` to `0.0.0.0`
 # to revert to previous behaviour.
-komodo_bind_ip: "[::]"
+#komodo_bind_ip: "[::]"
+komodo_bind_ip: "0.0.0.0"
 
 # Replace with your komodo core IP if desired so that only core can access it
 komodo_allowed_ips: []
