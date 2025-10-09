@@ -13,7 +13,6 @@ resource "proxmox_virtual_environment_file" "meta2_data_cloud_config" {
   }
 }
 
-
 resource "proxmox_virtual_environment_vm" "kmd2" {
   name      = "kmd2"
   node_name = var.virtual_environment_nodeB_name
@@ -21,7 +20,7 @@ resource "proxmox_virtual_environment_vm" "kmd2" {
   tags      = sort(["debian", "terraform", "komodo"])
 #  migrate   = true
   clone {
-    vm_id = proxmox_virtual_environment_vm.debian-template.id
+    vm_id = proxmox_virtual_environment_vm.debian_template.id
   }
 
   agent {
