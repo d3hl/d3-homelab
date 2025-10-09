@@ -21,7 +21,7 @@ komodo:
   children:
     komodo:
       vars:
-        komodo_core_url: "http://10.10.10.30:9120"
+        komodo_core_url: "https://komodo.d3adc3ii.cc"
         ansible_become_pass: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           39343161376537346633343035303635643939363832373362386637353433363662666363343238
@@ -45,6 +45,16 @@ komodo:
           6461343863326431310a333733616365353139386230613734343437636265623261653139613061
           31626364636231316539333661313734356362373739636564643034326339323535633063346635
           3832636166326133353931343630346365386166633230303465
+        komodo_passkeys: - !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33346138386538663433316331386233306235386363323261656138323131356139333265353166
+          6132663733633231313035333765653063363431336461330a643631383336383266343932323139
+          63326136613636643833303362666639386164343137396365313933326566343131353062653031
+          3565356335373835320a373461636563393936386135353464333632356233353661643533376536
+          39343561666465383162623935323261636362616132346664376239653765393034336566363336
+          30373934393032333130316261343738613236386139616537333263663836303330656662376162
+          64376165633164633963316130323236393530303337376165383363653064383963336534313132
+          34393731373862663164
         enable_server_management: true
       children:
         core:
@@ -62,15 +72,19 @@ komodo:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
+              komodo_bind_ip: 0.0.0.0
             kmd3:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
+              komodo_bind_ip: 0.0.0.0
             kmd4:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
+              komodo_bind_ip: 0.0.0.0
             kmd5:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
+              komodo_bind_ip: 0.0.0.0
