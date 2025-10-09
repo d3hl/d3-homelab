@@ -7,8 +7,8 @@ resource "proxmox_virtual_environment_pool" "komodo-pool" {
   pool_id = "komodo-pool"
 }
 
-resource "proxmox_virtual_environment_vm" "debian-template" {
-  name      = "debian-template"
+resource "proxmox_virtual_environment_vm" "debian_template" {
+  name      = "debian_template"
   node_name = var.virtual_environment_nodeA_name
 
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
@@ -46,9 +46,7 @@ resource "proxmox_virtual_environment_vm" "debian-template" {
       }
     }
 
-    #datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-    //user_data_file_id = proxmox_virtual_environment_file.cloud_config.id       
   }
     disk {
     datastore_id = "cephVM"
