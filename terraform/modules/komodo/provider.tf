@@ -20,6 +20,14 @@ terraform {
         name    = "pve10"
         address = "10.10.10.10"
       }
+      node {
+        name    = "nodeB"
+        address = "10.10.10.15"
+      }
+      node {
+        name    = "nodeC"
+        address = "10.10.10.19"
+      }
     node {
       name    = "nodeA"
       address = "10.10.10.18"
