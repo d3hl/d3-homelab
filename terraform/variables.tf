@@ -45,12 +45,8 @@ variable "virtual_environment_nodeC_name" {
   type        = string
   default     = "nodeC"
 }
-variable "datastore_id" {
-  type        = string
-  description = "Datastore for VM disks"
-  default     = "cVM"
-}
-variable "ssh_public_key" {
-  type = string
-  sensitive = true
-}
+
+#variable "ssh_public_key" {
+#  type = string
+#  sensitive = true
+#}
