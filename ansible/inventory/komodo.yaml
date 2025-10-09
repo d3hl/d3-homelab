@@ -52,8 +52,8 @@ komodo:
             kmd1:
               periphery_port: 8120
               komodo_allowed_ips:
-              generate_server_passkey: true
                 - "10.10.10.30"
+              generate_server_passkey: true
               server_address: https://host.docker.internal:{{ periphery_port }}
         periphery:
           hosts:
@@ -61,8 +61,6 @@ komodo:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
-            #    - "{{ hostvars['komodo_host1'].ansible_host }}"
-             #   - 10.10.10.0/24
             kmd3:
               generate_server_passkey: true
               komodo_allowed_ips:
@@ -75,7 +73,3 @@ komodo:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
-           # pangolin:
-           #   generate_server_passkey: true
-           #   komodo_allowed_ips: 0.0.0.0
-                
