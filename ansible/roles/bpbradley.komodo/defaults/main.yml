@@ -50,7 +50,7 @@ server_address: "" # Leave blank to try and autodetect
 server_passkey: "" # Leave blank to use global passkeys in core configuration
 generate_server_passkey: false # Allow a generation of a random passkey
 
-komodo_user: "komodo"
+komodo_user: "d3"
 komodo_group: "{{ komodo_user }}"
 
 komodo_home: "/home/{{ komodo_user }}"
@@ -67,7 +67,8 @@ komodo_service_file_template: "periphery.service.j2"
 
 komodo_periphery_port: "{{ periphery_port | default(8120, true) }}"
 
-komodo_root_directory: "{{ root_dir | default(komodo_home ~ '/.komodo', true) }}"
+#komodo_root_directory: "{{ root_dir | default(komodo_home ~ '/.komodo', true) }}"
+komodo_root_directory: "/mnt/cFS/appdata/komodo"
 komodo_repo_dir: "{{ repo_dir  | default(komodo_root_directory ~ '/repos',  true) }}"
 komodo_stack_dir: "{{ stack_dir | default(komodo_root_directory ~ '/stacks', true) }}"
 komodo_build_dir: "{{ build_dir | default(komodo_root_directory ~ '/build',  true) }}"
