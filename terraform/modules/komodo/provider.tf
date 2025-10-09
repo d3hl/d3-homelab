@@ -29,7 +29,7 @@ terraform {
       address = "10.10.10.14"
     }
         agent = true
-        username = d3
+        username = "d3"
         #username = var.virtual_environment_username
       }
       }
