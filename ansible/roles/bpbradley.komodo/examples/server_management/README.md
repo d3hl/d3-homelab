@@ -21,7 +21,7 @@ generate in **Settings > Profile > New Api Key +**
 Reminder to encrypt your API credentials with `ansible-vault`
 
 On `komodo_host1`, the host which is on the same machine as core,
-we are manually setting the server address to `https://host.docker.internal:{{ periphery_port }}`
+we are manually setting the server address to `https://host.docker.internal:{{ komodo_periphery_port }}`
 since we are specifying a unique bind address to the docker network. In this setup,
 this host does not have any passkeys configured.
 
@@ -65,10 +65,10 @@ You can use also it to update / uninstall, or change the version by
 overriding variables with `-e`
 
 ```sh
-# Update to v1.18.4
+# Update to latest
 ansible-playbook playbooks/komodo.yml \
     -e "komodo_action=update" \
-    -e "komodo_version=v1.18.4" 
+    -e "komodo_version=latest" 
 
 # Uninstall and delete komodo service user
 ansible-playbook playbooks/komodo.yml \
