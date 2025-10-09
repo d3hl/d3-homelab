@@ -59,19 +59,19 @@ komodo:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: 0.0.0.0
+              komodo_bind_ip: "{{ ansible_host }}"
             kmd3:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: 0.0.0.0
+              komodo_bind_ip: "{{ ansible_host }}"
             kmd4:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: 0.0.0.0
+              komodo_bind_ip: "{{ ansible_host }}"
             kmd5:
               generate_server_passkey: true
               komodo_allowed_ips:
                 - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: 0.0.0.0
+              komodo_bind_ip: "{{ ansible_host }}" 
