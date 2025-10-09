@@ -21,7 +21,7 @@ komodo:
   children:
     komodo:
       vars:
-        komodo_core_url: "https://komodo.d3adc3ii.cc"
+        komodo_core_url: "http://10.10.10.30:9120"
         ansible_become_pass: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           39343161376537346633343035303635643939363832373362386637353433363662666363343238
