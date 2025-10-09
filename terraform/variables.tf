@@ -7,12 +7,12 @@ variable "virtual_environment_username" {
   type        = string
 }
 
-variable "virtual_environment_password" {
-  description = "Password for Proxmox API User"
-  type        = string
-  sensitive   = true
+#variable "virtual_environment_password" {
+#  description = "Password for Proxmox API User"
+#  type        = string
+#  sensitive   = true
 #  default     = "don not use default passwords!"
-}
+#}
 
 variable "virtual_environment_api_token" {
   description = "The API token for the Proxmox Virtual Environment API"
