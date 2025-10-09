@@ -50,7 +50,7 @@ variable "datastore_id" {
   description = "Datastore for VM disks"
   default     = "cVM"
 }
-#variable "ssh_public_key" {
-#  type = string
-#  sensitive = true
-#}
+variable "ssh_public_key" {
+  type = string
+  sensitive = true
+}

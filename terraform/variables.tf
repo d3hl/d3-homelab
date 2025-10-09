@@ -46,7 +46,7 @@ variable "virtual_environment_nodeC_name" {
   default     = "nodeC"
 }
 
-#variable "ssh_public_key" {
-#  type = string
-#  sensitive = true
-#}
+variable "ssh_public_key" {
+  type = string
+  sensitive = true
+}
