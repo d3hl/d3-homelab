@@ -48,5 +48,5 @@ variable "virtual_environment_nodeC_name" {
 variable "datastore_id" {
   type        = string
   description = "Datastore for VM disks"
-  default     = "cVM"
+  default     = "cephVM"
 }
