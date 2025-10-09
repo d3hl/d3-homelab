@@ -51,11 +51,8 @@ komodo:
           hosts:
             kmd1:
               komodo_periphery_port: 8120
-              komodo_allowed_ips:
-                - "10.10.10.30"
               generate_server_passkey: true
-             # server_address: https://host.docker.internal:{{ komodo_periphery_port }}
-              server_address: https://periphery:8120
+              server_address: https://host.docker.internal:{{ komodo_periphery_port }}
         periphery:
           hosts:
             kmd2:
