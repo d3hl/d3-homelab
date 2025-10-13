@@ -2,7 +2,7 @@
 - name: Install neccessary packages for onboarding.
   hosts: komodo
   become: true
-  become_user: root
+#  become_user: root
   gather_facts: no
   roles:
     - onboard
