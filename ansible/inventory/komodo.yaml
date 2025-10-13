@@ -15,9 +15,6 @@ komodo:
       ansible_host: 10.203.1.120
     k-121:
       ansible_host: 10.203.1.121
-    #pangolin:
-    #  ansible_host: 45.127.32.141
-   #   connection: local
   children:
     komodo:
       vars:
@@ -45,7 +42,8 @@ komodo:
           3434316134326161340a346563643930376364336632626338333963373132613936386433366436
           33646138353765633161663062343138336133386231666239656130373533373939346239343538
           6637383236303065613866396266626562373939353737656636
-       children:
+        enable_server_management: true
+      children:
         core:
           hosts:
             kmd1:
