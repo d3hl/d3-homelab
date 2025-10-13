@@ -1,27 +1,25 @@
-  - name: update repository cache
-    apt:
-      update_cache: yes
-      cache_valid_time: 3600
-
-  - name: install common packages
-    apt:
-      name:
-      - ceph-common
-      - vim
-      state: latest
-
-  - name: add Ceph source
-    ansible.builtin.blockinfile:
-      path: /etc/apt/sources.list.d/ceph.sources
-      block: |
-        Types: deb
-        URIs: http://download.proxmox.com/debian/ceph-squid
-        Suites: trixie
-        Components: no-subscription
-        Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
-      create: yes
-
-  - name: download proxmox keyring
-    ansible.builtin.apt:
-      deb: http://download.proxmox.com/debian/pbs-client/dists/trixie/main/binary-amd64/proxmox-archive-keyring_4.0_all.deb
+  - name: installing podman
+    package:
+      name: "podman"
       state: present
+
+  - name: Pull an image
+    containers.podman.podman_image:
+      name: httpd
+
+  - name: Copying file into home
+    copy:
+      src: /root/ws1/index.html
+      dest: /home
+      
+  - name: Re-create a redis container
+    containers.podman.podman_container:
+      name: sarthak
+      image: httpd
+      state: started
+      detach: true
+      exposed_ports:
+        - 80
+      ports:
+        - 4444:80
+      volumes: /home/:/usr/local/apache2/htdocs/
