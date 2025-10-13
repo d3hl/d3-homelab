@@ -1,6 +1,6 @@
 ---
 - name: Installing podman
-  host: hosts/komodo
+  host: komodo
   gather_facts: no
   roles:
     - podman
