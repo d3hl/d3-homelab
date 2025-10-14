@@ -1,8 +1,8 @@
 ---
 - name: mount cephfs drive 
   hosts: komodo
-#  become: true
-  become_user: root
+  become: true
+#  become_user: root
   gather_facts: yes
   roles:
     - cephfs
