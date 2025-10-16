@@ -54,5 +54,5 @@
         path: /mnt/cFS
         state: mounted
         src: komodo@.cFS=/
-        opts: mon_addr=10.10.10.10:6789,10.10.10.14:6789,10.10.10.158:6789,10.10.10.18:6789,10.10.10.19:6789,rw,noatime,_netdev
+        opts: mon_addr=10.10.10.10:6789/10.10.10.14:6789/10.10.10.158:6789/10.10.10.18:6789/10.10.10.19:6789,rw,noatime,_netdev
       become: true
