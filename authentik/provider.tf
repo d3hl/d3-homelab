@@ -6,3 +6,14 @@ terraform {
     }
   }
 }
+
+provider "authentik" {
+  url   = "https://auth.d3adc3ii.cc"
+  token = var.AUTHENTIK_TOKEN
+  #insecure = true
+  # Optionally add extra headers
+  # headers {
+  #   X-my-header = "foo"
+  # }
+  #  Set token with `export AUTHENTIK_TOKEN='<your-token>'`
+}
