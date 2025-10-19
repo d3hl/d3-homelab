@@ -3,6 +3,10 @@
 data "authentik_flow" "default-authorization-flow" {
   slug = "default-provider-authorization-implicit-consent"
 }
+
+data "authentik_flow" "default-provider-invalidation-flow" {
+  slug = "default-provider-invalidation-flow"
+}
 resource "authentik_provider_oauth2" "provider_for_proxmox" {
   name               = "Proxmox Provider"
   client_id          = "proxmox"
@@ -13,7 +17,7 @@ resource "authentik_provider_oauth2" "provider_for_proxmox" {
       url           = "https://10.10.10.10:8006/oauth2/callback",
     }
   ]
-
+  invalidation_flow = data.authentik_flow.default-provider-invalidation-flow.id
   authorization_flow = data.authentik_flow.default-authorization-flow.id
 }
 
