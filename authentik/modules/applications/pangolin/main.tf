@@ -36,7 +36,7 @@ resource "authentik_application" "pangolin" {
 
 # Binding policy to application to allow access to specific group
 resource "authentik_policy_binding" "app-access" {
-  target = authentik_application.name.uuid
+  target = authentik_application.pangolin.uuid
   group  = data.authentik_group.homelab-admins.id
   order  = 0
 }
