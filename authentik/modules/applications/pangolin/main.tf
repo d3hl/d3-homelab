@@ -1,4 +1,7 @@
-# Create an application with a provider attached and policies applied
+### Look up for existing groups and flows ###
+data "authentik_group" "homelab-admins" {
+  name = "homelab-admins"
+}
 
 data "authentik_flow" "default-authorization-flow" {
   slug = "default-provider-authorization-implicit-consent"
@@ -7,6 +10,11 @@ data "authentik_flow" "default-authorization-flow" {
 data "authentik_flow" "default-provider-invalidation-flow" {
   slug = "default-provider-invalidation-flow"
 }
+
+
+
+#### Create resource for Pangolin OAuth2 provider ###
+
 resource "authentik_provider_oauth2" "provider_for_pangolin" {
   name               = "Pangolin Provider"
   client_id          = "pangolin080012"
@@ -20,8 +28,16 @@ resource "authentik_provider_oauth2" "provider_for_pangolin" {
   authorization_flow = data.authentik_flow.default-authorization-flow.id
 }
 
+resource "authentik_policy_binding" "test-ent-access" {
+  target = authentik_application_entitlement.ent.uuid
+  group  = authentik_group.group.id
+  order  = 0
+}
+
+
 resource "authentik_application" "pangolin" {
   name              = "pangolin"
   slug              = "pangolin"
   protocol_provider = authentik_provider_oauth2.provider_for_pangolin.id
+  group            = data.authentik_group.homelab-admins.id
 }
