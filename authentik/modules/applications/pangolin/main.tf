@@ -12,7 +12,6 @@ data "authentik_flow" "default-provider-invalidation-flow" {
 }
 
 
-
 #### Create resource for Pangolin OAuth2 provider ###
 
 resource "authentik_provider_oauth2" "provider_for_pangolin" {
@@ -33,4 +32,11 @@ resource "authentik_application" "pangolin" {
   slug              = "pangolin"
   protocol_provider = authentik_provider_oauth2.provider_for_pangolin.id
   group            = data.authentik_group.homelab-admins.id
+}
+
+# Binding policy to application to allow access to specific group
+resource "authentik_policy_binding" "app-access" {
+  target = authentik_application.name.uuid
+  group  = data.authentik_group.homelab-admins.id
+  order  = 0
 }
