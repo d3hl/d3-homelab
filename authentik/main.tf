@@ -13,3 +13,8 @@ module "beszel" {
   AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
   AUTHENTIK_URL = var.AUTHENTIK_URL
 }
+module "pangolin" {
+  source = "./modules/applications/pangolin"
+  AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
+  AUTHENTIK_URL = var.AUTHENTIK_URL
+}
