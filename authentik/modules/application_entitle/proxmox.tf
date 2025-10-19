@@ -13,8 +13,9 @@ resource "authentik_group" "group" {
   name = "Infrastructure"
 }
 
-resource "authentik_policy_binding" "app-access" {
+resource "authentik_policy_binding" "test-ent-access" {
   target = authentik_application_entitlement.ent.uuid
   group  = authentik_group.group.id
   order  = 0
 }
+
