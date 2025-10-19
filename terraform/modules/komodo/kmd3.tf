@@ -30,7 +30,7 @@ resource "proxmox_virtual_environment_vm" "kmd3" {
   }
 
   memory {
-    dedicated = 8192
+    dedicated = 16384
   }
 
   initialization {
