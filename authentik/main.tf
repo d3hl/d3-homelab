@@ -1,4 +1,5 @@
-module "application_entitle" {
-  source = "./modules/application_entitle"
-
+module "name" {
+  source = "./modules/application_entitlement"
 }
+
+# Define variables
