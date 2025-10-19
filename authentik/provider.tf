@@ -8,6 +8,4 @@ terraform {
 }
 
 provider "authentik" {
-  AUTHENTIK_URL   = var.AUTHENTIK_URL
-  AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
 }
