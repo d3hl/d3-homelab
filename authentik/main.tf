@@ -1,15 +1,15 @@
 module "proxmox" {
-  source = "./modules/applications"
+  source = "./modules/applications/proxmox"
   AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
   AUTHENTIK_URL = var.AUTHENTIK_URL
 }
-module "immich" {
-  source = "./modules/applications"
+module "komodo" {
+  source = "./modules/applications/komodo"
   AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
   AUTHENTIK_URL = var.AUTHENTIK_URL
 }
 module "beszel" {
-  source = "./modules/applications"
+  source = "./modules/applications/beszel"
   AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
   AUTHENTIK_URL = var.AUTHENTIK_URL
 }
