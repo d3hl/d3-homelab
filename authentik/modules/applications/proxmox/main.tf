@@ -13,7 +13,8 @@ resource "authentik_provider_oauth2" "provider_for_proxmox" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://10.10.10.10:8006/oauth2/callback",
+      url           = "https://komodo.d3adc3ii.cc/auth/oidc/callback",
+
     }
   ]
   invalidation_flow = data.authentik_flow.default-provider-invalidation-flow.id
