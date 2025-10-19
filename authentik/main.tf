@@ -18,8 +18,8 @@ module "pangolin" {
   AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
   AUTHENTIK_URL = var.AUTHENTIK_URL
 }
-module "passwordless-flow" {
-  source = "./modules/flows/passwordless"
-  AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
-  AUTHENTIK_URL = var.AUTHENTIK_URL
-}
+#module "passwordless-flow" {
+#  source = "./modules/flows/passwordless"
+#  AUTHENTIK_TOKEN = var.AUTHENTIK_TOKEN
+#  AUTHENTIK_URL = var.AUTHENTIK_URL
+#}
