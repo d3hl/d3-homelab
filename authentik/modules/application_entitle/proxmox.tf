@@ -1,7 +1,7 @@
 # Create an application entitlement bound to a group
 resource "authentik_application" "name" {
-  name = "proxmox"
-  slug = "proxmox"
+  name = "example-app"
+  slug = "example-app"
 }
 
 resource "authentik_application_entitlement" "ent" {
@@ -10,7 +10,7 @@ resource "authentik_application_entitlement" "ent" {
 }
 
 resource "authentik_group" "group" {
-  name = "Infrastructure"
+  name = "test-ent-group"
 }
 
 resource "authentik_policy_binding" "test-ent-access" {
@@ -18,4 +18,3 @@ resource "authentik_policy_binding" "test-ent-access" {
   group  = authentik_group.group.id
   order  = 0
 }
-
