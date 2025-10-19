@@ -1,11 +1,11 @@
 # Create an application with a provider attached and policies applied
 
-data "authentik_flow" "default-authorization-flow" {
-  slug = "default-provider-authorization-implicit-consent"
+data "authentik_flow" "default-authorization-flow-immich" {
+  slug = "default-provider-authorization-implicit-consent-immich"
 }
 
-data "authentik_flow" "default-provider-invalidation-flow" {
-  slug = "default-provider-invalidation-flow"
+data "authentik_flow" "default-provider-invalidation-flow-immich" {
+  slug = "default-provider-invalidation-flow-immich"
 }
 resource "authentik_provider_oauth2" "provider_for_immich" {
   name               = "Immich Provider"
