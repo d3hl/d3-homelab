@@ -6,7 +6,7 @@ resource "authentik_application" "name" {
 
 resource "authentik_application_entitlement" "ent" {
   name        = "test-ent"
-  application = authentik_application.name.uuid
+  application = authentik_application.name.id
 }
 
 resource "authentik_group" "group" {
@@ -14,7 +14,7 @@ resource "authentik_group" "group" {
 }
 
 resource "authentik_policy_binding" "test-ent-access" {
-  target = authentik_application_entitlement.ent.uuid
+  target = authentik_application_entitlement.ent.id
   group  = authentik_group.group.id
   order  = 0
 }
