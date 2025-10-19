@@ -28,13 +28,6 @@ resource "authentik_provider_oauth2" "provider_for_pangolin" {
   authorization_flow = data.authentik_flow.default-authorization-flow.id
 }
 
-resource "authentik_policy_binding" "test-ent-access" {
-  target = authentik_application_entitlement.ent.uuid
-  group  = authentik_group.group.id
-  order  = 0
-}
-
-
 resource "authentik_application" "pangolin" {
   name              = "pangolin"
   slug              = "pangolin"
