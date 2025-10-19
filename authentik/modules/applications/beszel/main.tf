@@ -1,7 +1,7 @@
 # Create an application with a provider attached and policies applied
 
-data "authentik_flow" "default-authorization-flow-beszel" {
-  slug = "default-provider-authorization-implicit-consent-beszel"
+data "authentik_flow" "default-authorization-flow" {
+  slug = "default-provider-authorization-implicit-consent"
 }
 
 data "authentik_flow" "default-provider-invalidation-flow" {
