@@ -13,7 +13,7 @@ resource "authentik_provider_oauth2" "provider_for_komodo" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "http://10.10.10.30:9120/auth/oidc/callback",
+      url           = "http://komodo.d3adc3ii.cc/auth/oidc/callback",
     }
   ]
   invalidation_flow = data.authentik_flow.default-provider-invalidation-flow.id
@@ -25,3 +25,4 @@ resource "authentik_application" "komodo" {
   slug              = "komodo"
   protocol_provider = authentik_provider_oauth2.provider_for_komodo.id
 }
+
