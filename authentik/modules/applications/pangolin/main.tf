@@ -13,7 +13,7 @@ resource "authentik_provider_oauth2" "provider_for_pangolin" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://10.10.10.10:8006/oauth2/callback",
+      url           = "https://pangolin.d3adc3ii.cc/auth/idp/2/oidc/callback",
     }
   ]
   invalidation_flow = data.authentik_flow.default-provider-invalidation-flow.id
