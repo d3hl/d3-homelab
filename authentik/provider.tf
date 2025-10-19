@@ -9,5 +9,4 @@ terraform {
 
 provider "authentik" {
   url   = "https://auth.d3adc3ii.cc"
-            # Token should be defined in variables
 }
