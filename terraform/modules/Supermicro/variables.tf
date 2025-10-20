@@ -1,3 +1,7 @@
+variable "debian_cloud_image_file_id" {
+  description = "File id of the Debian cloud image to use for VM disks. Typically passed from module.komodo.debian_cloud_image_file_id"
+  type        = string
+}
 variable "virtual_environment_endpoint" {
   type        = string
 }
