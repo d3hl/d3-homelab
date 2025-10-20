@@ -1,5 +1,5 @@
 variable "virtual_environment_endpoint" {
-  type        = string
+  type = string
 }
 
 variable "virtual_environment_username" {
@@ -7,12 +7,10 @@ variable "virtual_environment_username" {
   type        = string
 }
 
-#variable "virtual_environment_password" {
-#  description = "Password for Proxmox API User"
-#  type        = string
-#  sensitive   = true
-#  default     = "don not use default passwords!"
-#}
+variable "hostname" {
+  type    = string
+  default = "kmd1"
+}
 
 variable "virtual_environment_api_token" {
   description = "The API token for the Proxmox Virtual Environment API"
@@ -20,29 +18,8 @@ variable "virtual_environment_api_token" {
   sensitive   = true
 }
 
-variable "virtual_environment_pve10_name" {
-  description = "Name of the Proxmox node"
-  type        = string
-  default     = "pve10"
-}
-variable "virtual_environment_pve14_name" {
-  description = "Name of the Proxmox node"
-  type        = string
-  default     = "pve14"
-}
-variable "virtual_environment_nodeA_name" {
+variable "virtual_environment_node_name" {
   description = "Name of the Proxmox node"
   type        = string
   default     = "nodeA"
 }
-variable "virtual_environment_nodeB_name" {
-  description = "Name of the Proxmox node"
-  type        = string
-  default     = "nodeB"
-}
-variable "virtual_environment_nodeC_name" {
-  description = "Name of the Proxmox node"
-  type        = string
-  default     = "nodeC"
-}
-

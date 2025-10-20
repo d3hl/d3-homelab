@@ -1,12 +1,28 @@
 module "template" {
-  source = "/./modules/template"
+  source = "../../modules/template"
 }
-module "meta" {
-  source = "/./modules/meta"
+
+module "cloud_init" {
+  source = "../../modules/cloud_init"
 }
-resource "proxmox_virtual_environment_vm" "kmd1" {
-  name      = "kmd1"
-  node_name = var.virtual_environment_nodeA_name
+resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
+  content_type = "snippets"
+  datastore_id = var.datastore_id
+  node_name    = var.virtual_environment_node_name
+
+  source_raw {
+    data = <<-EOF
+    #cloud-config
+    local-hostname: ${var.hostname}
+    EOF
+
+    file_name = "meta-data-cloud-config-${var.hostname}.yaml"
+  }
+}
+
+resource "proxmox_virtual_environment_vm" "debian_vm" {
+  name      = var.hostname
+  node_name = var.virtual_environment_node_name
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
@@ -30,7 +46,7 @@ resource "proxmox_virtual_environment_vm" "kmd1" {
     }
 
     datastore_id      = var.datastore_id
-    user_data_file_id = module.cloud_init.user_data_file_id
+    user_data_file_id = module.cloud_init.user_data_cloud_config_id
     meta_data_file_id = module.meta.meta_data_file_id
   }
 }
