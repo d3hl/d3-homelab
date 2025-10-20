@@ -1,12 +1,11 @@
 data "proxmox_virtual_environment_vm" "debian_template" {
   node_name = var.virtual_environment_nodeA_name
-  vm_id     = "debian_template"
+  vm_id     = module.template.debian_template.vm_id
 }
-
 resource "proxmox_virtual_environment_vm" "kmd1" {
   name      = "kmd1"
   node_name = var.virtual_environment_nodeA_name
-  pool_id   = module.proxmox_virtual_environment_pool.komodo_pool.id
+  pool_id   = module.pools.komodo_pool_id
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
