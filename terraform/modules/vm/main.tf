@@ -1,18 +1,8 @@
-data "proxmox_virtual_environment_vms" "debian_template" {
-  tags = ["debian", "template"]
-}
-
-resource "proxmox_virtual_environment_pool" "komodo-pool" {
-  comment = "Managed by Terraform"
-  pool_id = "komodo-pool"
-}
-
 resource "proxmox_virtual_environment_vm" "debian_template" {
   name      = "debian-template"
   node_name = var.virtual_environment_nodeA_name
 
   pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
-  # should be true if qemu agent is not installed / enabled on the VM
   template = true
   started  = false
 
@@ -25,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
 
   memory {
-    dedicated = 2048
+    dedicated = 2048 
   }
 
   efi_disk {
@@ -61,12 +51,4 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
     vlan_id = 10
   }
 
-}
-
-resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
-  content_type = "import"
-  datastore_id = "cFS"
-  node_name    = var.virtual_environment_nodeA_name
-  #url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-nocloud-amd64.qcow2"
-  url          =  "http://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2"
 }

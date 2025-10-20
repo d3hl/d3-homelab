@@ -1,17 +1,8 @@
-resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
-  content_type = "snippets"
-  datastore_id = "cFS"
-  node_name    = var.virtual_environment_nodeA_name
-
-  source_raw {
-    data = <<-EOF
-    #cloud-config
-    local-hostname: kmd1
-    EOF
-
-    file_name = "meta-data-cloud-config.yaml"
-  }
+data "proxmox_virtual_environment_vm" "debian_template" {
+  node_name = var.virtual_environment_nodeA_name
+  vm_id     = "debian_template"
 }
+
 resource "proxmox_virtual_environment_vm" "kmd1" {
   name      = "kmd1"
   node_name = var.virtual_environment_nodeA_name
@@ -19,7 +10,8 @@ resource "proxmox_virtual_environment_vm" "kmd1" {
   tags      = sort(["debian", "terraform","komodo"])
 
   clone {
-    vm_id = proxmox_virtual_environment_vm.debian_template.id
+#    vm_id = data.proxmox_virtual_environment_vm.debian_template.vm_id
+    vm_id = module.proxmox_virtual_environment_vm.debian_template.vm_id
   }
 
   agent {
@@ -43,6 +35,3 @@ resource "proxmox_virtual_environment_vm" "kmd1" {
   }
 }
 
-output "vm_ipv4_address" {
-  value = proxmox_virtual_environment_vm.kmd1.ipv4_addresses[1][0]
-}
