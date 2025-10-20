@@ -32,11 +32,11 @@ resource "proxmox_virtual_environment_vm" "supermicro_cloud_composer" {
       }
     }
 
-    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
+    user_data_file_id = proxmox_virtual_environment_file.supermicro_user_data_cloud_config.id
   }
     disk {
     datastore_id = "cephVM"
-    file_id   = proxmox_virtual_environment_download_file.debian_cloud_image.id
+    file_id   = proxmox_virtual_environment_download_file.debian_cloud2_image.id
     interface = "virtio0"
     iothread  = true
     discard   = "on"
@@ -49,10 +49,10 @@ resource "proxmox_virtual_environment_vm" "supermicro_cloud_composer" {
 
 }
 
-resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
+resource "proxmox_virtual_environment_download_file" "debian_cloud2_image" {
   content_type = "import"
   datastore_id = "cFS"
-  node_name    = var.virtual_environment_nodeA_name
+  node_name    = var.virtual_environment_nodeC_name
   #url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-nocloud-amd64.qcow2"
   url          =  "http://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2"
 }

@@ -3,7 +3,7 @@ data "local_file" "ssh_public_key" {
  # filename = "${path.module}/d3_tf.pub"
 }
 
-resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "supermicro_user_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_nodeC_name
@@ -31,7 +31,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config.yaml"
+    file_name = "supermicro_user-data-cloud-config.yaml"
   }
 
 }
