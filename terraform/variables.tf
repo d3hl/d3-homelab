@@ -1,5 +1,5 @@
 variable "virtual_environment_endpoint" {
-  type        = string
+  type = string
 }
 
 variable "virtual_environment_username" {
