@@ -6,12 +6,12 @@ data "proxmox_virtual_environment_vm" "debian_template" {
 resource "proxmox_virtual_environment_vm" "kmd1" {
   name      = "kmd1"
   node_name = var.virtual_environment_nodeA_name
-  pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
-  tags      = sort(["debian", "terraform","komodo"])
+  pool_id   = module.proxmox_virtual_environment_pool.komodo_pool.id
+  tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
-#    vm_id = data.proxmox_virtual_environment_vm.debian_template.vm_id
-    vm_id = module.proxmox_virtual_environment_vm.debian_template.vm_id
+    #    vm_id = data.proxmox_virtual_environment_vm.debian_template.vm_id
+    vm_id = module.template.debian_template.vm_id
   }
 
   agent {
@@ -29,9 +29,9 @@ resource "proxmox_virtual_environment_vm" "kmd1" {
       }
     }
 
-    datastore_id = var.datastore_id
+    datastore_id      = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-    meta_data_file_id = proxmox_virtual_environment_file.meta_data_cloud_config.id
+    meta_data_file_id = module.meta.meta_data_cloud_config.id
   }
 }
 
