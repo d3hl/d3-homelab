@@ -2,7 +2,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   name      = "debian-template"
   node_name = var.virtual_environment_nodeA_name
 
-  pool_id = proxmox_virtual_environment_pool.komodo-pool.pool_id  
+  pool_id  = proxmox_virtual_environment_pool.komodo-pool.pool_id
   template = true
   started  = false
 
@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
 
   memory {
-    dedicated = 2048 
+    dedicated = 2048
   }
 
   efi_disk {
@@ -23,11 +23,11 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
     type         = "4m"
   }
 
-#  hostpci {
-#    device = "hostpci0"
-#    mapping     = "hostpci0"
-#    pcie   = true
-#  }
+  #  hostpci {
+  #    device = "hostpci0"
+  #    mapping     = "hostpci0"
+  #    pcie   = true
+  #  }
 
   initialization {
     ip_config {
@@ -38,17 +38,22 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
 
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
-    disk {
+  disk {
     datastore_id = "cephVM"
-    file_id   = proxmox_virtual_environment_download_file.debian_cloud_image.id
-    interface = "virtio0"
-    iothread  = true
-    discard   = "on"
-    size      = 20
+    file_id      = proxmox_virtual_environment_download_file.debian_cloud_image.id
+    interface    = "virtio0"
+    iothread     = true
+    discard      = "on"
+    size         = 20
   }
   network_device {
-    bridge = "vmbr0"
+    bridge  = "vmbr0"
     vlan_id = 10
   }
+
+}
+output "vm_debian_template_id" {
+  description = "The ID of the Debian VM template"
+  value       = proxmox_virtual_environment_vm.debian_template.id
 
 }
