@@ -1,8 +1,8 @@
 module "template" {
-  source = "./modules/template"
+  source = "../modules/template"
 }
 module "meta" {
-  source = "./modules/meta"
+  source = "../modules/meta"
 }
 resource "proxmox_virtual_environment_vm" "kmd1" {
   name      = "kmd1"
