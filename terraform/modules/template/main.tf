@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "2.5.3"
+    }
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.85.0" # x-release-please-version
+    }
+  }
+
+}
 resource "proxmox_virtual_environment_vm" "debian_template" {
   name      = "debian-template"
   node_name = var.virtual_environment_nodeA_name
