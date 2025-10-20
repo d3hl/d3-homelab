@@ -3,7 +3,7 @@ module "template" {
 }
 
 module "cloud_init" {
-  source = "../../modules/cloud_init"
+  source = "../../modules/cloud-init"
 }
 resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"
