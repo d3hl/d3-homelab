@@ -1,6 +1,8 @@
-data "proxmox_virtual_environment_vm" "debian_template" {
-  node_name = var.virtual_environment_nodeA_name
-  vm_id     = module.template.debian_template.vm_id
+module "template" {
+  source = "./modules/template"
+}
+module "meta" {
+  source = "./modules/meta"
 }
 resource "proxmox_virtual_environment_vm" "kmd1" {
   name      = "kmd1"
