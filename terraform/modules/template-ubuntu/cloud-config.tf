@@ -30,7 +30,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config-ubuntu.yaml"
+    file_name = "user-data-cloud-config-${var.os}.yaml"
   }
 
 }

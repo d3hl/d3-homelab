@@ -23,6 +23,12 @@ variable "virtual_environment_api_token" {
   type        = string
   sensitive   = true
 }
+variable "os" {
+  description = "Operating system for the template"
+  type        = string
+  default     = "ubuntu-talos"
+
+}
 
 
 
