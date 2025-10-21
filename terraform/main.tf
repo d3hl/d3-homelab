@@ -29,18 +29,18 @@ provider "proxmox" {
   }
 }
 #
-module "kmd1" {
-  source                        = "./resources/kmd1"
-  virtual_environment_username  = var.virtual_environment_username
-  virtual_environment_endpoint  = var.virtual_environment_endpoint
-  virtual_environment_api_token = var.virtual_environment_api_token
-}
-module "omni-master1" {
-  source                        = "./resources/omni-master1"
-  virtual_environment_username  = var.virtual_environment_username
-  virtual_environment_endpoint  = var.virtual_environment_endpoint
-  virtual_environment_api_token = var.virtual_environment_api_token
-}
+#module "kmd1" {
+#  source                        = "./resources/kmd1"
+#  virtual_environment_username  = var.virtual_environment_username
+#  virtual_environment_endpoint  = var.virtual_environment_endpoint
+#  virtual_environment_api_token = var.virtual_environment_api_token
+#}
+#module "omni-master1" {
+#  source                        = "./resources/omni-master1"
+#  virtual_environment_username  = var.virtual_environment_username
+#  virtual_environment_endpoint  = var.virtual_environment_endpoint
+#  virtual_environment_api_token = var.virtual_environment_api_token
+#}
 
 #module "Supermicro" {
 # source = "./modules/Supermicro"
