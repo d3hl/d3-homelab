@@ -30,7 +30,7 @@ provider "proxmox" {
   }
 }
 #
-module "komodo" {
+module "kmd1" {
   source                        = "./resources/komodo"
   virtual_environment_username  = var.virtual_environment_username
   virtual_environment_endpoint  = var.virtual_environment_endpoint
