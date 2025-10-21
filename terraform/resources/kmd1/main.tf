@@ -26,7 +26,7 @@ resource "proxmox_virtual_environment_pool" "komodo-pool" {
 }
 resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"
-  datastore_id = var.datastore_id
+  datastore_id = var.filestore_id
   node_name    = var.virtual_environment_node_name
 
   source_raw {
