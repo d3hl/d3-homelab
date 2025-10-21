@@ -1,0 +1,84 @@
+terraform {
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "2.5.3"
+    }
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.85.1" # x-release-please-version
+    }
+  }
+
+}
+##################
+module "cloud-init" {
+  source = "../cloud-init"
+}
+
+
+
+module "download-file" {
+  source = "../download-file"
+}
+
+###########################
+resource "proxmox_virtual_environment_vm" "ubuntu_template" {
+  name      = "ubuntu-template"
+  node_name = var.virtual_environment_node_name
+
+
+  template = true
+  started  = false
+
+  machine     = "q35"
+  bios        = "ovmf"
+  description = "Managed by Terraform"
+
+  cpu {
+    cores = 2
+  }
+
+  memory {
+    dedicated = 2048
+  }
+
+  efi_disk {
+    datastore_id = var.datastore_id
+    type         = "4m"
+  }
+
+  #  hostpci {
+  #    device = "hostpci0"
+  #    mapping     = "hostpci0"
+  #    pcie   = true
+  #  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+
+    user_data_file_id = module.cloud-init.user_data_cloud_config_id
+  }
+  disk {
+    datastore_id = "cephVM"
+    file_id      = module.download-file.ubuntu_cloud_image_file_id
+    interface    = "virtio0"
+    iothread     = true
+    discard      = "on"
+    size         = 20
+  }
+  network_device {
+    bridge  = "vmbr0"
+    vlan_id = 10
+  }
+
+}
+output "ubuntu_template" {
+  description = "The ID of the Ubuntu VM template"
+  value       = proxmox_virtual_environment_vm.ubuntu_template.id
+
+}
