@@ -65,8 +65,8 @@ resource "proxmox_virtual_environment_vm" "debian_vm" {
     }
 
     datastore_id      = var.datastore_id
-    user_data_file_id = module.cloud-init.user_data_cloud_config_id
-    meta_data_file_id = module.meta.meta_data_file_id
+    user_data_file_id = module.cloud_init.user_data_cloud_config_id
+    meta_data_file_id = proxmox_virtual_environment_file.meta_data_cloud_config.id
   }
 }
 
