@@ -13,7 +13,7 @@ terraform {
 }
 provider "proxmox" {
   endpoint  = var.virtual_environment_endpoint
-  api_token = var.virtual_environment_token
+  api_token = var.virtual_environment_api_token
   ssh {
     agent    = true
     username = "d3"
