@@ -10,6 +10,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
+    #hostname: test-${count.index}
     timezone: Asia/Singapore
     users:
       - name: d3
@@ -30,7 +31,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config-${var.os}.yaml"
+    file_name = "user-data-cloud-config-${count.index}.yaml"
   }
 
 }
