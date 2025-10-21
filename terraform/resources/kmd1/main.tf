@@ -19,7 +19,7 @@ module "cloud_init" {
   source = "../../modules/cloud-init"
 }
 module "download-file" {
-  source = "../download-file"
+  source = "../../modules/download-file"
 }
 resource "proxmox_virtual_environment_pool" "komodo-pool" {
   pool_id = "komodo-pool"
