@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    local = {
-      source  = "hashicorp/local"
-      version = "2.5.3"
-    }
-    proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.85.1" # x-release-please-version
-    }
-  }
-
-}
 resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
   content_type = "import"
   datastore_id = "cFS"
