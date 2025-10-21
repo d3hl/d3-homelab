@@ -12,7 +12,7 @@ terraform {
 
 }
 module "template" {
-  source = "../../modules/template"
+  source = "../../modules/template-ubuntu"
 }
 
 module "cloud_init" {
