@@ -11,9 +11,18 @@ terraform {
   }
 
 }
+##################
+module "cloud-init" {
+  source = "../cloud-init"
+}
+
+
+
 module "download-file" {
   source = "../download-file"
 }
+
+###########################
 resource "proxmox_virtual_environment_vm" "debian_template" {
   name      = "debian-template"
   node_name = var.virtual_environment_node_name
@@ -56,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
   disk {
     datastore_id = "cephVM"
-    file_id      = proxmox_virtual_environment_download_file.debian_cloud_image.id
+    file_id      = module.download-file.debian_cloud_image_file_id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
