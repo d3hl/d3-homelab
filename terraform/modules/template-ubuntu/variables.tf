@@ -8,3 +8,21 @@ variable "datastore_id" {
   description = "Datastore for VM disks"
   default     = "cephVM"
 }
+variable "virtual_environment_endpoint" {
+  type = string
+}
+
+variable "virtual_environment_username" {
+  description = "Proxmox User for API Access"
+  type        = string
+}
+
+
+variable "virtual_environment_api_token" {
+  description = "The API token for the Proxmox Virtual Environment API"
+  type        = string
+  sensitive   = true
+}
+
+
+
