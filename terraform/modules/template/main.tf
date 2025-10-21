@@ -61,7 +61,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
       }
     }
 
-    user_data_file_id = module.cloud-init.user_data_cloud_init_id
+    user_data_file_id = module.cloud-init.user_data_cloud_init_file_id
   }
   disk {
     datastore_id = "cephVM"
