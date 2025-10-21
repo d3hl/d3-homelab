@@ -1,6 +1,19 @@
+terraform {
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "2.5.3"
+    }
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.85.0" # x-release-please-version
+    }
+  }
+
+}
 data "local_file" "ssh_public_key" {
-  filename = "/home/d3/.ssh/d3_tf.pub" 
- # filename = "${path.module}/d3_tf.pub"
+  filename = "/home/d3/.ssh/d3_tf.pub"
+  # filename = "${path.module}/d3_tf.pub"
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
