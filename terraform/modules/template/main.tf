@@ -77,7 +77,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
 
 }
-output "vm_debian_template" {
+output "debian_template" {
   description = "The ID of the Debian VM template"
   value       = proxmox_virtual_environment_vm.debian_template.id
 
