@@ -30,5 +30,5 @@ variable "virtual_environment_node_name" {
 variable "datastore_id" {
   description = "ID of the Proxmox datastore"
   type        = string
-  default     = "cephVM"
+  default     = "cFS"
 }
