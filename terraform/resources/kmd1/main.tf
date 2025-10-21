@@ -45,7 +45,7 @@ resource "proxmox_virtual_environment_vm" "debian_vm" {
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
-    vm_id = module.template.debian_template.vm_id
+    vm_id = module.template.debian_template
 
   }
 
