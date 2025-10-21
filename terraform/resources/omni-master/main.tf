@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
   }
 
   memory {
-    dedicated = 16384
+    dedicated = 8192
   }
 
   initialization {
