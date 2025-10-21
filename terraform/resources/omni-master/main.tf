@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
   tags      = sort(["ubuntu", "terraform", "omni"])
 
   clone {
-    vm_id = module.template.ubuntu_template.vm_id
+    vm_id = module.template.ubuntu_template
 
   }
 
