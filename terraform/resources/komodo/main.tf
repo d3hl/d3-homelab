@@ -18,9 +18,14 @@ module "template" {
 module "cloud_init" {
   source = "../../modules/cloud-init"
 }
+
+resource "proxmox_virtual_environment_pool" "komodo-pool" {
+  name = "komodo-pool"
+}
 resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"
   datastore_id = var.datastore_id
+  pool_id      = proxmox_virtual_environment_pool.komodo-pool.id
   node_name    = var.virtual_environment_node_name
 
   source_raw {

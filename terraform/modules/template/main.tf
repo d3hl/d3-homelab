@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   name      = "debian-template"
   node_name = var.virtual_environment_nodeA_name
 
-  pool_id  = proxmox_virtual_environment_pool.komodo-pool.pool_id
+
   template = true
   started  = false
 
@@ -49,7 +49,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
       }
     }
 
-    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
+    user_data_file_id = module.cloud-init.user_data_cloud_config.id
   }
   disk {
     datastore_id = "cephVM"

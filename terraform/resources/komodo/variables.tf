@@ -23,3 +23,8 @@ variable "virtual_environment_node_name" {
   type        = string
   default     = "nodeA"
 }
+variable "datastore_id" {
+  description = "ID of the Proxmox datastore"
+  type        = string
+  default     = "cephVM"
+}
