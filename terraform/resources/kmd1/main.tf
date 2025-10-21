@@ -18,14 +18,15 @@ module "template" {
 module "cloud_init" {
   source = "../../modules/cloud-init"
 }
-
+module "download-file" {
+  source = "../download-file"
+}
 resource "proxmox_virtual_environment_pool" "komodo-pool" {
   pool_id = "komodo-pool"
 }
 resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"
   datastore_id = var.datastore_id
-  pool_id      = proxmox_virtual_environment_pool.komodo-pool.id
   node_name    = var.virtual_environment_node_name
 
   source_raw {
@@ -64,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "debian_vm" {
     }
 
     datastore_id      = var.datastore_id
-    user_data_file_id = module.cloud_init.user_data_cloud_config_id
+    user_data_file_id = module.cloud-init.user_data_cloud_config_id
     meta_data_file_id = module.meta.meta_data_file_id
   }
 }
