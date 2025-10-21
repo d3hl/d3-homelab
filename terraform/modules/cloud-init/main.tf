@@ -48,3 +48,6 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   }
 
 }
+output "user_data_cloud_config_id" {
+  value = proxmox_virtual_environment_file.user_data_cloud_config.id
+}
