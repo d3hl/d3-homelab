@@ -1,28 +1,6 @@
-terraform {
-  required_providers {
-    local = {
-      source  = "hashicorp/local"
-      version = "2.5.3"
-    }
-    proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.85.1" # x-release-please-version
-    }
-  }
-
-}
-##################
-module "cloud-init" {
-  source = "../cloud-init"
-}
-
-
-
 module "download-file" {
   source = "../download-file"
 }
-
-###########################
 resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   name      = "ubuntu-template"
   node_name = var.virtual_environment_node_name
@@ -61,7 +39,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
       }
     }
 
-    user_data_file_id = module.cloud-init.user_data_cloud_config_id
+    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config-ubuntu.id
   }
   disk {
     datastore_id = "cephVM"
@@ -75,10 +53,5 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
     bridge  = "vmbr0"
     vlan_id = 10
   }
-
-}
-output "ubuntu_template" {
-  description = "The ID of the Ubuntu VM template"
-  value       = proxmox_virtual_environment_vm.ubuntu_template.id
 
 }

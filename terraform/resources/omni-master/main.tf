@@ -1,28 +1,10 @@
-terraform {
-  required_providers {
-    local = {
-      source  = "hashicorp/local"
-      version = "2.5.3"
-    }
-    proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.85.1" # x-release-please-version
-    }
-  }
 
-}
 module "template" {
   source = "../../modules/template-ubuntu"
 }
 
-module "cloud_init" {
-  source = "../../modules/cloud-init"
-}
-module "download-file" {
-  source = "../../modules/download-file"
-}
-resource "proxmox_virtual_environment_pool" "komodo-pool" {
-  pool_id = "komodo-pool"
+resource "proxmox_virtual_environment_pool" "Talos-pool" {
+  pool_id = "Talos-pool"
 }
 resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"
@@ -64,8 +46,6 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
       }
     }
 
-    datastore_id      = var.datastore_id
-    user_data_file_id = module.cloud_init.user_data_cloud_config_id
     meta_data_file_id = proxmox_virtual_environment_file.meta_data_cloud_config.id
   }
 }
