@@ -11,6 +11,9 @@ terraform {
   }
 
 }
+module "download-file" {
+  source = "../download-file"
+}
 resource "proxmox_virtual_environment_vm" "debian_template" {
   name      = "debian-template"
   node_name = var.virtual_environment_nodeA_name

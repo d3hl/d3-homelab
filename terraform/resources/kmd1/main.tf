@@ -20,7 +20,7 @@ module "cloud_init" {
 }
 
 resource "proxmox_virtual_environment_pool" "komodo-pool" {
-  name = "komodo-pool"
+  pool_id = "komodo-pool"
 }
 resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   content_type = "snippets"

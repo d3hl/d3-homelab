@@ -7,6 +7,10 @@ variable "virtual_environment_username" {
   type        = string
 }
 
+variable "vm_hostname" {
+  type    = string
+  default = " proxmox_virtual_environment_vm.kmd1.ipv4_addresses[1][0]"
+}
 variable "hostname" {
   type    = string
   default = "kmd1"
