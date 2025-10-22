@@ -1,4 +1,3 @@
-
 module "template" {
   source                        = "../../modules/template-ubuntu"
   virtual_environment_api_token = var.virtual_environment_api_token
@@ -10,6 +9,7 @@ resource "proxmox_virtual_environment_pool" "Talos-pool" {
   pool_id = "Talos-pool"
 }
 resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
+  count     = 2
   name      = "omni-${count.index}"
   node_name = var.virtual_environment_node_name
   tags      = sort(["ubuntu", "terraform", "omni"])
