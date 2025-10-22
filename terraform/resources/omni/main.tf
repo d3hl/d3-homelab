@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "omni_control" {
   tags      = sort(["omni-controller", "terraform", "omni"])
 
   clone {
-    vm_id = module.template.talos_tempplate.vm_id
+    vm_id = module.template.talos_template.vm_id
 
   }
   cpu {
