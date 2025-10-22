@@ -48,9 +48,9 @@ resource "proxmox_virtual_environment_vm" "omni_control" {
   }
 }
 resource "proxmox_virtual_environment_vm" "omni_worker" {
-  count     = 2
-  name      = "omni-worker-${count.index}"
-  node_name = "nodeB"
+  count     = 5
+  name      = "omni-${count.index}"
+  node_name = "nodeA"
   tags      = sort(["omni-worker", "terraform", "omni"])
 
   clone {

@@ -11,6 +11,7 @@ resource "proxmox_virtual_environment_vm" "talos_template" {
   description = "Managed by Terraform"
 
   cpu {
+    type  = "host"
     cores = 2
   }
 
