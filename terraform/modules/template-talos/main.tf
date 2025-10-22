@@ -59,5 +59,7 @@ data "proxmox_virtual_environment_file" "talos_nocloud_image" {
   file_name    = "metal-amd64-omn-omni.v1.11.3.iso"
 }
 output "talos_template" {
-  value = data.proxmox_virtual_environment_vm.talos_template.id
+  value = {
+    vm_id = proxmox_virtual_environment_vm.talos_template.id
+  }
 }
