@@ -52,7 +52,12 @@ resource "proxmox_virtual_environment_vm" "talos_template" {
   }
 
 }
-
+data "proxmox_virtual_environment_file" "talos_nocloud_image" {
+  content_type = "iso"
+  datastore_id = "cFS"
+  node_name    = var.virtual_environment_node_name
+  file_name    = "metal-amd64-omn-omni.v1.11.3.iso"
+}
 output "talos_template" {
   value = data.proxmox_virtual_environment_vm.talos_template.id
 }
