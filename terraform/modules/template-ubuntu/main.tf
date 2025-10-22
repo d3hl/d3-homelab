@@ -1,9 +1,3 @@
-module "download-file" {
-  source                        = "../download-file"
-  virtual_environment_api_token = var.virtual_environment_api_token
-  virtual_environment_endpoint  = var.virtual_environment_endpoint
-  virtual_environment_username  = var.virtual_environment_username
-}
 resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   name      = "ubuntu-template"
   node_name = var.virtual_environment_node_name
@@ -46,7 +40,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   }
   disk {
     datastore_id = "cephVM"
-    file_id      = module.download-file.ubuntu_cloud_image_file_id
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
@@ -58,8 +52,9 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   }
 
 }
-output "ubuntu_template" {
-  value = {
-    vm_id = proxmox_virtual_environment_vm.ubuntu_template.id
-  }
+resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image" {
+  content_type = "iso"
+  datastore_id = "cFS"
+  node_name    = var.virtual_environment_node_name
+  url          = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 }
