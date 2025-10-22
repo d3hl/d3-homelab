@@ -7,10 +7,10 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
 
+  #hostname: test-${count.index}
   source_raw {
     data = <<-EOF
     #cloud-config
-    #hostname: test-${count.index}
     timezone: Asia/Singapore
     users:
       - name: d3
@@ -31,7 +31,8 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config-${count.index}.yaml"
+    #  file_name = "user-data-cloud-config-${count.index}.yaml"
+    file_name = "user-data-cloud-config}.yaml"
   }
 
 }
