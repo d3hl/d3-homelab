@@ -19,13 +19,14 @@ provider "proxmox" {
   ssh {
     agent    = true
     username = "d3"
+    node {
+      name    = "nodeA"
+      address = "10.10.10.18"
+    }
+    node {
+      name    = "nodeB"
+      address = "10.10.10.15"
+    }
   }
-  node {
-    name    = "nodeA"
-    address = "10.10.10.18"
-  }
-  node {
-    name    = "nodeB"
-    address = "10.10.10.15"
-  }
+
 }
