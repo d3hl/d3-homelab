@@ -12,7 +12,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
     data = <<-EOF
     #cloud-config
     timezone: Asia/Singapore
-    hostname: omni-${count.index}
+    hostname: omni-master
     users:
       - name: d3
         groups:
