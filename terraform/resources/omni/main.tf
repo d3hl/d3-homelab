@@ -6,9 +6,9 @@ module "template" {
 }
 
 resource "proxmox_virtual_environment_pool" "Omni-pool" {
-  pool_id = "Omni-pool"
+  pool_id = "talos-pool"
 }
-resource "proxmox_virtual_environment_vm" "omni_control" {
+resource "proxmox_virtual_environment_vm" "omni_control_nodeC" {
   count     = 2
   name      = "omni-control-${count.index}"
   node_name = "nodeA"

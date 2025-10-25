@@ -3,7 +3,6 @@ data "local_file" "ssh_public_key" {
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
-  count        = 2
   content_type = "snippets"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
@@ -33,7 +32,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config-${count.index}.yaml"
+    file_name = "user-data-cloud-config-omnimaster.yaml"
     #file_name = "user-data-cloud-config}.yaml"
   }
 

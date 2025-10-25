@@ -5,12 +5,8 @@ module "template" {
   virtual_environment_username  = var.virtual_environment_username
 }
 
-resource "proxmox_virtual_environment_pool" "Talos-pool" {
-  pool_id = "Talos-pool"
-}
 resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
-  count     = 2
-  name      = "omni-${count.index}"
+  name      = "omni-master"
   node_name = var.virtual_environment_node_name
   tags      = sort(["ubuntu", "terraform", "omni"])
 
@@ -34,7 +30,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
       }
     }
 
-    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config[count.index].id
+    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
 }
 
