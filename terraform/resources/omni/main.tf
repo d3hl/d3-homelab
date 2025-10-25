@@ -47,8 +47,8 @@ resource "proxmox_virtual_environment_vm" "omni_control" {
     size         = 100
   }
 }
-resource "proxmox_virtual_environment_vm" "omni_worker" {
-  count     = 5
+resource "proxmox_virtual_environment_vm" "omni_worker_nodeD" {
+  count     = 3
   name      = "omni-${count.index}"
   node_name = "nodeA"
   tags      = sort(["omni-worker", "terraform", "omni"])

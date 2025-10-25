@@ -27,6 +27,10 @@ provider "proxmox" {
       name    = "nodeB"
       address = "10.10.10.15"
     }
+    node {
+      name    = "nodeD"
+      address = "10.10.10.17"
+    }
   }
 
 }
