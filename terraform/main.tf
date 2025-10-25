@@ -12,12 +12,12 @@ module "omni-master" {
   virtual_environment_endpoint  = var.virtual_environment_endpoint
   virtual_environment_api_token = var.virtual_environment_api_token
 }
-#module "omni" {
-#  source                        = "./resources/omni"
-#  virtual_environment_username  = var.virtual_environment_username
-#  virtual_environment_endpoint  = var.virtual_environment_endpoint
-#  virtual_environment_api_token = var.virtual_environment_api_token
-#}
+module "omni" {
+  source                        = "./resources/omni"
+  virtual_environment_username  = var.virtual_environment_username
+  virtual_environment_endpoint  = var.virtual_environment_endpoint
+  virtual_environment_api_token = var.virtual_environment_api_token
+} #}
 
 #module "Supermicro" {
 # source = "./modules/Supermicro"
