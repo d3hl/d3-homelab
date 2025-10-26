@@ -50,9 +50,9 @@ resource "proxmox_virtual_environment_vm" "omni_control_nodeC" {
 resource "proxmox_virtual_environment_vm" "omni_worker_nodeD" {
   count     = 3
   name      = "omni-${count.index}"
-  node_name = "nodeA"
+  node_name = "nodeD"
   tags      = sort(["omni-worker", "terraform", "omni"])
-
+  migrate   = true
   clone {
     vm_id = module.template.talos_template.vm_id
 
