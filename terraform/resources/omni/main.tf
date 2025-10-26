@@ -6,11 +6,11 @@ module "template" {
 }
 
 variable "control_nodes" {
-  default = ["nodeA", "nodeB"]
+  default = ["nodeA", "pve10"]
 }
 
 variable "worker_nodes" {
-  default = ["nodeC", "nodeD", "pve10"]
+  default = ["nodeB", "nodeC", "nodeD"]
 }
 
 resource "proxmox_virtual_environment_pool" "Omni-pool" {
