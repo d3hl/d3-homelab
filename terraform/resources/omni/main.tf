@@ -18,9 +18,10 @@ resource "proxmox_virtual_environment_pool" "Omni-pool" {
 }
 
 resource "proxmox_virtual_environment_vm" "control" {
-  count     = length(var.control_nodes)
-  name      = "omni-control-${count.index}"
-  node_name = var.control_nodes[count.index]
+  count = length(var.control_nodes)
+  name  = "omni-control-${count.index}"
+  #node_name = var.control_nodes[count.index]
+  node_name = "nodeA"
   tags      = sort(["omni-controller", "terraform", "omni"])
 
   clone {
@@ -58,8 +59,9 @@ resource "proxmox_virtual_environment_vm" "control" {
 resource "proxmox_virtual_environment_vm" "worker" {
   count = length(var.worker_nodes)
 
-  name      = "omni-worker-${count.index}"
-  node_name = var.worker_nodes[count.index]
+  name = "omni-worker-${count.index}"
+  #node_name = var.worker_nodes[count.index]
+  node_name = "nodeA"
   tags      = sort(["omni-worker", "terraform", "omni"])
 
   clone {
