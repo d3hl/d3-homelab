@@ -11,6 +11,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   description = "Managed by Terraform"
 
   cpu {
+    type  = "x86-64-v2-AES" # recommended for modern CPUs
     cores = 2
   }
 

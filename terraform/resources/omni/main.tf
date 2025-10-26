@@ -32,7 +32,10 @@ resource "proxmox_virtual_environment_vm" "control" {
   }
 
 
-  cpu { cores = 4 }
+  cpu {
+    type  = "x86-64-v2-AES"
+    cores = 4
+  }
   memory { dedicated = 4096 }
 
   initialization {
@@ -65,7 +68,10 @@ resource "proxmox_virtual_environment_vm" "worker" {
   agent {
     enabled = true
   }
-  cpu { cores = 2 }
+  cpu {
+    cores = 2
+    type  = "x86-64-v2-AES"
+  }
   memory { dedicated = 2048 }
   initialization {
     ip_config {
