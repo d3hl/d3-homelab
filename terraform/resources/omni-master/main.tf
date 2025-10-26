@@ -17,10 +17,6 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
   agent {
     enabled = true
   }
-  agent {
-    enabled = true
-  }
-
   memory {
     dedicated = 8192
   }
