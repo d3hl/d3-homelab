@@ -25,7 +25,8 @@ resource "proxmox_virtual_environment_vm" "control" {
   tags      = sort(["omni-controller", "terraform", "omni"])
 
   clone {
-    vm_id = module.template.talos_template.vm_id
+    vm_id     = module.template.talos_template.vm_id
+    node_name = "nodeA"
 
   }
   agent {
