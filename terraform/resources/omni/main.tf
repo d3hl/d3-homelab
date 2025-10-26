@@ -5,31 +5,35 @@ module "template" {
   virtual_environment_username  = var.virtual_environment_username
 }
 
+variable "control_nodes" {
+  default = ["nodeA", "nodeB"]
+}
+
+variable "worker_nodes" {
+  default = ["nodeC", "nodeD", "pve10"]
+}
+
 resource "proxmox_virtual_environment_pool" "Omni-pool" {
   pool_id = "talos-pool"
 }
-resource "proxmox_virtual_environment_vm" "omni_control_nodeC" {
-  count     = 2
+
+resource "proxmox_virtual_environment_vm" "control" {
+  count     = length(var.control_nodes)
   name      = "omni-control-${count.index}"
-  node_name = "nodeA"
+  node_name = var.control_nodes[count.index]
   tags      = sort(["omni-controller", "terraform", "omni"])
 
   clone {
     vm_id = module.template.talos_template.vm_id
 
   }
-  cpu {
-    cores = 4
-  }
-
-
   agent {
     enabled = true
   }
 
-  memory {
-    dedicated = 4096
-  }
+
+  cpu { cores = 4 }
+  memory { dedicated = 4096 }
 
   initialization {
     ip_config {
@@ -47,29 +51,22 @@ resource "proxmox_virtual_environment_vm" "omni_control_nodeC" {
     size         = 100
   }
 }
-resource "proxmox_virtual_environment_vm" "omni_worker_nodeD" {
-  count     = 3
-  name      = "omni-${count.index}"
-  node_name = "nodeD"
+
+resource "proxmox_virtual_environment_vm" "worker" {
+  count = length(var.worker_nodes)
+
+  name      = "omni-worker-${count.index}"
+  node_name = var.worker_nodes[count.index]
   tags      = sort(["omni-worker", "terraform", "omni"])
-  migrate   = true
+
   clone {
     vm_id = module.template.talos_template.vm_id
-
   }
-  cpu {
-    cores = 2
-  }
-
-
   agent {
     enabled = true
   }
-
-  memory {
-    dedicated = 2048
-  }
-
+  cpu { cores = 2 }
+  memory { dedicated = 2048 }
   initialization {
     ip_config {
       ipv4 {
@@ -86,3 +83,12 @@ resource "proxmox_virtual_environment_vm" "omni_worker_nodeD" {
     size         = 100
   }
 }
+
+output "control_ipv4_addresses" {
+  value = [for vm in proxmox_virtual_environment_vm.control : vm.ipv4_addresses[1][0]]
+}
+
+output "worker_ipv4_addresses" {
+  value = [for vm in proxmox_virtual_environment_vm.worker : vm.ipv4_addresses[1][0]]
+}
+
