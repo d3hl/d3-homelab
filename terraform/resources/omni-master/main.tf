@@ -35,6 +35,6 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
 }
-output "vm_ipv4_address" {
+output "master_ipv4_address" {
   value = proxmox_virtual_environment_vm.ubuntu_vm.ipv4_addresses[1][0]
 }
