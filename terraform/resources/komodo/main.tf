@@ -33,7 +33,7 @@ resource "proxmox_virtual_environment_vm" "debian_vm" {
 
   clone {
     vm_id     = module.template.debian_template.vm_id
-    node_name = "nodeD"
+    node_name = var.virtual_environment_node_name
 
   }
 
