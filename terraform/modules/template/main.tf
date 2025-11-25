@@ -42,7 +42,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
   disk {
     datastore_id = "cephVM"
-    import_from  = proxmox_virtual_download_file.debian_image.id
+    import_from  = proxmox_virtual_environment_download_file.debian_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
@@ -54,7 +54,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
 }
 #resource "proxmox_virtual_environment_file" "debian_image" {
-resource "proxmox_virtual_download_file" "debian_image" {
+resource "proxmox_virtual_environment_download_file" "debian_image" {
   content_type = "import"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
