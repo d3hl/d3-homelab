@@ -1,25 +1,5 @@
-terraform {
-  required_providers {
-    local = {
-      source  = "hashicorp/local"
-      version = "2.5.3"
-    }
-    proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.85.1" # x-release-please-version
-    }
-  }
-
-}
-##################
 module "cloud-init" {
   source = "../cloud-init"
-}
-
-
-
-module "download-file" {
-  source = "../download-file"
 }
 
 ###########################
@@ -36,6 +16,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   description = "Managed by Terraform"
 
   cpu {
+    type  = "host"
     cores = 2
   }
 
@@ -65,7 +46,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
   disk {
     datastore_id = "cephVM"
-    file_id      = module.download-file.debian_cloud_image_file_id
+    file_id      = data.proxmox_virtual_environment_file.debian_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
@@ -76,6 +57,12 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
     vlan_id = 10
   }
 
+}
+data "proxmox_virtual_environment_file" "debian_image" {
+  content_type = "import"
+  datastore_id = "cFS"
+  node_name    = var.virtual_environment_node_name
+  file_name    = "debian-12-genericcloud-amd64.qcow2"
 }
 output "debian_template" {
   description = "The ID of the Debian VM template"

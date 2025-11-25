@@ -24,11 +24,6 @@ resource "proxmox_virtual_environment_vm" "talos_template" {
     type         = "4m"
   }
 
-  #  hostpci {
-  #    device = "hostpci0"
-  #    mapping     = "hostpci0"
-  #    pcie   = true
-  #  }
   cdrom {
     file_id = data.proxmox_virtual_environment_file.talos_nocloud_image.id
   }

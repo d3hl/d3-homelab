@@ -18,15 +18,14 @@ resource "proxmox_virtual_environment_pool" "Omni-pool" {
 }
 
 resource "proxmox_virtual_environment_vm" "control" {
-  count = length(var.control_nodes)
-  name  = "omni-control-${count.index}"
-  #node_name = var.control_nodes[count.index]
-  node_name = "nodeA"
+  count     = length(var.control_nodes)
+  name      = "omni-control-${count.index}"
+  node_name = var.control_nodes[count.index]
   tags      = sort(["omni-controller", "terraform", "omni"])
 
   clone {
     vm_id     = module.template.talos_template.vm_id
-    node_name = "nodeA"
+    node_name = var.control_nodes[count.index]
 
   }
   agent {
@@ -60,13 +59,13 @@ resource "proxmox_virtual_environment_vm" "control" {
 resource "proxmox_virtual_environment_vm" "worker" {
   count = length(var.worker_nodes)
 
-  name = "omni-worker-${count.index}"
-  #node_name = var.worker_nodes[count.index]
-  node_name = "nodeA"
+  name      = "omni-worker-${count.index}"
+  node_name = var.worker_nodes[count.index]
   tags      = sort(["omni-worker", "terraform", "omni"])
 
   clone {
-    vm_id = module.template.talos_template.vm_id
+    vm_id     = module.template.talos_template.vm_id
+    node_name = var.worker_nodes[count.index]
   }
   agent {
     enabled = true

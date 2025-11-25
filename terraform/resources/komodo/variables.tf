@@ -7,15 +7,6 @@ variable "virtual_environment_username" {
   type        = string
 }
 
-variable "vm_hostname" {
-  type    = string
-  default = " proxmox_virtual_environment_vm.kmd1.ipv4_addresses[1][0]"
-}
-variable "hostname" {
-  type    = string
-  default = "kmd1"
-}
-
 variable "virtual_environment_api_token" {
   description = "The API token for the Proxmox Virtual Environment API"
   type        = string
@@ -25,7 +16,7 @@ variable "virtual_environment_api_token" {
 variable "virtual_environment_node_name" {
   description = "Name of the Proxmox node"
   type        = string
-  default     = "nodeA"
+  default     = "nodeD"
 }
 variable "datastore_id" {
   description = "ID of the Proxmox datastore"
@@ -36,4 +27,11 @@ variable "filestore_id" {
   description = "ID of the Proxmox datastore"
   type        = string
   default     = "cFS"
+}
+
+variable "vm_names" {
+  default = ["kmd1", "kmd2"]
+}
+variable "node_names" {
+  default = ["nodeC", "nodeD"]
 }
