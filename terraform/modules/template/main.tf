@@ -11,7 +11,8 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   bios        = "ovmf"
   description = "Managed by Terraform"
   cpu {
-    type  = "host"
+    #type  = "host"
+    type  = "x86-64-v2-AES" # recommended for modern CPUs
     cores = 2
   }
 
@@ -31,7 +32,6 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   #  }
 
   initialization {
-    datastore_id = var.datastore_id
     ip_config {
       ipv4 {
         address = "dhcp"
