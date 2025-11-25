@@ -38,6 +38,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
       }
     }
 
+    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
   disk {
     datastore_id = "cephVM"
@@ -51,7 +52,6 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
     bridge  = "vmbr0"
     vlan_id = 10
   }
-  user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
 }
 data "proxmox_virtual_environment_file" "debian_image" {
   content_type = "import"
