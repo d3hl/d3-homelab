@@ -42,7 +42,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   }
   disk {
     datastore_id = "cephVM"
-    import_from  = proxmox_virtual_environment_file.debian_image.id
+    import_from  = proxmox_virtual_download_file.debian_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
@@ -53,12 +53,13 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
     vlan_id = 10
   }
 }
-resource "proxmox_virtual_environment_file" "debian_image" {
+#resource "proxmox_virtual_environment_file" "debian_image" {
+resource "proxmox_virtual_download_file" "debian_image" {
   content_type = "import"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
-  #  file_name    = "debian-12-genericcloud-amd64.qcow2"
-  url = "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2"
+  url          = "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2"
+  file_name    = "debian-12-genericcloud-amd64.qcow2"
 }
 output "debian_template" {
   description = "The ID of the Debian VM template"
