@@ -1,4 +1,10 @@
 terraform {
+  cloud {
+    organization = "d3-org"
+    workspaces {
+      name = "komodo"
+    }
+  }
   required_providers {
     local = {
       source  = "hashicorp/local"
