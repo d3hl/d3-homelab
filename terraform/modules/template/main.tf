@@ -19,7 +19,9 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   memory {
     dedicated = 2048
   }
-
+  serial_device {
+    device = "socket"
+  }
   efi_disk {
     datastore_id = var.datastore_id
     type         = "4m"

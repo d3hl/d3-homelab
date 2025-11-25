@@ -32,7 +32,7 @@ resource "proxmox_virtual_environment_vm" "komodo" {
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
-    vm_id     = module.template.ubuntu_template.vm_id
+    vm_id     = module.template.debian_template.vm_id
     node_name = var.node_names[count.index]
 
   }
