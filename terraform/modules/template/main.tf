@@ -71,4 +71,3 @@ output "debian_template" {
   }
 }
 
-}
