@@ -1,5 +1,5 @@
 module "template" {
-  source                        = "../../modules/template"
+  source                        = "../../modules/template-ubuntu"
   virtual_environment_api_token = var.virtual_environment_api_token
   virtual_environment_endpoint  = var.virtual_environment_endpoint
   virtual_environment_username  = var.virtual_environment_username
@@ -25,14 +25,14 @@ resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
 }
 
 # Create VM resources
-resource "proxmox_virtual_environment_vm" "debian_vm" {
+resource "proxmox_virtual_environment_vm" "komodo" {
   count     = length(var.vm_names)
   name      = "kmd-${count.index}"
   node_name = var.node_names[count.index]
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
-    vm_id     = module.template.debian_template.vm_id
+    vm_id     = module.template.ubuntu_template.vm_id
     node_name = var.node_names[count.index]
 
   }
@@ -58,5 +58,5 @@ resource "proxmox_virtual_environment_vm" "debian_vm" {
 }
 
 output "vm_ipv4_addresses" {
-  value = [for vm in proxmox_virtual_environment_vm.debian_vm : vm.ipv4_addresses[1][0]]
+  value = [for vm in proxmox_virtual_environment_vm.komodo : vm.ipv4_addresses[1][0]]
 }
