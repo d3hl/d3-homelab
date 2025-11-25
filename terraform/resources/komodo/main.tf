@@ -12,7 +12,7 @@ resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
   count        = length(var.vm_names)
   content_type = "snippets"
   datastore_id = var.filestore_id
-  node_name    = var.node_names[count.index]
+  node_name    = var.virtual_environment_node_name
 
   source_raw {
     data = <<-EOF
@@ -28,12 +28,12 @@ resource "proxmox_virtual_environment_file" "meta_data_cloud_config" {
 resource "proxmox_virtual_environment_vm" "komodo" {
   count     = length(var.vm_names)
   name      = "kmd-${count.index}"
-  node_name = var.node_names[count.index]
+  node_name = var.virtual_environment_node_name
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
     vm_id     = module.template.debian_template.vm_id
-    node_name = var.node_names[count.index]
+    node_name = var.virtual_environment_node_name
 
   }
 
