@@ -43,6 +43,6 @@ provider "proxmox" {
       address = "10.10.10.17"
     }
     agent    = true
-    username = var.virtual_environment_username
+    username = d3
   }
 }
