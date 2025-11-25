@@ -2,7 +2,8 @@ data "local_file" "ssh_public_key" {
   filename = "/home/d3/.ssh/d3_tf.pub"
 }
 
-resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "cloud_config" {
+  count        = length(var.vm_names)
   content_type = "snippets"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
@@ -12,7 +13,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
     data = <<-EOF
     #cloud-config
     timezone: Asia/Singapore
-    hostname: omni-master
+    hostname: kmd-${count.index}
     users:
       - name: d3
         groups:
@@ -32,7 +33,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config.yaml"
+    file_name = "cloud-config-kmd-${count.index}.yaml"
     #file_name = "user-data-cloud-config}.yaml"
   }
 
