@@ -32,7 +32,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config.yaml"
+    file_name = "user-data-cloud-config-komodo.yaml"
     #file_name = "user-data-cloud-config}.yaml"
   }
 
