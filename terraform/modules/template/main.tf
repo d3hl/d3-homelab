@@ -67,7 +67,7 @@ data "proxmox_virtual_environment_file" "debian_image" {
 output "debian_template" {
   description = "The ID of the Debian VM template"
   value = {
-    vm_id = proxmox_virtual_environment_vm.talos_template.id
+    vm_id = proxmox_virtual_environment_vm.debian_template.id
   }
 }
 
