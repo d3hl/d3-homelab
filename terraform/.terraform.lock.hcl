@@ -2,8 +2,8 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/bpg/proxmox" {
-  version     = "0.85.1"
-  constraints = "0.85.1"
+  version     = "0.87.0"
+  constraints = "0.87.0"
   hashes = [
     "h1:hVQfNpJGBsFj++9VFHgGZbkJVKxyqN9pPR1DgNjODI4=",
     "zh:0866c44f3bc222d01fb6cc998eadef102cda2434464b929466998719c98ef77f",
