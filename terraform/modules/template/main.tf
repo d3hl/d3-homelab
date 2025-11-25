@@ -1,6 +1,3 @@
-module "cloud-init" {
-  source = "../cloud-init"
-}
 
 ###########################
 resource "proxmox_virtual_environment_vm" "debian_template" {
