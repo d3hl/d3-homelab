@@ -10,7 +10,6 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   machine     = "q35"
   bios        = "ovmf"
   description = "Managed by Terraform"
-
   cpu {
     type  = "host"
     cores = 2
@@ -68,4 +67,3 @@ output "debian_template" {
     vm_id = proxmox_virtual_environment_vm.debian_template.id
   }
 }
-
