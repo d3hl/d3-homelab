@@ -5,13 +5,6 @@ module "template" {
   virtual_environment_username  = var.virtual_environment_username
 }
 
-module "cloud_init" {
-  source = "../../modules/cloud-init"
-}
-
-
-
-
 resource "proxmox_virtual_environment_pool" "komodo-pool" {
   pool_id = "komodo-pool"
 }
@@ -59,7 +52,7 @@ resource "proxmox_virtual_environment_vm" "debian_vm" {
       }
     }
 
-    user_data_file_id = module.cloud_init.user_data_cloud_config_id
+    #    user_data_file_id = module.cloud_init.user_data_cloud_config_id
     meta_data_file_id = proxmox_virtual_environment_file.meta_data_cloud_config[count.index].id
   }
 }
