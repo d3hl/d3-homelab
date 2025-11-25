@@ -32,7 +32,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
   #  }
 
   initialization {
-    datastore_id = "cFS"
+    datastore_id = var.datastore_id
     ip_config {
       ipv4 {
         address = "dhcp"
