@@ -13,7 +13,6 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
     data = <<-EOF
     #cloud-config
     timezone: Asia/Singapore
-    hostname: kmd-${count.index}
     users:
       - name: d3
         groups:
