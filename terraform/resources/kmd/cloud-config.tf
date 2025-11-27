@@ -33,8 +33,8 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "cloud-config-kmd-${count.index}.yaml"
-    #file_name = "user-data-cloud-config}.yaml"
+    #file_name = "cloud-config-kmd-${count.index}.yaml"
+    file_name = "cloud-config.yaml"
   }
 
 }
