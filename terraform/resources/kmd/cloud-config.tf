@@ -3,7 +3,7 @@ data "local_file" "ssh_public_key" {
 }
 
 resource "proxmox_virtual_environment_file" "cloud_config" {
-  count        = length(var.vm_names)
+  #  count        = length(var.vm_names)
   content_type = "snippets"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
