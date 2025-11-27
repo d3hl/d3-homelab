@@ -60,6 +60,6 @@ resource "proxmox_virtual_environment_download_file" "debian_image" {
   content_type = "import"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
-  url          = "https://cdimage.debian.org/images/cloud/bookworm/latest/debian-13-generic-amd64.qcow2"
+  url          = "https://cdimage.debian.org/images/cloud/trixie/latest/debian-13-generic-amd64.qcow2"
   file_name    = "debian-13-generic-amd64.qcow2"
 }
