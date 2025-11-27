@@ -1,9 +1,3 @@
-module "template" {
-  source                        = "../../modules/template"
-  virtual_environment_api_token = var.virtual_environment_api_token
-  virtual_environment_endpoint  = var.virtual_environment_endpoint
-  virtual_environment_username  = var.virtual_environment_username
-}
 resource "proxmox_virtual_environment_pool" "komodo-pool" {
   pool_id = "komodo-pool"
 }
@@ -31,11 +25,11 @@ resource "proxmox_virtual_environment_vm" "komodo" {
   tags      = sort(["debian", "terraform", "komodo"])
 
   clone {
-    vm_id = module.template.debian_template.vm_id
+    vm_id = proxmox_virtual_environment_vm.debian_template.vm_id
   }
 
   agent {
-    enabled = true
+    enabled = false
   }
 
   memory {
