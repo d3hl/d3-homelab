@@ -27,27 +27,29 @@
 #        name: ceph-common
 #        state: latest
 #      become: true
-    - name: Download ceph config
-      ansible.builtin.copy:
-        src: '/etc/ceph/ceph.conf'
-        dest: /etc/ceph/ceph.conf
-        owner: root
-        group: root
-        mode: '0664'
-      become: true
-    - name: Download ceph user key
-      ansible.builtin.copy:
-        src: '/etc/ceph/ceph.client.komodo.keyring'
-        dest: /etc/ceph/ceph.client.komodo.keyring
-        owner: root
-        group: root
-        mode: '0664'
-      become: true
-    - name: Create CephFS mount point
-      ansible.builtin.file:
-        path: /mnt/cFS # Or your desired mount path
-        state: directory
-        mode: '0755'
+
+# not work
+#    - name: Download ceph config
+#      ansible.builtin.copy:
+#        src: '/etc/ceph/ceph.conf'
+#        dest: /etc/ceph/ceph.conf
+#        owner: root
+#        group: root
+#        mode: '0664'
+#      become: true
+#    - name: Download ceph user key
+#      ansible.builtin.copy:
+#        src: '/etc/ceph/ceph.client.komodo.keyring'
+#        dest: /etc/ceph/ceph.client.komodo.keyring
+#        owner: root
+#        group: root
+#        mode: '0664'
+#      become: true
+#    - name: Create CephFS mount point
+#      ansible.builtin.file:
+#        path: /mnt/cFS # Or your desired mount path
+#        state: directory
+#        mode: '0755'
     - name: update fstab
       ansible.posix.mount:
         fstype: ceph
