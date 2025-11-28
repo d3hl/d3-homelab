@@ -1,6 +1,6 @@
 ---
 - name: Install neccessary packages for onboarding.
-  hosts: komodo
+  hosts: pve
   become: true
 #  become_user: root
   gather_facts: no
