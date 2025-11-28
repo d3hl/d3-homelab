@@ -5,6 +5,10 @@
 10.10.10.19
 10.10.10.17
 
+[komodo]
+10.10.10.35
+10.10.10.36
+
 [pve:vars]
 ansible_user=d3
 ansible_become=true
