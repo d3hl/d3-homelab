@@ -1,5 +1,4 @@
-komodo:
-  # Add additonal vars: section for ssh keyfiles, etc.
+all:
   hosts:
     kmd0:
       ansible_host: 10.10.10.35
