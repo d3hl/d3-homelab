@@ -1,24 +1,14 @@
 komodo:
   # Add additonal vars: section for ssh keyfiles, etc.
   hosts:
+    kmd0:
+      ansible_host: 10.10.10.35
     kmd1:
-      ansible_host: 10.10.10.30
-    kmd2:
-      ansible_host: 10.10.10.31
-    kmd3:
-      ansible_host: 10.10.10.32
-    kmd4:
-      ansible_host: 10.10.10.33
-    kmd5:
-      ansible_host: 10.10.10.34
-    k-120:
-      ansible_host: 10.203.1.120
-    k-121:
-      ansible_host: 10.203.1.121
+      ansible_host: 10.10.10.36
   children:
     komodo:
       vars:
-        komodo_core_url: "http://10.10.10.30:9120"
+        komodo_core_url: "http://10.10.10.35:9120"
         ansible_become_pass: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           63373731376164383137313031613837323365633833386137376562313562383931623065623236
@@ -46,39 +36,14 @@ komodo:
       children:
         core:
           hosts:
-            kmd1:
+            kmd0:
               komodo_periphery_port: 8120
               generate_server_passkey: true
               server_address: https://host.docker.internal:{{ komodo_periphery_port }}
         periphery:
           hosts:
-            kmd2:
+            kmd1:
               generate_server_passkey: true
               komodo_allowed_ips:
-                - "{{ hostvars['kmd1'].ansible_host }}"
+                - "{{ hostvars['kmd0'].ansible_host }}"
               komodo_bind_ip: "{{ ansible_host }}"
-            kmd3:
-              generate_server_passkey: true
-              komodo_allowed_ips:
-                - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: "{{ ansible_host }}"
-            kmd4:
-              generate_server_passkey: true
-              komodo_allowed_ips:
-                - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: "{{ ansible_host }}"
-            kmd5:
-              generate_server_passkey: true
-              komodo_allowed_ips:
-                - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: "{{ ansible_host }}" 
-            k-120:
-              generate_server_passkey: true
-              komodo_allowed_ips:
-                - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: "{{ ansible_host }}" 
-            k-121:
-              generate_server_passkey: true
-              komodo_allowed_ips:
-                - "{{ hostvars['kmd1'].ansible_host }}"
-              komodo_bind_ip: "{{ ansible_host }}" 
