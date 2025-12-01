@@ -1,0 +1,7 @@
+contexts:
+    default:
+        url: https://omni.d3hl.site
+        auth:
+            siderov1:
+                identity: d3social@pm.me
+context: default
