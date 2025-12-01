@@ -11,6 +11,8 @@ patches:
     file: patches/kubespan.yml
   - name: no-cni # we will install cilium in extraManifests
     file: patches/cni.yml
+  - name: disable-kubeproxy
+    file: patches/disable-kubeproxy.yml
   - name: install-cilium
     file: patches/extraManifests.yml
   - name: metric-server
