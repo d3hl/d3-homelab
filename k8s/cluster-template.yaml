@@ -1,5 +1,9 @@
 kind: Cluster
 name: pve-sing-1
+labels:
+  template: true
+  cni: none
+  kubespan: enabled
 kubernetes:
   version: v1.34.2
 talos:
