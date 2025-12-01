@@ -1,0 +1,32 @@
+kind: Cluster
+name: pve-sg-1
+kubernetes:
+  version: v1.34.2
+talos:
+  version: v1.11.5
+patches:
+  - idOverride: 500-241a193d-9231-4e28-8a20-df54ed138391
+    annotations:
+      description: cni-patch
+      name: cni-patch
+    inline:
+      cluster:
+        network:
+          cni:
+            name: none
+---
+kind: ControlPlane
+machineClass:
+  name: proxmox-auto-control
+  size: 3
+---
+kind: Workers
+machineClass:
+  name: proxmox-auto-worker
+  size: 3
+---
+kind: Workers
+name: manual
+machineClass:
+  name: Self-Managed
+  size: Unlimited
