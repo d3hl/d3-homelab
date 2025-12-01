@@ -19,6 +19,7 @@ patches:
     file: patches/metrics-server.yml
 systemExtensions:
   - siderolabs/qemu-guest-agent
+  - siderolabs/util-linux-tools
 ---
 kind: ControlPlane
 machineClass:
