@@ -4,16 +4,19 @@ kubernetes:
   version: v1.34.2
 talos:
   version: v1.11.5
+features:
+  enableWorkloadProxy: true
 patches:
-  - idOverride: 500-241a193d-9231-4e28-8a20-df54ed138391
-    annotations:
-      description: cni-patch
-      name: cni-patch
-    inline:
-      cluster:
-        network:
-          cni:
-            name: none
+  - name: kubespan-enabled
+    file: patches/kubespan.yml
+  - name: no-cni # we will install cilium in extraManifests
+    file: patches/cni.yml
+  - name: install-cilium
+    file: patches/extraManifests.yml
+  - name: metric-server
+    file: patches/metrics-server.yml
+systemExtensions:
+  - siderolabs/qemu-guest-agent
 ---
 kind: ControlPlane
 machineClass:
@@ -24,9 +27,3 @@ kind: Workers
 machineClass:
   name: proxmox-auto-worker
   size: 3
----
-kind: Workers
-name: manual
-machineClass:
-  name: Self-Managed
-  size: Unlimited
