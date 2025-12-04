@@ -1,6 +1,6 @@
 ---
 - name: Install neccessary packages for onboarding.
-  hosts: ios
+  hosts: cisco
   #become: true
 #  become_user: root
   gather_facts: yes
