@@ -11,8 +11,7 @@
 
 
 [network]
-
-switch1 ansible_host=10.10.10.1 ansible_user=d3 ansible_password=$$$laught3RRR   ansible_network_os=ios ansible_connection=network_cli
+10.10.10.1 
 
 [komodo]
 10.10.10.35
