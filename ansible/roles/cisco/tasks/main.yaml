@@ -1,4 +1,4 @@
-- name: Merge provided configuration with device configuration
+- name: add vlans
   cisco.ios.ios_vlans:
     config:
       - name: Vlan_11
