@@ -4,6 +4,4 @@
 #  become_user: root
   gather_facts: no
   roles:
-    - cisco
-  tasks:
-    - add vlans
+    - cisco-add-vlans
