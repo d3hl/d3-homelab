@@ -4,4 +4,4 @@
 #  become_user: root
   gather_facts: no
   roles:
-    - cisco-add-banner
+    - cisco-add-vlans
