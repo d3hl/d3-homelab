@@ -4,6 +4,9 @@
 10.10.10.18
 10.10.10.19
 10.10.10.17
+# inventory/hosts
+[ios-xe]
+10.10.10.1
 
 [komodo]
 10.10.10.35
@@ -18,3 +21,8 @@ config_file=""
 is_master = 0
 is_install = 0
 fluentbit = 0
+
+[ios-xe]
+ansible_user=d3
+
+

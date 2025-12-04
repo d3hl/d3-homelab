@@ -1,0 +1,3 @@
+interfaces:
+  - { wan_interface: "GigabitEthernet1", wan_description: "WAN1", wan_ip: "10.10.10.1", wan_mask: "255.255.255.0" }
+#  - { wan_interface: "GigabitEthernet2", wan_description: "OSPF-INTERFACE", wan_ip: "192.168.20.1", wan_mask: "255.255.255.0" }
