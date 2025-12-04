@@ -10,7 +10,7 @@
 
 
 
-[network]
+[cisco]
 10.10.10.1 
 
 [komodo]
