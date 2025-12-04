@@ -1,6 +1,3 @@
-- name: Gather listed vlans with provided configurations
-  cisco.ios.ios_vlans:
-    state: gathered
 - name: Merge provided configuration with device configuration
   cisco.ios.ios_vlans:
     config:
