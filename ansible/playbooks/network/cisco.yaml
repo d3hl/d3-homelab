@@ -1,6 +1,6 @@
 ---
 - name: Install neccessary packages for onboarding.
-  hosts: ios-xe
+  hosts: ios
   #become: true
 #  become_user: root
   gather_facts: yes
