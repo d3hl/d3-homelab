@@ -1,18 +1,27 @@
 name: Kestra CI/CD
-on: 
-  workflow_dispatch:
+on: [push]
 jobs:
-  kestra:
+  validate:
     runs-on: ubuntu-latest
+    name: Validate Kestra flows
     steps:
-      - uses: actions/checkout@v3
-      - name: deploy
-        uses: kestra-io/deploy-action@main
+      - name: Checkout repo content  
+        uses: actions/checkout@v4
+      - name: Validate flows on server-sde
+        uses: kestra-io/validate-action@develop
+        with:
+            directory: ./kestra/flows
+            resource: flow
+            server: ${{ secrets.KESTRA_HOSTNAME }}  
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Kestra flow
+    needs: validate
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v4
         with:
           namespace: ansible
-          directory: ./flows
+          directory: ./kestra/flows/product
           resource: flow
           server: ${{secrets.KESTRA_HOST}}
-          user: ${{secrets.KESTRA_USER}}
-          password: ${{secrets.KESTRA_PASSWORD}}
-          delete: false
