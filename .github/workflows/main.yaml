@@ -1,0 +1,18 @@
+name: Kestra CI/CD
+on: 
+  workflow_dispatch:
+jobs:
+  kestra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: deploy
+        uses: kestra-io/deploy-action@main
+        with:
+          namespace: ansible
+          directory: ./flows
+          resource: flow
+          server: ${{secrets.KESTRA_HOST}}
+          user: ${{secrets.KESTRA_USER}}
+          password: ${{secrets.KESTRA_PASSWORD}}
+          delete: false
