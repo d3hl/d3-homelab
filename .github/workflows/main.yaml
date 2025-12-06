@@ -21,7 +21,7 @@ jobs:
           server: https://kestra.d3adc3ii.cc/
           user: ${{env.KESTRA_USER}}
           password: ${{env.KESTRA_PW}}
-          directory: ./flows/cisco
+          directory: ./_flows/cisco
           resource: flow
       - name: Deploy
         uses: kestra-io/deploy-action@develop
@@ -31,6 +31,6 @@ jobs:
           user: ${{env.KESTRA_USER}}
           password: ${{env.KESTRA_PW}}
           namespace: d3hl.ansible.network
-          directory: ./flows/cisco
+          directory: ./_flows/cisco
           resource: flow
           delete: false
