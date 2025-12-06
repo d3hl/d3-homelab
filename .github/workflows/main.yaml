@@ -7,9 +7,9 @@ jobs:
   prod:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Validate flows
-        uses: kestra-io/validate-action@main
+        uses: kestra-io/validate-action@master
         env:
           server: ${{secrets.KESTRA_HOSTNAME}}
           user: ${{secrets.KESTRA_USER}}
