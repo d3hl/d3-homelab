@@ -1,5 +1,11 @@
 name: Kestra CI/CD
-on: [push]
+on: 
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -12,7 +18,8 @@ jobs:
         with:
             directory: ./kestra/flows
             resource: flow
-            server: ${{ secrets.KESTRA_HOSTNAME }}  
+            server: ${{ secrets.KESTRA_HOSTNAME }} 
+            password: ${{ secrets.KESTRA_PW }} 
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Kestra flow
@@ -21,7 +28,7 @@ jobs:
       - name: Checkout repo content
         uses: actions/checkout@v4
         with:
-          namespace: ansible
+          namespace: d3hl.ansible
           directory: ./kestra/flows/product
           resource: flow
           server: ${{secrets.KESTRA_HOST}}
