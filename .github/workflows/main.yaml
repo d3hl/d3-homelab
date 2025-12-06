@@ -3,8 +3,8 @@ name: Kestra CI/CD
 env:
   #server: ${{secrets.KESTRA_HOSTNAME}}
   server: https://kestra.d3adc3ii.cc/
-  user: ${{secrets.KESTRA_USER}}
-  password: ${{secrets.KESTRA_PW}}
+  user: ${{KESTRA_USER}}
+  password: ${{KESTRA_PW}}
 on:
   push:
     branches:
