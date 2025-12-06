@@ -1,0 +1,8 @@
+---
+- name: Update package and config.  
+  hosts: komodo 
+  gather_facts: no
+  roles:
+    - update_package
+  become: true
+
