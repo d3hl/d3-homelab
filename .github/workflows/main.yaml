@@ -1,6 +1,7 @@
 name: Kestra CI/CD
 env:
-  server: ${{secrets.KESTRA_HOSTNAME}}
+  #server: ${{secrets.KESTRA_HOSTNAME}}
+  server: https://kestra.d3adc3ii.cc/
   user: ${{secrets.KESTRA_USER}}
   password: ${{secrets.KESTRA_PW}}
 on:
@@ -16,7 +17,8 @@ jobs:
         uses: kestra-io/validate-action@master
 
         with:
-          server: ${{env.KESTRA_HOSTNAME}}
+          #server: ${{env.KESTRA_HOSTNAME}}
+          server: https://kestra.d3adc3ii.cc/
           user: ${{env.KESTRA_USER}}
           password: ${{env.KESTRA_PW}}
           directory: ./kestra/flows/cisco
@@ -24,7 +26,8 @@ jobs:
       - name: Deploy
         uses: kestra-io/deploy-action@develop
         with:
-          server: ${{env.KESTRA_HOSTNAME}}
+          #server: ${{env.KESTRA_HOSTNAME}}
+          server: https://kestra.d3adc3ii.cc/
           user: ${{env.KESTRA_USER}}
           password: ${{env.KESTRA_PW}}
           namespace: d3hl.ansible.network
