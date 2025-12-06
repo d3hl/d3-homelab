@@ -1,4 +1,8 @@
 name: Kestra CI/CD
+env:
+  server: ${{secrets.KESTRA_HOSTNAME}}
+  user: ${{secrets.KESTRA_USER}}
+  password: ${{secrets.KESTRA_PW}}
 on:
   push:
     branches:
@@ -10,22 +14,19 @@ jobs:
       - uses: actions/checkout@v3
       - name: Validate flows
         uses: kestra-io/validate-action@master
-        env:
-          server: ${{secrets.KESTRA_HOSTNAME}}
-          user: ${{secrets.KESTRA_USER}}
-          password: ${{secrets.KESTRA_PW}}
+
         with:
-          server: ${{secrets.KESTRA_HOSTNAME}}
-          user: ${{secrets.KESTRA_USER}}
-          password: ${{secrets.KESTRA_PW}}
+          server: ${{env.KESTRA_HOSTNAME}}
+          user: ${{env.KESTRA_USER}}
+          password: ${{env.KESTRA_PW}}
           directory: ./kestra/flows/cisco
           resource: flow
       - name: Deploy
         uses: kestra-io/deploy-action@develop
         with:
-          server: ${{secrets.KESTRA_HOSTNAME}}
-          user: ${{secrets.KESTRA_USER}}
-          password: ${{secrets.KESTRA_PW}}
+          server: ${{env.KESTRA_HOSTNAME}}
+          user: ${{env.KESTRA_USER}}
+          password: ${{env.KESTRA_PW}}
           namespace: d3hl.ansible.network
           directory: ./kestra/flows/cisco
           resource: flow
