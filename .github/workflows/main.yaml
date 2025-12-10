@@ -1,15 +1,14 @@
 name: Kestra CI/CD
-#test  1
+on:
+  push:
+    branches:
+      - main
 env:
   #server: ${{secrets.KESTRA_HOSTNAME}}
   #server: https://kestra.d3adc3ii.cc/
   server: http://10.10.10.36:8080
   user: ${{ secrets.KESTRA_USER }}
   password: ${{ secrets.KESTRA_PW }}
-on:
-  push:
-    branches:
-      - main
 jobs:
   prod:
     runs-on: self-hosted
@@ -23,16 +22,15 @@ jobs:
           server: http://10.10.10.36:8080
           user: ${{ secrets.KESTRA_USER }}
           password: ${{ secrets.KESTRA_PW }}
-          directory: ./_flows/cisco
+          directory: ./_flows/network.cisco
           resource: flow
       - name: Deploy
         uses: kestra-io/deploy-action@develop
         with:
-          #server: ${{env.KESTRA_HOSTNAME}}
-          server: https://kestra.d3adc3ii.cc/
+          namespace: network.cisco 
+          directory: ./_flows/network.cisco
+          server: http://10.10.10.36:8080
           user: ${{ secrets.KESTRA_USER }}
           password: ${{ secrets.KESTRA_PW }}
-          namespace: d3hl.ansible.network
-          directory: ./_flows/cisco
           resource: flow
           delete: false
