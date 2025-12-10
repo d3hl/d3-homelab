@@ -3,8 +3,8 @@ name: Kestra CI/CD
 env:
   #server: ${{secrets.KESTRA_HOSTNAME}}
   server: https://kestra.d3adc3ii.cc/
-  user: ${{KESTRA_USER}}
-  password: ${{KESTRA_PW}}
+  user: ${KESTRA_USER}
+  password: ${KESTRA_PW}
 on:
   push:
     branches:
@@ -20,7 +20,7 @@ jobs:
         with:
           #server: ${{env.KESTRA_HOSTNAME}}
           server: https://kestra.d3adc3ii.cc/
-          user: ${{env.KESTRA_USER}}
+          user: ${KESTRA_USER}
           password: ${{env.KESTRA_PW}}
           directory: ./_flows/cisco
           resource: flow
@@ -29,8 +29,8 @@ jobs:
         with:
           #server: ${{env.KESTRA_HOSTNAME}}
           server: https://kestra.d3adc3ii.cc/
-          user: ${{env.KESTRA_USER}}
-          password: ${{env.KESTRA_PW}}
+          user: ${KESTRA_USER}
+          password: ${KESTRA_PW}
           namespace: d3hl.ansible.network
           directory: ./_flows/cisco
           resource: flow
