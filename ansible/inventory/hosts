@@ -5,6 +5,8 @@
 10.10.10.19
 10.10.10.17
 
+[jump]
+10.10.10.26
 [cisco]
 d39k3 ansible_host=10.10.10.1 ansible_user=ansible ansible_password=taolavodich123  ansible_network_os=ios ansible_connection=network_cli
 
