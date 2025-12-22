@@ -1,3 +1,9 @@
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
 #
 # group variables
 #
@@ -8,15 +14,6 @@ ansible_connection = local
 ansible_network_os=ios
 ansible_connection=network_cli
 
-[cat4500-X:vars]
-ansible_connection=network_cli
-ansible_become=yes
-ansible_become_method=enable
-
-[grpc:vars]
-ansible_network_os=ios
-ansible_connection=netconf
-
 #
 # group definitions
 #
@@ -25,25 +22,11 @@ ansible_connection=netconf
 ios-xe
 
 [ios-xe:children]
-#cat3k
-#cat4500-X
-cat9kwork
-cat9khomelab
+9kcorp
+9khome
 
-[cat3k]
-cat3k-fabri-45.cisco.com
-10.195.183.[47:49]
-
-[cat4500-X]
-#10.24.98.82
-
-[cat9kwork]
+[9kcorp]
 10.203.1.254
 
-[cat9khomelab]
+[9khome]
 10.10.10.1
-
-[grpc]
-10.195.183.38
-#10.195.183.39
-10.195.183.41
