@@ -31,7 +31,7 @@ nxos
 #cat4500-X
 cat9k
 
-[ios-xe-homelab]
+[10.10.10.1]
 10.10.10.1
 
 

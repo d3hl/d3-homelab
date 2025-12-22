@@ -1,7 +1,7 @@
 # Add Vlan info to interfaces
 - name: Interface config
   hosts: 10.10.10.1
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
     - name: confgure all L2 interfaces 
