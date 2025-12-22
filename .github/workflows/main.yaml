@@ -1,21 +1,13 @@
-name: KestraCI/CD2
-
+name: KestraCI/CD
 env:
   KESTRA_HOSTNAME: ${{ secrets.KESTRA_HOSTNAME }}
   server: https://kestra.d3adc3ii.cc/
-  KESTRA_USER: ${{ secrets.KESTRA_USER }}
-  KESTRA_PW: ${{ secrets.KESTRA_PW }}
-name: Kestra CI/CD
+  user: ${{ secrets.KESTRA_USER }}
+  password: ${{ secrets.KESTRA_PW }}
 on:
   push:
     branches:
       - main
-env:
-  #server: ${{secrets.KESTRA_HOSTNAME}}
-  #server: https://kestra.d3adc3ii.cc/
-  server: http://10.10.10.36:8080
-  user: ${{ secrets.KESTRA_USER }}
-  password: ${{ secrets.KESTRA_PW }}
 jobs:
   prod:
     runs-on: self-hosted
