@@ -162,6 +162,15 @@
           - name: twoGigabitEthernet2/0/32
             description: n/a
             enabled: false
+          - name: twoGigabitEthernet2/0/33
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/34
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/35
+            description: n/a
+            enabled: false
           - name: tenGigabitEthernet2/0/43
             description: n/a
             enabled: false
