@@ -23,3 +23,10 @@ ios-xe
 
 [9khome]
 10.10.10.1
+
+[all:vars]
+ansible_python_interpreter=python
+
+[ios-xe:vars]
+ansible_network_os=ios
+ansible_connection=network_clix
