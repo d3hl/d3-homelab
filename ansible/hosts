@@ -23,12 +23,17 @@ ansible_connection=netconf
 
 [switches:children]
 ios-xe
+ios-xe-homelab
 nxos
 
 [ios-xe:children]
 #cat3k
 #cat4500-X
 cat9k
+
+[ios-xe-homelab]
+10.10.10.1
+
 
 [cat3k]
 cat3k-fabri-45.cisco.com
