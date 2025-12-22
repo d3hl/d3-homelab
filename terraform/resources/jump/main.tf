@@ -22,7 +22,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
   }
   disk {
     datastore_id = "cephVM"
-    file_id      = proxmox_virtual_environment_download_file.ubuntu_template.id
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
