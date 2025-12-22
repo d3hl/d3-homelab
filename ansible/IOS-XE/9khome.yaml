@@ -7,20 +7,22 @@
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_l2_interfaces:
         config:
-          - name: twoGigabitEthernet2/0/31
+          - name: twoGigabitEthernet2/0/1
             mode: access
             access:
-              vlan: 444
+              vlan: 99
+          - name: twoGigabitEthernet2/0/2
+            mode: access
+            access:
+              vlan: 99
         state: merged
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
         config:
-          - name: twoGigabitEthernet2/0/31
-            description: Configured and Merged by Ansible Network
+          - name: twoGigabitEthernet2/0/1
+            description: BMC 
             enabled: true
-          - name: twoGigabitEthernet2/0/32
-            description: Configured and Merged by Ansible Network
-            mtu: 3800
+          - name: twoGigabitEthernet2/0/2
+            description: BMC
             enabled: true
-            duplex: full
         state: merged
