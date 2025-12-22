@@ -9,3 +9,6 @@ systemctl --user stop periphery.service
 sudo ln -s /var/run/user/1000/docker.sock /var/run/docker.sock
 systemctl --user start docker
 systemctl --user start periphery.service
+
+# Cisco
+ansible-playbook IOS-XE/ios_command.yaml -i hosts -u $ANSIBLE_NET_USERNAME -k 
