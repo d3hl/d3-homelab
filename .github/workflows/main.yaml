@@ -1,5 +1,4 @@
 name: KestraCI/CD
-#test11
 env:
   KESTRA_HOSTNAME: ${{ secrets.KESTRA_HOSTNAME }}
   server: https://kestra.d3adc3ii.cc/
