@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-name: KestraCI/CD
+name: KestraCI/CD2
 
 env:
   KESTRA_HOSTNAME: ${{ secrets.KESTRA_HOSTNAME }}
