@@ -1,1 +1,2 @@
-ansible_user: d3
+ansible_user: ansible
+ansible_password: ansiblecisco7890
