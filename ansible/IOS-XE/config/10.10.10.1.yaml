@@ -57,6 +57,10 @@
             trunk:
               allowed_vlans: 3,10
               native_vlan: 1
+          - name: tenGigabitEthernet2/0/48
+            mode: access
+            access:
+              vlan: 100
           - name: twentyFiveGigE2/1/1
             mode: trunk
             trunk:
@@ -86,7 +90,88 @@
           - name: twoGigabitEthernet2/0/5
             description: BMC 
             enabled: true
+          - name: twoGigabitEthernet2/0/6
+            description: n/a 
+            enabled: false
           - name: twoGigabitEthernet2/0/7
             description: BMC 
+            enabled: true
+          - name: twoGigabitEthernet2/0/8
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/9
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/11
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/12
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/13
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/14
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/15
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/16
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/17
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/19
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/21
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/22
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/23
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/24
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/25
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/26
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/27
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/28
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/29
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/30
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/31
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/32
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/0/43
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/0/45
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/0/47
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/0/48
+            description: WIFI AP
             enabled: true
         state: merged
