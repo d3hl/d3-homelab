@@ -1,5 +1,5 @@
 - name: Interface config
-  hosts: ios-xe-homelab
+  hosts: 9khome
   gather_facts: no
 
   tasks:
