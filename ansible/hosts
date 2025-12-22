@@ -2,7 +2,7 @@
 # group variables
 #
 [all:vars]
-#ansible_connection = local
+ansible_connection = local
 
 [ios-xe:vars]
 ansible_network_os=ios
@@ -23,17 +23,13 @@ ansible_connection=netconf
 
 [switches:children]
 ios-xe
-ios-xe-homelab
 nxos
 
 [ios-xe:children]
 #cat3k
 #cat4500-X
-cat9k
-
-[10.10.10.1]
-10.10.10.1
-
+cat9k-work
+cat9k-homelab
 
 [cat3k]
 cat3k-fabri-45.cisco.com
@@ -42,9 +38,11 @@ cat3k-fabri-45.cisco.com
 [cat4500-X]
 #10.24.98.82
 
-[cat9k]
-10.10.10.1
+[cat9k-work]
 10.203.1.254
+
+[cat9k-homelab]
+10.10.10.1
 
 [grpc]
 10.195.183.38
