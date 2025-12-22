@@ -1,6 +1,6 @@
 # Add Vlan info to interfaces
 - name: Interface config
-  hosts: cat9k-homelab
+  hosts: cat9khomelab
   gather_facts: yes
 
   tasks:

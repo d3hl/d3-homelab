@@ -38,10 +38,10 @@ cat3k-fabri-45.cisco.com
 [cat4500-X]
 #10.24.98.82
 
-[cat9k-work]
+[cat9kwork]
 10.203.1.254
 
-[cat9k-homelab]
+[cat9khomelab]
 10.10.10.1
 
 [grpc]
