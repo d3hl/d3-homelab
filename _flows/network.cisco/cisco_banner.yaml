@@ -1,6 +1,5 @@
 id: ios_banner
 namespace: d3hl.ansible.network
-
 tasks:
   - id: ansible_task
     type: io.kestra.plugin.ansible.cli.AnsibleCLI

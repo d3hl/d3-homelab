@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: KestraCI/CD
 
 env:
@@ -5,10 +6,19 @@ env:
   server: https://kestra.d3adc3ii.cc/
   KESTRA_USER: ${{ secrets.KESTRA_USER }}
   KESTRA_PW: ${{ secrets.KESTRA_PW }}
+=======
+name: Kestra CI/CD
+>>>>>>> e6cdc5ace568752c7e16847937b27d06e1078ee3
 on:
   push:
     branches:
       - main
+env:
+  #server: ${{secrets.KESTRA_HOSTNAME}}
+  #server: https://kestra.d3adc3ii.cc/
+  server: http://10.10.10.36:8080
+  user: ${{ secrets.KESTRA_USER }}
+  password: ${{ secrets.KESTRA_PW }}
 jobs:
   prod:
     runs-on: self-hosted
@@ -18,18 +28,34 @@ jobs:
         uses: kestra-io/validate-action@main
 
         with:
+<<<<<<< HEAD
           server: ${{env.KESTRA_HOSTNAME}}
           user: ${{env.KESTRA_USER}}
           password: ${{env.KESTRA_PW}}
           directory: ./_flows/cisco
+=======
+          #server: ${{env.KESTRA_HOSTNAME}}
+          server: http://10.10.10.36:8080
+          user: ${{ secrets.KESTRA_USER }}
+          password: ${{ secrets.KESTRA_PW }}
+          directory: ./_flows/network.cisco
+>>>>>>> e6cdc5ace568752c7e16847937b27d06e1078ee3
           resource: flow
       - name: Deploy
         uses: kestra-io/deploy-action@develop
         with:
+<<<<<<< HEAD
           server: ${{env.KESTRA_HOSTNAME}}
           user: ${{env.KESTRA_USER}}
           password: ${{env.KESTRA_PW}}
           namespace: d3hl.ansible.network
           directory: ./_flows/cisco
+=======
+          namespace: network.cisco 
+          directory: ./_flows/network.cisco
+          server: http://10.10.10.36:8080
+          user: ${{ secrets.KESTRA_USER }}
+          password: ${{ secrets.KESTRA_PW }}
+>>>>>>> e6cdc5ace568752c7e16847937b27d06e1078ee3
           resource: flow
           delete: false
