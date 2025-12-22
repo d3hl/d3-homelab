@@ -22,7 +22,11 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
   }
   disk {
     datastore_id = "cephVM"
-    size         = 50
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
+    interface    = "virtio0"
+    iothread     = true
+    discard      = "on"
+    size         = 20
   }
   initialization {
     ip_config {
@@ -36,4 +40,9 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
 }
 output "master_ipv4_address" {
   value = proxmox_virtual_environment_vm.ubuntu_vm.ipv4_addresses[1][0]
+}
+output "ubuntu_template" {
+  value = {
+    vm_id = proxmox_virtual_environment_vm.ubuntu_template.id
+  }
 }
