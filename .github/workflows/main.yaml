@@ -1,9 +1,4 @@
 name: KestraCI/CD
-env:
-  KESTRA_HOSTNAME: ${{ secrets.KESTRA_HOSTNAME }}
-  server: https://kestra.d3adc3ii.cc/
-  user: ${{ secrets.KESTRA_USER }}
-  password: ${{ secrets.KESTRA_PW }}
 on:
   push:
     branches:
@@ -17,14 +12,17 @@ jobs:
         uses: kestra-io/validate-action@master
 
         with:
-          #server: ${{env.KESTRA_HOSTNAME}}
           server: http://10.10.10.36:8080
+          user: ${{secrets.KESTRA_USERNAME}}
+          password: ${{secrets.KESTRA_PW}}
           directory: ./_flows/network.cisco
           resource: flow
       - name: Deploy
         uses: kestra-io/deploy-action@develop
         with:
-          server: ${{env.KESTRA_HOSTNAME}}
+          server: ${{secrets.KESTRA_HOSTNAME}}
+          user: ${{secrets.KESTRA_USERNAME}}
+          password: ${{secrets.KESTRA_PW}}
           directory: ./_flows/cisco
           namespace: network.cisco 
           resource: flow
