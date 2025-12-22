@@ -57,11 +57,6 @@
             trunk:
               allowed_vlans: 3,10
               native_vlan: 1
-          - name: twoGigabitEthernet2/0/46
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10
-              native_vlan: 1
           - name: twentyFiveGigE2/1/1
             mode: trunk
             trunk:
