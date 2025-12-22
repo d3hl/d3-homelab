@@ -7,14 +7,7 @@
 #
 # group variables
 #
-[all:vars]
-ansible_connection = local
 
-[ios-xe:vars]
-ansible_network_os=ios
-ansible_connection=network_cli
-
-#
 # group definitions
 #
 
