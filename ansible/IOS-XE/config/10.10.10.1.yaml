@@ -15,6 +15,18 @@
             mode: access
             access:
               vlan: 99
+          - name: twoGigabitEthernet2/0/3
+            mode: access
+            access:
+              vlan: 99
+          - name: twoGigabitEthernet2/0/4
+            mode: access
+            access:
+              vlan: 99
+          - name: twoGigabitEthernet2/0/7
+            mode: access
+            access:
+              vlan: 99
         state: merged
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
@@ -24,5 +36,17 @@
             enabled: true
           - name: twoGigabitEthernet2/0/2
             description: BMC
+            enabled: true
+          - name: twoGigabitEthernet2/0/3
+            description: BMC 
+            enabled: true
+          - name: twoGigabitEthernet2/0/4
+            description: BMC 
+            enabled: true
+          - name: twoGigabitEthernet2/0/5
+            description: BMC 
+            enabled: true
+          - name: twoGigabitEthernet2/0/7
+            description: BMC 
             enabled: true
         state: merged
