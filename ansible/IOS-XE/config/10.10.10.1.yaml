@@ -211,4 +211,6 @@
             name: bmc
           - vlan_id: 100
             name: wifi
+          - vlan_id: 21
+            name: logs
         state: merged
