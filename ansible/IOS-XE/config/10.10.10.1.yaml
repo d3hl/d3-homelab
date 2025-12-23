@@ -3,6 +3,7 @@
   hosts: 9khome
   gather_facts: no
 
+### Interface Configuration ###
   tasks:
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_l2_interfaces:
@@ -187,4 +188,27 @@
           - name: tenGigabitEthernet2/0/48
             description: WIFI AP
             enabled: true
+        state: merged
+
+### End of Interface Configuration ###
+
+### VLAN configuration ###
+
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_vlans:
+        config:
+          - vlan_id: 1
+            name: default
+          - vlan_id: 3
+            name: quorum
+          - vlan_id: 10
+            name: homelab
+          - vlan_id: 11
+            name: hlvl
+          - vlan_id: 20
+            name: cephpriv
+          - vlan_id: 99
+            name: bmc
+          - vlan_id: 100
+            name: wifi
         state: merged
