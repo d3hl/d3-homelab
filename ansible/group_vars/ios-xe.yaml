@@ -2,7 +2,7 @@ ansible_connection: ansible.netcommon.network_cli
 ansible_network_os: cisco.ios.ios
 ansible_become: true
 ansible_become_method: enable
-ansible_user: ansible
+ansible_user: d3
 ansible_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           64316566386462656633613038363664656430306465346334366566353134623130333834343231
