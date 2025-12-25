@@ -17,15 +17,19 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
   agent {
     enabled = true
   }
+  cpu {
+    type  = "x86-64-v2-AES"
+    cores = 16
+  }
   memory {
-    dedicated = 8192
+    dedicated = 32768
   }
   disk {
     datastore_id = "cephVM"
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 300
   }
   initialization {
     ip_config {
