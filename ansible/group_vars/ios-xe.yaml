@@ -2,7 +2,7 @@ ansible_connection: ansible.netcommon.network_cli
 ansible_network_os: cisco.ios.ios
 ansible_become: true
 ansible_become_method: enable
-ssh_prvate_key: |
+ssh_private_key: |
   $ANSIBLE_VAULT;1.1;AES256
 32343532666130626163343938393964353161303730356132636331646561343065613533613466
 3463663862303664656134356535623062626334313664300a626664306337653533666361323335
