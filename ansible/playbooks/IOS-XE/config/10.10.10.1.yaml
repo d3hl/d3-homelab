@@ -12,7 +12,10 @@
       copy:
         content: "{{ssh_private_key}}"
         dest: "/home/d3/.ssh/id_rsa"
+        owner: d3
+        group: d3
         mode: 0600
+      no_log: true
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_l2_interfaces:
         config:
