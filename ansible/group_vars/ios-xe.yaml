@@ -3,4 +3,3 @@ ansible_network_os: cisco.ios.ios
 ansible_become: true
 ansible_user: d3
 ansible_become_method: enable
-ssh_private_key_file: /home/d3/.ssh/id_rsa.pem
