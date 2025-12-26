@@ -7,7 +7,7 @@
   tasks:
     - name: impot secret variable 
       include_vars: "secret.yml"
-      no_log: true
+ #     no_log: true
     - name: copy deployment private key
       copy:
         content: "{{ssh_private_key}}"
@@ -15,7 +15,7 @@
         owner: d3
         group: d3
         mode: 0600
-      no_log: true
+#      no_log: true
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_l2_interfaces:
         config:
