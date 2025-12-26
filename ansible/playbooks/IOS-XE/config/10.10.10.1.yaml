@@ -5,11 +5,6 @@
 
 ### Interface Configuration ###
   tasks:
-    - name: copy deployment private key
-      copy:
-        content: "{{ssh_private_key}}"
-        dest: "/home/d3/.ssh/id_rsa"
-        mode: 0600
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_l2_interfaces:
         config:
