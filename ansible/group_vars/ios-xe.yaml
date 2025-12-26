@@ -3,7 +3,7 @@ ansible_network_os: cisco.ios.ios
 ansible_become: true
 ansible_user: d3
 ansible_become_method: enable
-ssh_private_key: !vault |
+ansible_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           31623037373934623863663861366533336266666136613931633261363133663031646638316536
           6133333034653338383330613838316166396161346232340a626566303361306431333764653338
