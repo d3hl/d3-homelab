@@ -1,6 +1,6 @@
 # Add Vlan info to interfaces
 - name: Interface config
-  hosts: 9khome
+  hosts: 10.10.10.1
   gather_facts: no
 
 ### Interface Configuration ###

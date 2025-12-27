@@ -1,0 +1,38 @@
+[pve]
+10.10.10.10
+10.10.10.15
+10.10.10.18
+10.10.10.19
+10.10.10.17
+[vm]
+10.10.10.26 # jump
+10..10.10.35 # kmd0
+[lxc]
+10.10.10.4 # proxmox dc
+10.10.10.24 # scanopy
+
+[jump]
+10.10.10.26
+
+[switches:children]
+ios-xe
+
+[ios-xe:children]
+9kcorp
+9khome
+
+[9kcorp]
+10.203.1.254
+
+[9khome]
+10.10.10.1
+
+[pve:vars]
+ansible_user=d3
+ansible_become=true
+ansible_become_method=sudo
+config_dir=""
+config_file=""
+is_master = 0
+is_install = 0
+fluentbit = 0
