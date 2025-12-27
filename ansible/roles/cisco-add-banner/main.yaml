@@ -1,0 +1,8 @@
+- name: Configure the login banner
+  cisco.ios.ios_banner:
+    banner: login
+    text: |
+      this is my login banner la vo dchy
+      that contains a multiline
+      string
+    state: present
