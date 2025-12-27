@@ -102,6 +102,12 @@
           - name: twoGigabitEthernet2/0/6
             description: pve10 
             enabled: true
+          - name: tenGigabitEthernet2/0/39
+            description: nodeA.3.10
+            enabled: true
+          - name: tenGigabitEthernet2/0/41
+            description: nodeB.3.10.11
+            enabled: true
           - name: tenGigabitEthernet2/0/42
             description: nodeC.3.10.11
             enabled: true
