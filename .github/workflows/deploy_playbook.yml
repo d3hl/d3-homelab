@@ -32,4 +32,4 @@ jobs:
           ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook -i ansible/inventory/hosts.ini ansible/playbooks/IOS-XE/config/10.10.10.1.yaml 
+          ansible-playbook -i inventory/hosts.ini playbooks/IOS-XE/config/10.10.10.1.yaml 
