@@ -29,7 +29,7 @@
             access:
               vlan: 99
           - name: twoGigabitEthernet2/0/6
-            mode: trunk
+            mode: access
             access:
               vlan: 99
           - name: twoGigabitEthernet2/0/5
