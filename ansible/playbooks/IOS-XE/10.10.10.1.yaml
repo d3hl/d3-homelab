@@ -24,10 +24,27 @@
             mode: access
             access:
               vlan: 99
-          - name: twoGigabitEthernet2/0/7
+          - name: twoGigabitEthernet2/0/5
             mode: access
             access:
               vlan: 99
+          - name: twoGigabitEthernet2/0/6
+            mode: trunk
+            trunk:
+              allowed_vlans: 3,10
+              native_vlan: 1
+          - name: twoGigabitEthernet2/0/5
+            mode: access
+            access:
+              vlan: 99
+          - name: twoGigabitEthernet2/0/6
+            mode: access
+            access:
+              vlan: 99
+          - name: twoGigabitEthernet2/0/7
+            mode: access
+            access:
+              vlan: 999
           - name: twoGigabitEthernet2/0/10
             mode: trunk
             trunk:
@@ -51,7 +68,7 @@
           - name: tenGigabitEthernet2/0/42
             mode: trunk
             trunk:
-              allowed_vlans: 3,10
+              allowed_vlans: 3,10,11
               native_vlan: 1
           - name: tenGigabitEthernet2/0/45
             mode: trunk
@@ -101,26 +118,26 @@
       cisco.ios.ios_interfaces:
         config:
           - name: twoGigabitEthernet2/0/1
-            description: BMC testing with GH Actions 
+            description: BMC for nodeA
             enabled: true
           - name: twoGigabitEthernet2/0/2
-            description: BMC
+            description: BMC for nodeB
             enabled: true
           - name: twoGigabitEthernet2/0/3
-            description: BMC 
+            description: BMC for nodeC 
             enabled: true
           - name: twoGigabitEthernet2/0/4
-            description: BMC 
+            description: BMC for nodeD 
             enabled: true
           - name: twoGigabitEthernet2/0/5
-            description: BMC 
+            description: BMC for pve10
             enabled: true
           - name: twoGigabitEthernet2/0/6
+            description: pve10 
+            enabled: true
+          - name: twoGigabitEthernet2/0/7
             description: n/a 
             enabled: false
-          - name: twoGigabitEthernet2/0/7
-            description: BMC 
-            enabled: true
           - name: twoGigabitEthernet2/0/8
             description: n/a
             enabled: false
@@ -195,6 +212,9 @@
             enabled: false
           - name: twoGigabitEthernet2/0/35
             description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/0/42
+            description: nodeC.3.10.11
             enabled: false
           - name: tenGigabitEthernet2/0/43
             description: n/a
