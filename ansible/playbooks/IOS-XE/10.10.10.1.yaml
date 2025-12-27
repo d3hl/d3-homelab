@@ -38,9 +38,10 @@
             access:
               vlan: 99
           - name: twoGigabitEthernet2/0/6
-            mode: access
-            access:
-              vlan: 99
+            mode: trunk
+            trunk:
+              allowed_vlans: 3,10
+              native_vlan: 1
           - name: twoGigabitEthernet2/0/7
             mode: access
             access:
