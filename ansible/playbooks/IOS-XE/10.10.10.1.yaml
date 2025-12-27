@@ -313,6 +313,36 @@
           - name: tenGigabitEthernet2/0/48
             description: WIFI AP
             enabled: true
+          - name: tenGigabitEthernet2/1/1
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/2
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/3
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/4
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/5
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/6
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/7
+            description: n/a
+            enabled: false
+          - name: tenGigabitEthernet2/1/8
+            description: n/a
+            enabled: false
+          - name: twentyFiveGigE2/1/1 
+            description: Trunk to Mikrotk
+            enabled: true
+          - name: twentyFiveGigE2/1/2 
+            description: Trunk to Fortigate
+            enabled: true
         state: merged
 
 ### End of Interface Configuration ###
