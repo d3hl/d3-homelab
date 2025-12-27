@@ -234,3 +234,18 @@
           violations of this policy may result in disciplinary action.
 
           ***************************************************************************
+### LLDP Configuration ###
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_lldp_global:
+        config:
+          holdtime: 10
+          enabled: true
+          reinit: 3
+          timer: 10
+        state: merged
+### Hostname ###
+    - name: Apply the provided configuration
+      cisco.ios.ios_hostname:
+        config:
+          hostname: d39k3
+        state: merged
