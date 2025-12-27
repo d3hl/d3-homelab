@@ -34,11 +34,10 @@
               allowed_vlans: 3,10
               native_vlan: 1
           - name: tenGigabitEthernet2/0/37
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10
-              native_vlan: 1
-          - name: tenGigabitEthernet2/0/39
+            mode: access
+            access:
+              vlans: 999
+          - name: tenGigabitEthernet2/0/39  
             mode: trunk
             trunk:
               allowed_vlans: 3,10
@@ -102,6 +101,9 @@
           - name: twoGigabitEthernet2/0/6
             description: pve10 
             enabled: true
+          - name: tenGigabitEthernet2/0/37
+            description: n/a
+            enabled: false
           - name: tenGigabitEthernet2/0/39
             description: nodeA.3.10
             enabled: true
