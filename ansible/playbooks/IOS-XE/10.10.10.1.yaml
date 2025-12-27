@@ -165,11 +165,10 @@
             trunk:
               allowed_vlans: 3,10,11
               native_vlan: 1
-          - name: tenGigabitEthernet2/0/45
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10
-              native_vlan: 1
+          - name: tenGigabitEthernet2/0/44
+            mode: access
+            access:
+              vlan: 20
           - name: tenGigabitEthernet2/0/46
             mode: trunk
             trunk:
@@ -318,8 +317,8 @@
             description: n/a
             enabled: false
           - name: tenGigabitEthernet2/0/44
-            description: nodeC.3.10
-            enabled: false
+            description: nodeC.20
+            enabled: true
           - name: tenGigabitEthernet2/0/45
             description: n/a
             enabled: true
