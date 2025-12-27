@@ -54,9 +54,29 @@
               allowed_vlans: 3,10
               native_vlan: 1
           - name: tenGigabitEthernet2/0/45
+            mode: trunk
+            trunk:
+              allowed_vlans: 3,10
+              native_vlan: 1
+          - name: tenGigabitEthernet2/0/46
+            mode: trunk
+            trunk:
+              allowed_vlans: 3,10
+              native_vlan: 1
+          - name: tenGigabitEthernet2/0/46
+            mode: trunk
+            trunk:
+              allowed_vlans: 3,10
+              native_vlan: 1
+          - name: tenGigabitEthernet2/0/45
             mode: access
             access:
               vlan: 10
+          - name: tenGigabitEthernet2/0/46
+            mode: trunk
+            trunk:
+              allowed_vlans: 3,10
+              native_vlan: 1
           - name: tenGigabitEthernet2/0/46
             mode: trunk
             trunk:
@@ -179,8 +199,11 @@
           - name: tenGigabitEthernet2/0/43
             description: n/a
             enabled: false
+          - name: tenGigabitEthernet2/0/44
+            description: nodeC.3.10
+            enabled: false
           - name: tenGigabitEthernet2/0/45
-            description: TrueNAS
+            description: n/a
             enabled: true
           - name: tenGigabitEthernet2/0/47
             description: n/a
