@@ -81,7 +81,7 @@
       cisco.ios.ios_interfaces:
         config:
           - name: twoGigabitEthernet2/0/1
-            description: BMC 
+            description: BMC testing with GH Actions 
             enabled: true
           - name: twoGigabitEthernet2/0/2
             description: BMC
