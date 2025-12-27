@@ -1,8 +1,0 @@
-apiVersion: "cilium.io/v2alpha1"
-kind: CiliumLoadBalancerIPPool
-metadata:
-  name: "lan-cloud-pool"
-  namespace: kube-system
-spec:
-  blocks:
-  - cidr: "10.0.10.0/24"

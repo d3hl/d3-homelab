@@ -1,5 +1,0 @@
-ansible_connection: network_cli
-ansible_network_os: cisco.ios.ios
-ansible_user: d3
-ansible_become: yes
-ansible_become_method: enable
