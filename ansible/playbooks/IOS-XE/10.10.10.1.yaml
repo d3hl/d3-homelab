@@ -33,24 +33,70 @@
             trunk:
               allowed_vlans: 3,10
               native_vlan: 1
-          - name: twoGigabitEthernet2/0/5
-            mode: access
-            access:
-              vlan: 99
-          - name: twoGigabitEthernet2/0/6
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10
-              native_vlan: 1
           - name: twoGigabitEthernet2/0/7
             mode: access
             access:
               vlan: 999
           - name: twoGigabitEthernet2/0/10
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,99
-              native_vlan: 1
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/11
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/12
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/13
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/14
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/15
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/16
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/17
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/18
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/19
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/20
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/21
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/22
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/23
+            mode: access
+            access:
+              vlan: 999
+          - name: twoGigabitEthernet2/0/24
+            mode: access
+            access:
+              vlan: 999
           - name: tenGigabitEthernet2/0/37
             mode: trunk
             trunk:
@@ -143,6 +189,9 @@
             description: n/a
             enabled: false
           - name: twoGigabitEthernet2/0/9
+            description: n/a
+            enabled: false
+          - name: twoGigabitEthernet2/0/10
             description: n/a
             enabled: false
           - name: twoGigabitEthernet2/0/11
