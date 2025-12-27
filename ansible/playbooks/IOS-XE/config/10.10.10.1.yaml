@@ -214,3 +214,23 @@
           - vlan_id: 21
             name: logs
         state: merged
+### Login Banner ###
+    - name: configure login banner
+      ios_banner:
+        banner: login
+        text: |
+          ***************************************************************************
+
+                 ||        ||
+                 ||        ||             Cisco Systems, Inc.
+                ||||      ||||            TME Lab
+            ..:||||||:..:||||||:..        SJC23/1/163
+
+                                      NOTICE TO USERS
+
+          UNAUTHORIZED ACCESS TO THIS NETWORK DEVICE IS PROHIBITED.
+          You must have explicit permission to access or configure this
+          device.  All activities performed on this device are logged and
+          violations of this policy may result in disciplinary action.
+
+          ***************************************************************************
