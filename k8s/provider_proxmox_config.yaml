@@ -1,6 +1,0 @@
-proxmox:
-  username: omni
-  password: taolavodich123
-  url: "https://10.10.10.15:8006/api2/json"
-  insecureSkipVerify: true
-  realm: "pam"
