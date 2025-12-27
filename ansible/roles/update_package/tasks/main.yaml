@@ -1,7 +1,0 @@
-    - name: Update apt cache
-      ansible.builtin.apt:
-        update_cache: yes
-
-    - name: Upgrade all installed packages
-      ansible.builtin.apt:
-        upgrade: dist # Equivalent to apt-get dist-upgrade
