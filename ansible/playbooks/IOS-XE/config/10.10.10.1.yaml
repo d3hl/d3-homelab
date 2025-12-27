@@ -1,6 +1,6 @@
 # Add Vlan info to interfaces
 - name: Interface config
-  hosts: 10.10.10.1
+  hosts: ciscohome 
   gather_facts: no
 
 ### Interface Configuration ###
