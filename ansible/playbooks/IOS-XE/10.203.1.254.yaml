@@ -1,6 +1,6 @@
 # Add Vlan info to interfaces
 - name: Interface config
-  hosts: ciscocorp 
+  hosts: NTN-L2-C9300-CS01 
   gather_facts: no
 
 ### Interface Configuration ###
