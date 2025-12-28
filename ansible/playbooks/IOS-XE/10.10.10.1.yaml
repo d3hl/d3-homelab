@@ -84,7 +84,7 @@
       cisco.ios.ios_interfaces:
         config:
           - name: twoGigabitEthernet2/0/1
-            description: BMC for nodeA
+            description: BMC for nodeA ( test for github)
             enabled: true
           - name: twoGigabitEthernet2/0/2
             description: BMC for nodeB
