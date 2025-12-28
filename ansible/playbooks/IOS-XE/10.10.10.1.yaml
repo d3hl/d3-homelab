@@ -131,26 +131,26 @@
 
 ### VLAN configuration ###
 
-    - name: Merge provided configuration with device configuration
-      cisco.ios.ios_vlans:
-        config:
-          - vlan_id: 1
-            name: default
-          - vlan_id: 3
-            name: quorum
-          - vlan_id: 10
-            name: homelab
-          - vlan_id: 11
-            name: hlvl
-          - vlan_id: 20
-            name: cephpriv
-          - vlan_id: 99
-            name: bmc
-          - vlan_id: 100
-            name: wifi
-          - vlan_id: 21
-            name: logs
-        state: merged
+#    - name: Merge provided configuration with device configuration
+#      cisco.ios.ios_vlans:
+#        config:
+#          - vlan_id: 1
+#            name: default
+#          - vlan_id: 3
+#            name: quorum
+#          - vlan_id: 10
+#            name: homelab
+#          - vlan_id: 11
+#            name: hlvl
+#          - vlan_id: 20
+#            name: cephpriv
+#         - vlan_id: 99
+#            name: bmc
+#          - vlan_id: 100
+#            name: wifi
+#          - vlan_id: 21
+#            name: logs
+#        state: merged
 ### Login Banner ###
     - name: configure login banner
       ios_banner:
