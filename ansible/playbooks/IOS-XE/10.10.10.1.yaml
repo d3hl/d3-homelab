@@ -5,13 +5,13 @@
 
 ### Interface Configuration ###
   tasks:
-#    - name: Merge provided configuration with device configuration @d3hl
-#      cisco.ios.ios_l2_interfaces:
-#        config:
-#          - name: twoGigabitEthernet2/0/1
-#            mode: access
-#            access:
-#              vlan: 99
+    - name: Merge provided configuration with device configuration @d3hl
+      cisco.ios.ios_l2_interfaces:
+        config:
+          - name: twoGigabitEthernet2/0/1
+            mode: access
+            access:
+              vlan: 99
 #          - name: twoGigabitEthernet2/0/2
 #            mode: access
 #            access:
