@@ -1,11 +1,11 @@
 name: Deploy with cisco@d3hl
 on:
-  pull_request:
+  #pull_request:
+  #  branches:
+  #    - cisco
+  push:
     branches:
       - cisco
-#  push:
-#    branches:
-#      - cisco
 #   types: [closed]
 
 jobs:
