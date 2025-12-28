@@ -3,10 +3,10 @@ on:
   pull_request:
     branches:
       - cisco
-  push:
-    branches:
-      - cisco
-   types: [closed]
+#  push:
+#    branches:
+#      - cisco
+#   types: [closed]
 
 jobs:
   deploy:
