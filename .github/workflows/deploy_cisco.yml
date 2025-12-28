@@ -1,12 +1,12 @@
 name: Deploy with cisco@d3hl
 on:
-  #pull_request:
-  #  branches:
-  #    - main
+  pull_request:
+    branches:
+      - cisco
   push:
     branches:
       - cisco
- #  types: [closed]
+   types: [closed]
 
 jobs:
   deploy:
@@ -27,3 +27,4 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
           ansible-playbook -i ansible/inventory/hosts.ini ansible/playbooks/IOS-XE/10.10.10.1.yaml --private-key private_key.pem -u ${{ secrets.ANSIBLE_USER }} 
+          ansible-playbook -i ansible/inventory/hosts.ini ansible/playbooks/IOS-XE/10.203.1.254.yaml --private-key private_key.pem -u ${{ secrets.ANSIBLE_USER }} 
