@@ -1,0 +1,118 @@
+# Add Vlan info to interfaces
+- name: Interface config
+  hosts: ciscocorp 
+  gather_facts: no
+
+### Interface Configuration ###
+  tasks:
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_l2_interfaces:
+        config:
+          - name: GigabitEthernet1/0/5
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet1/0/13
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet1/0/30
+            mode: access
+            access:
+              vlan: 103
+          - name: GigabitEthernet1/0/33
+            mode: access
+            access:
+              vlan: 103
+          - name: GigabitEthernet1/0/35
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet1/0/36
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet1/0/37
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet1/0/38
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet1/0/39
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet2/0/41
+            mode: trunk
+            trunk:
+              allowed_vlans: 101,102
+              native_vlan: 1
+          
+        state: merged
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1/0/5
+            description: n/a
+            enabled: true
+          - name: twoGigabitEthernet1/0/13
+            description: n/a
+            enabled: true
+          
+        state: merged
+
+### End of Interface Configuration ###
+
+### VLAN configuration ###
+
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_vlans:
+        config:
+          - vlan_id: 1
+            name: default
+          - vlan_id: 101
+            name: Servers
+          - vlan_id: 102
+            name: IT
+          - vlan_id: 103
+            name: VLAN103
+          - vlan_id: 104
+            name: VLAN104
+          - vlan_id: 105
+            name: VLAN105
+          - vlan_id: 106
+            name: WIFI 
+          - vlan_id: 107
+            name: backup 
+        state: merged
+### Login Banner ###
+    - name: configure login banner
+      ios_banner:
+        banner: login
+        text: |
+          ***************************************************************************
+
+                 ||        ||
+                 ||        ||             Cisco Systems, Inc.
+                ||||      ||||            d3 Homelab
+            ..:||||||:..:||||||:..        
+
+          NOTICE TO USERS
+          This is NTN Bearing Singapore property.
+          UNAUTHORIZED ACCESS TO THIS NETWORK DEVICE IS PROHIBITED.
+          You must have explicit permission to access or configure this
+          device.  All activities performed on this device are logged and
+          violations of this policy may result in disciplinary action.
+
+          ***************************************************************************
+### LLDP Configuration ###
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_lldp_global:
+        config:
+          holdtime: 10
+          enabled: true
+          reinit: 3
+          timer: 10
+        state: merged
