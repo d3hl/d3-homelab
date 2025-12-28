@@ -5,7 +5,7 @@
 
 ### Interface Configuration ###
   tasks:
-    - name: Merge provided configuration with device configuration
+    - name: Merge provided configuration with device configuration @d3hl
       cisco.ios.ios_l2_interfaces:
         config:
           - name: twoGigabitEthernet2/0/1
@@ -80,7 +80,7 @@
 #              allowed_vlans: 3,10,11,20,99,100
 #              native_vlan: 1
 #        state: merged
-    - name: Merge provided configuration with device configuration
+    - name: Merge provided configuration with device configuration @d3hl
       cisco.ios.ios_interfaces:
         config:
           - name: twoGigabitEthernet2/0/1
@@ -152,7 +152,7 @@
 #            name: logs
 #        state: merged
 ### Login Banner ###
-    - name: configure login banner
+    - name: configure login banner @d3hl
       ios_banner:
         banner: login
         text: |
@@ -172,7 +172,7 @@
 
           ***************************************************************************
 ### LLDP Configuration ###
-    - name: Merge provided configuration with device configuration
+    - name: Merge provided configuration with device configuration @d3hl
       cisco.ios.ios_lldp_global:
         config:
           holdtime: 10
@@ -181,7 +181,7 @@
           timer: 10
         state: merged
 ### Hostname ###
-    - name: Apply the provided configuration
+    - name: Apply the provided configuration @d3hl
       cisco.ios.ios_hostname:
         config:
           hostname: d39k3
