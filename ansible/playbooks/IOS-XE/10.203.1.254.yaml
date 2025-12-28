@@ -54,10 +54,10 @@
       cisco.ios.ios_interfaces:
         config:
           - name: GigabitEthernet1/0/5
-            description: n/a
+            description: test for change interface name
             enabled: true
           - name: twoGigabitEthernet1/0/13
-            description: n/a
+            description: test changing interface name
             enabled: true
           
         state: merged
