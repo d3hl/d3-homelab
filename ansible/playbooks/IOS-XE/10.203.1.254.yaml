@@ -20,6 +20,10 @@
             mode: access
             access:
               vlan: 103
+          - name: GigabitEthernet1/0/31
+            mode: access
+            access:
+              vlan: 101
           - name: GigabitEthernet1/0/33
             mode: access
             access:
@@ -58,6 +62,9 @@
             enabled: true
           - name: GigabitEthernet1/0/13
             description: test changing interface name
+            enabled: true
+          - name: GigabitEthernet1/0/31
+            description: Print Room Printer
             enabled: true
           
         state: merged
