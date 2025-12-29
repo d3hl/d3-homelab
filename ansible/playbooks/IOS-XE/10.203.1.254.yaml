@@ -36,6 +36,14 @@
             mode: access
             access:
               vlan: 101
+          - name: GigabitEthernet2/0/35
+            mode: access
+            access:
+              vlan: 101
+          - name: GigabitEthernet2/0/36
+            mode: access
+            access:
+              vlan: 101
           - name: GigabitEthernet1/0/37
             mode: access
             access:
@@ -74,8 +82,17 @@
           - name: GigabitEthernet1/0/31
             description: Print Room Printer
             enabled: true
-          - name: GigabitEthernet1/0/37
-            description: NTNSG-SRV1
+          - name: GigabitEthernet1/0/35
+            description: NTNSG-SRV2
+            enabled: true
+          - name: GigabitEthernet1/0/36
+            description: NTNSG-SRV2
+            enabled: true
+          - name: GigabitEthernet2/0/35
+            description: NTNSG-SRV2
+            enabled: true
+          - name: GigabitEthernet2/0/36
+            description: NTNSG-SRV2
             enabled: true
           - name: GigabitEthernet1/0/38
             description: NTNSG-SRV1
