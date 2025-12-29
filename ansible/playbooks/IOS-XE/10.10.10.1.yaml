@@ -1,6 +1,6 @@
 # Add Vlan info to interfaces
 - name: Interface config
-  hosts: ciscohome 
+  hosts: d39k3 
   gather_facts: no
 
 ### Interface Configuration ###
