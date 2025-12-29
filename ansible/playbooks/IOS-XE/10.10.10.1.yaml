@@ -5,7 +5,7 @@
 
 ### Interface Configuration ###
   tasks:
-    - name: Merge provided configuration with device configuration @d3hl
+#    - name: Merge provided configuration with device configuration @d3hl
 #      cisco.ios.ios_l2_interfaces:
 #        config:
 #          - name: twoGigabitEthernet2/0/1
