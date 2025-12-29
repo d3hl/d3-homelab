@@ -28,6 +28,7 @@
             mode: access
             access:
               vlan: 103
+### Server 1 Ports              
           - name: GigabitEthernet1/0/35
             mode: access
             access:
@@ -44,6 +45,8 @@
             mode: access
             access:
               vlan: 101
+### Server 1 Ports
+### Server 2 Ports
           - name: GigabitEthernet1/0/37
             mode: access
             access:
@@ -60,6 +63,7 @@
             mode: access
             access:
               vlan: 101
+### Server 2 Ports 
           - name: GigabitEthernet1/0/39
             mode: access
             access:
