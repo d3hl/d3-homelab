@@ -1,6 +1,6 @@
 ---
 - name: Update package and config.  
-  hosts: komodo 
+  hosts: pve 
   gather_facts: no
   roles:
     - update_package
