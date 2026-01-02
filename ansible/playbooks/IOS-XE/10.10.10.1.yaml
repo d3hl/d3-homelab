@@ -1,63 +1,63 @@
 # Add Vlan info to interfaces
 - name: Interface config
-  hosts: ciscohome 
+  hosts: d39k3 
   gather_facts: no
 
 ### Interface Configuration ###
   tasks:
-    - name: Merge provided configuration with device configuration @d3hl
-      cisco.ios.ios_l2_interfaces:
-        config:
-          - name: twoGigabitEthernet2/0/1
-            mode: access
-            access:
-              vlan: 99
-          - name: twoGigabitEthernet2/0/2
-            mode: access
-            access:
-              vlan: 99
-          - name: twoGigabitEthernet2/0/3
-            mode: access
-            access:
-              vlan: 99
-          - name: twoGigabitEthernet2/0/4
-            mode: access
-            access:
-              vlan: 99
-          - name: twoGigabitEthernet2/0/5
-            mode: access
-            access:
-              vlan: 99
-          - name: twoGigabitEthernet2/0/6
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10
-              native_vlan: 1
-          - name: tenGigabitEthernet2/0/37
-            mode: access
-            access:
-              vlans: 999
-          - name: tenGigabitEthernet2/0/39  
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10
-              native_vlan: 1
-          - name: tenGigabitEthernet2/0/41
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10,11
-              native_vlan: 1
-          - name: tenGigabitEthernet2/0/42
-            mode: trunk
-            trunk:
-              allowed_vlans: 3,10,11
-              native_vlan: 1
-          - name: tenGigabitEthernet2/0/44
-            mode: access
-            access:
-              vlan: 20
-          - name: tenGigabitEthernet2/0/45
-            mode: access
+#    - name: Merge provided configuration with device configuration @d3hl
+#      cisco.ios.ios_l2_interfaces:
+#        config:
+#          - name: twoGigabitEthernet2/0/1
+#            mode: access
+#            access:
+#              vlan: 99
+#          - name: twoGigabitEthernet2/0/2
+#            mode: access
+#            access:
+#              vlan: 99
+#          - name: twoGigabitEthernet2/0/3
+#            mode: access
+#            access:
+#              vlan: 99
+#          - name: twoGigabitEthernet2/0/4
+#            mode: access
+#           access:
+#              vlan: 99
+#          - name: twoGigabitEthernet2/0/5
+#            mode: access
+#            access:
+#              vlan: 99
+#          - name: twoGigabitEthernet2/0/6
+#            mode: trunk
+#            trunk:
+#              allowed_vlans: 3,10
+#              native_vlan: 1
+#          - name: tenGigabitEthernet2/0/37
+#            mode: access
+#            access:
+#              vlans: 999
+#          - name: tenGigabitEthernet2/0/39  
+#            mode: trunk
+#            trunk:
+#              allowed_vlans: 3,10
+#              native_vlan: 1
+#          - name: tenGigabitEthernet2/0/41
+#            mode: trunk
+#            trunk:
+#              allowed_vlans: 3,10,11
+#              native_vlan: 1
+#          - name: tenGigabitEthernet2/0/42
+#            mode: trunk
+#            trunk:
+#              allowed_vlans: 3,10,11
+#              native_vlan: 1
+#          - name: tenGigabitEthernet2/0/44
+#            mode: access
+#            access:
+#              vlan: 20
+#          - name: tenGigabitEthernet2/0/45
+#            mode: access
 #            access:
 #              vlan: 10
 #          - name: tenGigabitEthernet2/0/46
