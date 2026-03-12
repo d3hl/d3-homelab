@@ -1,5 +1,5 @@
 data "local_file" "ssh_public_key" {
-  filename = "/home/d3/.ssh/d3_tf.pub"
+  filename = "/home/d3/.ssh/kmd-2.pub"
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
