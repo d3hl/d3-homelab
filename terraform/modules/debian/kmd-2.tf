@@ -1,6 +1,6 @@
 resource "proxmox_virtual_environment_cloned_vm" "debian_clone" {
   node_name = var.virtual_environment_node_name
-  name      = "debian-clone"
+  name      = "kmd-2"
 
   clone = {
     source_vm_id = proxmox_virtual_environment_vm.debian_template.vm_id
