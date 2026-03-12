@@ -1,7 +1,7 @@
 
 
-module "supermicro" {
-  source                        = "./resources/supermicro"
+module "komodo" {
+  source                        = "./resources/komodo"
   virtual_environment_username  = var.virtual_environment_username
   virtual_environment_endpoint  = var.virtual_environment_endpoint
   virtual_environment_api_token = var.virtual_environment_api_token

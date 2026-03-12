@@ -30,7 +30,8 @@ variable "filestore_id" {
 }
 
 variable "vm_names" {
-  default = ["kmd1", "kmd2"]
+  #  default = ["kmd3"md2"]
+  default = ["kmd-2"]
 }
 variable "node_names" {
   default = ["nodeC", "nodeD"]

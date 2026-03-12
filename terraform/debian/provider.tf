@@ -6,7 +6,7 @@ terraform {
     }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.89.1" # x-release-please-version
+      version = "0.98.1" # x-release-please-version
     }
   }
 
@@ -14,8 +14,7 @@ terraform {
 provider "proxmox" {
   endpoint  = var.virtual_environment_endpoint
   api_token = var.virtual_environment_api_token
-  username  = var.virtual_environment_username
-  #password  = var.virtual_environment_password
+
   insecure = true
   ssh {
     node {
