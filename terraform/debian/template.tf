@@ -25,7 +25,7 @@ resource "proxmox_virtual_environment_vm" "debian_template" {
 
   disk {
     datastore_id = "cephVM"
-    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
+    file_id      = proxmox_virtual_environment_download_file.debian_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
