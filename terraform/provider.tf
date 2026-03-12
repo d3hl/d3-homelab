@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "d3-org"
     workspaces {
-      name = "komodo"
+      name = "d3-homelab"
     }
   }
   required_providers {
