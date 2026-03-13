@@ -20,7 +20,6 @@ terraform {
 provider "proxmox" {
   endpoint  = var.virtual_environment_endpoint
   api_token = var.virtual_environment_api_token
-  username  = var.virtual_environment_username
   insecure  = true
   ssh {
     agent    = true
@@ -38,8 +37,8 @@ provider "proxmox" {
       address = "10.10.10.17"
     }
     node {
-      name    = "nodeC"
-      address = "10.10.10.19"
+      name    = "pve10"
+      address = "10.10.10.10"
     }
   }
 
