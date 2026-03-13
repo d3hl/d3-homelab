@@ -20,7 +20,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
         shell: /bin/bash
         ssh_authorized_keys:
           - ${trimspace(data.local_file.ssh_public_key.content)}
-        password: abcd
+        password: Abcd1234
         sudo: ALL=(ALL) NOPASSWD:ALL
     package_update: true
     packages:
