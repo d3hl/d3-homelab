@@ -1,9 +1,9 @@
-#module "debian" {
-#source                        = "./modules/debian"
-#virtual_environment_endpoint  = var.virtual_environment_endpoint
-#virtual_environment_api_token = var.virtual_environment_api_token
-#virtual_environment_username  = var.virtual_environment_username
-#}
+module "debian" {
+  source                        = "./modules/debian"
+  virtual_environment_endpoint  = var.virtual_environment_endpoint
+  virtual_environment_api_token = var.virtual_environment_api_token
+  virtual_environment_username  = var.virtual_environment_username
+}
 #module "omni" {
 #  source                        = "./resources/omni"
 #  virtual_environment_username  = var.virtual_environment_username
