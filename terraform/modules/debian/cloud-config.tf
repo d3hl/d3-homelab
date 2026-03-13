@@ -1,5 +1,5 @@
 data "local_file" "ssh_public_key" {
-  filename = "/home/d3/.ssh/kmd-2.pub"
+  filename = "/home/d3/.ssh/sshid.pub"
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
@@ -13,6 +13,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
     hostname: kmd-2
     timezone: Asia/Singapore
     users:
+      - default
       - name: d3
         groups:
           - sudo
