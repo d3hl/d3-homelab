@@ -1,9 +1,6 @@
 variable "virtual_environment_endpoint" {
   type = string
 }
-variable "virtual_environment_username" {
-  type = string
-}
 
 variable "virtual_environment_api_token" {
   description = "The API token for the Proxmox Virtual Environment API"
