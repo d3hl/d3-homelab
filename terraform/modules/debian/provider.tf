@@ -1,10 +1,10 @@
 terraform {
-  cloud {
-    organization = "d3-org"
-    workspaces {
-      name = "d3-homelab"
-    }
-  }
+  #  cloud {
+  #    organization = "d3-org"
+  #    workspaces {
+  #      name = "d3-homelab"
+  #    }
+  #  }
   required_providers {
     local = {
       source  = "hashicorp/local"
