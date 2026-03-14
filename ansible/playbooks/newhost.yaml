@@ -1,0 +1,22 @@
+---
+- name: Update package and config.  
+  hosts: vm 
+  gather_facts: no
+  roles:
+    - update_package
+  become: true
+
+- name: install docker
+  hosts: vm 
+  gather_facts: no
+  roles:
+    - docker
+  become: true
+
+- name: mount cephfs drive 
+  hosts: vm
+ # become: true
+  become_method: su
+  gather_facts: yes
+  roles:
+    - cephfs
