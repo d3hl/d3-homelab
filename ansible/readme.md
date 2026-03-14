@@ -1,7 +1,7 @@
  ansible-playbook  -i inventory/hosts.yaml ./playbooks/docker.yaml --user=d3
 ansible-playbook -i inventory/hosts playbooks/cisco/add-vlans.yaml -k
  
- ansible-playbook -i inventory/komodo.yaml playbooks/komodo.yml --vault-password-file ~/.vault_pass
+ ansible-playbook -i inventory/hosts.ini playbooks/newsetup.yml --vault-password-file ~/.vault_pass
 
  # When run Komodo with Rootless Dockerrjidx 
 systemctl --user stop docker
