@@ -5,8 +5,8 @@
     - packages
     - ssh
     - fail2ban
-    - user
-    - ufw
+#    - user
+#    - ufw
     - dokploy
 
   vars:
