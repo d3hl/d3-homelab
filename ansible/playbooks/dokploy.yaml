@@ -1,0 +1,14 @@
+---
+- hosts: dokploy
+  become: true
+  roles:
+    - packages
+    - ssh
+    - fail2ban
+    - user
+    - ufw
+    - dokploy
+
+  vars:
+    user_name: d3 # replace with your username
+    user_password: mysecretpassword # replace with your password
