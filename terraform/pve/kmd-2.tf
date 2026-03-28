@@ -9,12 +9,13 @@ resource "proxmox_virtual_environment_cloned_vm" "kmd-2" {
   # Manage disks by slot
   disk = {
     # Resize the boot disk inherited from template
-    virtio0 = {
+    #virtio0 = {
+    scsi = {
       datastore_id = var.datastore_id
       size_gb      = 100 # Expand from 20GB to 50GB
       discard      = "on"
       iothread     = true
-      ssd          = true
+      #ssd          = true
     }
   }
   # Only explicitly listed devices are managed
