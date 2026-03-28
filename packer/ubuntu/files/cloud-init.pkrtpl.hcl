@@ -32,7 +32,7 @@ autoinstall:
     timezone: Asia/Singapore
     users:
       - name: d3
-        groups: [sudo,docker]
+        groups: [sudo]
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/zsh
         ssh_authorized_keys:
