@@ -165,8 +165,8 @@ build {
     }
 }
 
-#locals {
-#  user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
-#    ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
-#  })
-#}
+locals {
+    user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
+    #ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
+  })
+}
