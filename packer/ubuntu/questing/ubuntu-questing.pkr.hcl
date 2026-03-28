@@ -66,7 +66,6 @@ source "proxmox-iso" "ubuntu-server-questing" {
         type = "scsi"
         iso_file = "cFS:iso/ubuntu-25.10-live-server-amd64.iso"
         unmount = true
-       # iso_checksum = "sha512:c3514bf0056180d09376462a7a1b4f213c1d6e8ea67fae5c25099c6fd3d8274b"
     }
 
     # VM CPU Settings
