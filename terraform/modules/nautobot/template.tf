@@ -39,7 +39,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
       }
     }
 
-    user_data_file_id = proxmox_virtual_environment_file.nautobot_user_data_cloud_config.id
+    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
 
   network_device {
