@@ -35,6 +35,7 @@ variable "proxmox_api_token_secret" {
 variable "ssh_authorized_keys" {
     type      = list(string)
     sensitive = true
+    default   = []
 }
 
 source "proxmox-iso" "ubuntu-server-questing" {
