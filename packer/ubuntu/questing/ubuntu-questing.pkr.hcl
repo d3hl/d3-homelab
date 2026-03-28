@@ -131,7 +131,7 @@ build {
 #  sources = [
  #   "source.amazon-ebs.basic-example-east",
   #  "source.amazon-ebs.basic-example-west"
-  ]
+  #]
 
     name = "ubuntu-server-questing"
     sources = ["source.proxmox-iso.ubuntu-server-questing"]
