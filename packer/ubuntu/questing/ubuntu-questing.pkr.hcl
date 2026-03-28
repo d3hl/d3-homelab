@@ -84,7 +84,7 @@ source "proxmox-iso" "ubuntu-server-questing" {
     }
 
     cloud_init              = true
-    cloud_init_storage_pool = "cFS"
+    cloud_init_storage_pool = "cephVM"
 
 
     ssh_username = "d3"
