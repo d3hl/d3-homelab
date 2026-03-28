@@ -1,9 +1,9 @@
-resource "proxmox_virtual_environment_cloned_vm" "debian_clone" {
-  node_name = var.virtual_environment_node_name
-  name      = "kmd-2"
+resource "proxmox_virtual_environment_cloned_vm" "ubuntu_clone" {
+  node_name = var.virtual_environment_node10_name
+  name      = "nautobot"
 
   clone = {
-    source_vm_id = proxmox_virtual_environment_vm.debian_template.vm_id
+    source_vm_id = proxmox_virtual_environment_vm.ubuntu_template.vm_id
     full         = true
   }
   # Manage disks by slot
@@ -31,8 +31,8 @@ resource "proxmox_virtual_environment_cloned_vm" "debian_clone" {
 
   # Memory configuration using new terminology
   memory = {
-    size    = 16384 # Total memory available to VM
-    balloon = 512   # Minimum guaranteed memory via balloon device
+    size    = 8192 # Total memory available to VM
+    balloon = 512  # Minimum guaranteed memory via balloon device
   }
 
   cpu = {
@@ -42,5 +42,5 @@ resource "proxmox_virtual_environment_cloned_vm" "debian_clone" {
 }
 
 output "vm_id" {
-  value = proxmox_virtual_environment_cloned_vm.debian_clone.id
+  value = proxmox_virtual_environment_cloned_vm.ubuntu_clone.id
 }
