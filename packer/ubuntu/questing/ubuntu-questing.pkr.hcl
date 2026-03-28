@@ -47,10 +47,10 @@ source "proxmox-iso" "ubuntu-server-questing" {
     insecure_skip_tls_verify = true
 
     # VM General Settings
-    node = "pve"
+    node = "pve10"
 
-    vm_id = "199"
-    vm_name = "ubuntu-24-template"
+    vm_id = "999"
+    vm_name = "ubuntu-25-template"
     template_description = "Ubuntu Server questing from Packer"
 
     # VM System Settings
@@ -94,7 +94,7 @@ source "proxmox-iso" "ubuntu-server-questing" {
     ssh_username = "d3"
 ## The build takes forever, 60 is more than enough
     ssh_timeout  = "60m"
-    ssh_private_key_file = "~/.ssh/d3_tf.pub"
+    ssh_private_key_file = "~/.ssh/d3_tf"
 
     boot_wait = "10s"
     boot_command = [
