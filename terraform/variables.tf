@@ -18,6 +18,7 @@ variable "virtual_environment_node10_name" {
   description = "Name of the Proxmox node"
   type        = string
   default     = "pve10"
+}
 variable "datastore_id" {
   type        = string
   description = "Datastore for VM disks"

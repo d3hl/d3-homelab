@@ -17,8 +17,8 @@ variable "virtual_environment_node10_name" {
   description = "Name of the Proxmox node"
   type        = string
 }
-#variable "datastore_id" {
-#  type        = string
-#  description = "Datastore for VM disks"
-#  default     = "cephVM"
-#}
+variable "datastore_id" {
+  type        = string
+  description = "Datastore for VM disks"
+  default     = "cephVM"
+}
