@@ -11,7 +11,7 @@ resource "proxmox_virtual_environment_cloned_vm" "kmd-2" {
     # Resize the boot disk inherited from template
     #virtio0 = {
     scsi0 = {
-      datastore_id = var.datastore_id
+      datastore_id = cephVM
       size_gb      = 100 # Expand from 20GB to 50GB
       discard      = "on"
       iothread     = true
