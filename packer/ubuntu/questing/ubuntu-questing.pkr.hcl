@@ -39,8 +39,6 @@ variable "ssh_authorized_keys" {
 }
 
 source "proxmox-iso" "ubuntu-server-questing" {
-
-    # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
@@ -48,7 +46,6 @@ source "proxmox-iso" "ubuntu-server-questing" {
 
     # VM General Settings
     node = "pve10"
-
     vm_id = "999"
     vm_name = "ubuntu-25-template"
     template_description = "Ubuntu Server questing from Packer"
