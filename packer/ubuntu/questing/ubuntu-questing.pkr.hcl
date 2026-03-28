@@ -7,10 +7,7 @@ packer {
   }
 }
 
-variable "ssh_authorized_keys" {
-  type      = list(string)
-  sensitive = true
-}
+
 
 source "proxmox-iso" "ubuntu-server-questing" {
 
