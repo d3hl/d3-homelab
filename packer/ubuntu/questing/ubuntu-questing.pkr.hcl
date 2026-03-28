@@ -57,7 +57,7 @@ source "proxmox-iso" "ubuntu-server-questing" {
     scsi_controller = "virtio-scsi-pci"
 
     disks {
-        type = "scsi"
+        type = "virtio"
         disk_size = "8G"
         storage_pool = "cephVM"
     }
