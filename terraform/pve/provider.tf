@@ -1,18 +1,19 @@
 terraform {
   cloud {
     organization = "d3-org"
+    project      = "homelab"
     workspaces {
-      name = "d3-homelab"
+      name = "pve"
     }
   }
   required_providers {
-    local = {
-      source  = "hashicorp/local"
-      version = "2.5.3"
-    }
+    #    local = {
+    #      source  = "hashicorp/local"
+    #     version = "2.5.3"
+    #    }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.99.0" # x-release-please-version
+      version = "0.99.0"
     }
   }
 

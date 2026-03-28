@@ -112,6 +112,26 @@ source "proxmox-iso" "ubuntu-server-questing" {
 
 
 build {
+  hcp_packer_registry {
+    bucket_name = "ubuntu-questing"
+    description = "Image for Proxmox"
+
+    bucket_labels = {
+      "owner"          = "d3"
+      "os"             = "Ubuntu",
+      "ubuntu-version" = "Questing 25.10",
+    }
+
+    build_labels = {
+      "build-time"   = timestamp()
+      "build-source" = basename(path.cwd)
+    }
+  }
+
+#  sources = [
+ #   "source.amazon-ebs.basic-example-east",
+  #  "source.amazon-ebs.basic-example-west"
+  ]
 
     name = "ubuntu-server-questing"
     sources = ["source.proxmox-iso.ubuntu-server-questing"]
