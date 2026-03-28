@@ -7,7 +7,7 @@ autoinstall:
   identity:
     hostname: ubuntu-noble-template
     username: d3
-    password: $6$rounds=4096$dummy$dummy
+    password: 58b3aca37bd5407cd9b530cf881503ec3bcf13566d676578 
   storage:
     layout:
       name: direct
