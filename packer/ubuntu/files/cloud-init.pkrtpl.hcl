@@ -5,7 +5,7 @@ autoinstall:
   keyboard:
     layout: us
   identity:
-    hostname: ubuntu-noble-template
+    hostname: ubuntu-questing-template
     username: d3
     password: 58b3aca37bd5407cd9b530cf881503ec3bcf13566d676578 
   storage:
