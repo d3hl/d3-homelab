@@ -1,9 +1,9 @@
 terraform {
   cloud {
     organization = "d3-org"
-    project      = "homelab"
     workspaces {
-      name = "pve"
+      project = "homelab"
+      name    = "pve"
     }
   }
   required_providers {
