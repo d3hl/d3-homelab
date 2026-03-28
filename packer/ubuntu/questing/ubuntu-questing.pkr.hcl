@@ -7,7 +7,7 @@ packer {
   }
 }
 
-source "proxmox-iso" "ubuntu-server-noble" {
+source "proxmox-iso" "ubuntu-server-questing" {
 
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
@@ -20,7 +20,7 @@ source "proxmox-iso" "ubuntu-server-noble" {
 
     vm_id = "199"
     vm_name = "ubuntu-24-template"
-    template_description = "Ubuntu Server noble from Packer"
+    template_description = "Ubuntu Server questing from Packer"
 
     # VM System Settings
     qemu_agent = true
@@ -31,14 +31,14 @@ source "proxmox-iso" "ubuntu-server-noble" {
     disks {
         type = "scsi"
         disk_size = "8G"
-        storage_pool = "local-lvm"
+        storage_pool = "cephVM"
     }
 
     boot_iso {
         type = "scsi"
-        iso_file = "local:iso/ubuntu-24.04.3-live-server-amd64.iso"
+        iso_file = "cFS:iso/ubuntu-25.10-live-server-amd64.iso"
         unmount = true
-        iso_checksum = "sha512:c3514bf0056180d09376462a7a1b4f213c1d6e8ea67fae5c25099c6fd3d8274b"
+       # iso_checksum = "sha512:c3514bf0056180d09376462a7a1b4f213c1d6e8ea67fae5c25099c6fd3d8274b"
     }
 
     # VM CPU Settings
@@ -53,10 +53,11 @@ source "proxmox-iso" "ubuntu-server-noble" {
         model = "virtio"
         bridge = "vmbr0"
         firewall = "false"
+        vlan_tag = "10"
     }
 
     cloud_init              = true
-    cloud_init_storage_pool = "local-lvm"
+    cloud_init_storage_pool = "cFS"
 
 
     ssh_username = "d3"
@@ -76,7 +77,7 @@ source "proxmox-iso" "ubuntu-server-noble" {
 
     http_content = {
       "/user-data" = local.user_data
-      "/meta-data" = "instance-id: packer\nlocal-hostname: ubuntu-noble-template"
+      "/meta-data" = "instance-id: packer\nlocal-hostname: ubuntu-questing-template"
     }
     http_port_min = 8001
     http_port_max = 8001
@@ -85,8 +86,8 @@ source "proxmox-iso" "ubuntu-server-noble" {
 
 build {
 
-    name = "ubuntu-server-noble"
-    sources = ["source.proxmox-iso.ubuntu-server-noble"]
+    name = "ubuntu-server-questing"
+    sources = ["source.proxmox-iso.ubuntu-server-questing"]
 
     ## Cleanup for re-template
     provisioner "shell" {
