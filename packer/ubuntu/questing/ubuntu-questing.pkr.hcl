@@ -44,7 +44,7 @@ source "proxmox-iso" "ubuntu-server-questing" {
     token = "${var.proxmox_api_token_secret}"
     insecure_skip_tls_verify = true
 
-    # VM General Settings
+    # VM General Settingi
     node = "pve10"
     vm_id = "999"
     vm_name = "ubuntu-25-template"
