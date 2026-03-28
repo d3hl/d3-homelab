@@ -4,6 +4,10 @@ packer {
       version = "~> 1"
       source  = "github.com/hashicorp/proxmox"
     }
+    sshkey = {
+      version = ">= 1.2.1"
+      source = "github.com/ivoronin/sshkey"
+    }
   }
 }
 
@@ -21,10 +25,17 @@ variable "proxmox_api_token_secret" {
     
 }
 
-variable "ssh_authorized_keys" {
-  type      = list(string)
-  sensitive = true
-}
+#variables {
+#  temporary_key_pair_name = "my_temp_key"
+#}
+#data "sshkey" "install" {
+#  name = var.temporary_key_pair_name
+#}
+
+#variable "ssh_authorized_keys" {
+#  type      = list(string)
+#  sensitive = true
+#}
 
 source "proxmox-iso" "ubuntu-server-questing" {
 
@@ -154,8 +165,8 @@ build {
     }
 }
 
-locals {
-  user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
-    ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
-  })
-}
+#locals {
+#  user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
+#    ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
+#  })
+#}
