@@ -1,6 +1,6 @@
 resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   name      = "ubuntu-template"
-  node_name = var.virtual_environment_node_name
+  node_name = var.virtual_environment_node10_name
 
   template = true
   started  = false
