@@ -35,9 +35,11 @@ autoinstall:
         groups: [sudo]
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/zsh
+%{ if ssh_authorized_keys != "" ~}
         ssh_authorized_keys:
 %{ for key in split("\n", ssh_authorized_keys) ~}
           - ${key}
 %{ endfor ~}
+%{ endif ~}
   early-commands:
     - echo 'Packer build starting' > /tmp/packer-start.log
