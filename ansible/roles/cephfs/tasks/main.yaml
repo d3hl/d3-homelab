@@ -22,11 +22,11 @@
         gpgcheck: yes
         gpgkey: https://download.ceph.com/keys/release.gpg
       become: true
-    - name: Install ceph
-      ansible.builtin.dnf:
-        name: ceph-common
-        state: latest
-      become: true
+#    - name: Install ceph
+ #     ansible.builtin.dnf:
+  #      name: ceph-common
+   #     state: latest
+    #  become: true
     - name: Download ceph config
       ansible.builtin.copy:
         src: '{{playbook_dir}}/ceph.conf'
