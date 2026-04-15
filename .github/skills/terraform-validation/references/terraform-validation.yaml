@@ -1,0 +1,108 @@
+name: Terraform Validation
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform-validation.yaml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'terraform/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Terraform Validation
+    
+    strategy:
+      matrix:
+        terraform-version: ['1.5', '1.6', '1.7']
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ matrix.terraform-version }}
+      
+      - name: Terraform Format Check
+        id: fmt
+        run: |
+          echo "Checking Terraform formatting..."
+          terraform fmt -check -recursive terraform/
+        continue-on-error: true
+      
+      - name: Format Check Comment
+        if: steps.fmt.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **Terraform Format Check Failed**\n\nRun `terraform fmt -recursive terraform/` locally and commit changes.'
+            })
+      
+      - name: Terraform Init & Validate
+        id: validate
+        run: |
+          cd terraform/modules/komodo
+          terraform init
+          terraform validate
+      
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: latest
+      
+      - name: TFLint Init
+        run: tflint --init --config=.tflint.hcl
+      
+      - name: TFLint Check
+        id: tflint
+        run: |
+          tflint --config=.tflint.hcl --recursive terraform/ --format json > tflint-results.json || true
+          cat tflint-results.json
+        continue-on-error: true
+      
+      - name: TFLint Summary Comment
+        if: github.event_name == 'pull_request' && steps.tflint.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('tflint-results.json', 'utf8'));
+            const errors = results.filter(r => r.rule.severity === 'error');
+            const warnings = results.filter(r => r.rule.severity === 'warning');
+            
+            let comment = '### TFLint Results\n\n';
+            if (errors.length > 0) {
+              comment += `❌ **${errors.length} Errors**\n`;
+              errors.forEach(e => {
+                comment += `- ${e.rule.name}: ${e.message}\n`;
+              });
+            }
+            if (warnings.length > 0) {
+              comment += `⚠️  **${warnings.length} Warnings**\n`;
+              warnings.forEach(w => {
+                comment += `- ${w.rule.name}: ${w.message}\n`;
+              });
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+      
+      - name: Validation Result
+        if: failure()
+        run: |
+          echo "❌ Terraform validation failed"
+          echo "Run locally: ./validate-terraform.sh"
+          exit 1
