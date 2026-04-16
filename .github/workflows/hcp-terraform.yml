@@ -30,6 +30,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Load secret from 1Password  
+        uses: 1password/load-secrets-action@v4
+        with:
+          # Export loaded secrets as environment variables
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SECRET: op://d3HL/Terraform Proxmox GitOps.env/gh-action-push-token
+
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
