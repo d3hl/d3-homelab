@@ -14,7 +14,6 @@ on:
   workflow_dispatch:
 
 env:
-  TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
   TF_CLOUD_ORGANIZATION: d3-org
   TF_WORKSPACE: pve
 
@@ -30,13 +29,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Load secret from 1Password  
+      - name: Load secret from 1Password
         uses: 1password/load-secrets-action@v4
         with:
           # Export loaded secrets as environment variables
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
           SECRET: op://d3HL/Terraform Proxmox GitOps.env/gh-action-push-token
 
 
@@ -64,10 +64,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Load secret from 1Password
+        uses: 1password/load-secrets-action@v4
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
 
       - name: Terraform Init
         working-directory: terraform/pve
@@ -83,7 +91,7 @@ jobs:
         if: always() && github.event_name == 'pull_request'
         uses: hashicorp/setup-terraform@v3
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
 
       - name: Add Plan Comment to PR
         if: always() && github.event_name == 'pull_request'
@@ -113,10 +121,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Load secret from 1Password
+        uses: 1password/load-secrets-action@v4
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
 
       - name: Terraform Init
         working-directory: terraform/pve

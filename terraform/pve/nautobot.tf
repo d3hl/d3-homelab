@@ -35,6 +35,6 @@ resource "proxmox_virtual_environment_cloned_vm" "nautobot" {
 
 }
 
-output "vm_id" {
+output "vm_id_nautobot" {
   value = proxmox_virtual_environment_cloned_vm.nautobot.id
 }
