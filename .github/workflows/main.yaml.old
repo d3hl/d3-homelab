@@ -1,3 +1,6 @@
+- name: Load secrets from 1Password
+  uses: 1Password/load-secrets-action@v4.0.0
+  
 name: KestraCI/CD
 on:
   push:
