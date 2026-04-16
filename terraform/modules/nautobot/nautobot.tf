@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_cloned_vm" "ubuntu_clone" {
+resource "proxmox_virtual_environment_cloned_vm" "nautobot" {
   node_name = var.virtual_environment_node10_name
   name      = "nautobot"
 
@@ -42,5 +42,5 @@ resource "proxmox_virtual_environment_cloned_vm" "ubuntu_clone" {
 }
 
 output "vm_id" {
-  value = proxmox_virtual_environment_cloned_vm.ubuntu_clone.id
+  value = proxmox_virtual_environment_cloned_vm.nautobot.id
 }

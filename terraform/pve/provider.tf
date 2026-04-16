@@ -38,8 +38,8 @@ provider "proxmox" {
       address = "10.10.10.17"
     }
     node {
-      name    = "nodeE"
-      address = "10.10.10.19"
+      name    = "nodeF"
+      address = "10.10.10.10"
     }
   }
 

@@ -18,10 +18,11 @@ variable "virtual_environment_nodeA" {
   description = "Name of the Proxmox node"
   type        = string
   default     = "nodeA"
-variable "virtual_environment_node_pve10" {
+}
+variable "virtual_environment_node_nodeF" {
   description = "Name of the Proxmox node"
   type        = string
-  default     = "pve10"
+  default     = "nodeF"
 }
 variable "datastore_id" {
   type        = string
