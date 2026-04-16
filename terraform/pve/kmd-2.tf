@@ -1,5 +1,5 @@
 resource "proxmox_virtual_environment_cloned_vm" "kmd-2" {
-  node_name = var.virtual_environment_node_pve10
+  node_name = var.virtual_environment_node_nodeD
   name      = "kmd-2"
 
   clone = {
