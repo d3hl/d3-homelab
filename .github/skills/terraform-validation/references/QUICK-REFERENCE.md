@@ -61,7 +61,7 @@ terraform init
 terraform validate || exit 1
 
 echo "3. Linting..."
-cd ../..
+cd ../.
 tflint --config=.tflint.hcl --recursive terraform/ || exit 1
 
 echo "✅ All checks passed!"
