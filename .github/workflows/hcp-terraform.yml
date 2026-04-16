@@ -25,9 +25,9 @@ permissions:
 
 jobs:
   terraform-plan:
+    if: github.repository != 'd3hl/d3-homelab' 
     name: Plan Changes
     runs-on: self-hosted
-    if: github.event_name == 'push_request'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
