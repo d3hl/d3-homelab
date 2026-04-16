@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'terraform/komodo/**'
-      - '.github/workflows/hcp-terraform.yml'
+      - '.github/workflows/hcp-terraform.yml' # ye
   push:
     branches:
       - main
