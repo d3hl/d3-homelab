@@ -32,13 +32,13 @@ jobs:
       - name: Load secret from 1Password
         uses: 1password/load-secrets-action@v4
         with:
-          # Export loaded secrets as environment variables
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
-          SECRET: op://d3HL/Terraform Proxmox GitOps.env/gh-action-push-token
 
+      - name: Debug - Check TF_API_TOKEN
+        run: echo "TF_API_TOKEN is set to: ${TF_API_TOKEN:-(unset)}"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
