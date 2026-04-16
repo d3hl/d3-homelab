@@ -12,7 +12,7 @@ This document defines conventions, best practices, and required patterns for pro
 
 ### Proxmox Nodes
 | Node | IP Address | Role | Max VMs |
-|------|-----------|------|---------|
+|------|-----------|------|----------|
 | `nodeF` | 10.10.10.10 | Primary | 2-3 |
 | `nodeA` | 10.10.10.18 | Secondary | 2-3 |
 | `nodeB` | — | Archive/Standby | 1-2 |
@@ -304,7 +304,7 @@ After `terraform apply` completes:
 ## Common Pitfalls
 
 | Issue | Cause | Prevention |
-|-------|-------|-----------|
+|-------|-------|------------|
 | VM won't boot | Wrong template ID (not 999) | Always verify template exists, check cloud-init logs |
 | Network misconfiguration | DHCP lease not obtained | Ensure qemu-guest-agent running, check Proxmox network bridge |
 | SSH key auth fails | Key path typo, file permissions | Verify `/home/d3/.ssh/d3_tf.pub` exists, is readable |
