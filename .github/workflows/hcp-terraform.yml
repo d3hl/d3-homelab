@@ -34,7 +34,7 @@ jobs:
         with:
           export-env: true
         env:
-          OP_SERVICE_ACCOUNT_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/gh-action-push-token 
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }} 
           TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
