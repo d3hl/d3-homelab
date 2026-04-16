@@ -24,10 +24,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  terraform-plani:
+  terraform-plan:
     name: Plan Changes
     runs-on: self-hosted
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'push_request'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
