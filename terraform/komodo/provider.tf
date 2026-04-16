@@ -1,6 +1,14 @@
 terraform {
   required_version = ">= 1.5.0"
 
+  cloud {
+    organization = "d3-org"
+    workspaces {
+      project = "homelab"
+      name    = "komodo"
+    }
+  }
+
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"

@@ -3,7 +3,7 @@ name: HCP Terraform
 on:
   pull_request:
     paths:
-      - 'terraform/**'
+      - 'terraform/'
       - '.github/workflows/hcp-terraform.yml'
   push:
     branches:
@@ -16,103 +16,84 @@ on:
 env:
   TF_CLOUD_ORGANIZATION: d3-org
   TF_WORKSPACE: pve
+  TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  CONFIG_DIRECTORY: "./terraform/komodo"
 
 permissions:
   contents: read
   pull-requests: write
 
 jobs:
-  terraform-validate:
-    name: Validate Terraform
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Load secret from 1Password
-        uses: 1password/load-secrets-action@v4
-        with:
-          export-env: true
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }} 
-          TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Terraform Format Check
-        working-directory: terraform
-        run: terraform fmt -check -recursive
-
-      - name: Terraform Init
-        working-directory: terraform/pve
-        run: terraform init
-
-      - name: Terraform Validate
-        working-directory: terraform/pve
-        run: terraform validate
-
-  terraform-plan:
+  terraform-plani:
     name: Plan Changes
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: github.event_name == 'pull_request'
-    needs: terraform-validate
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Load secret from 1Password
-        uses: 1password/load-secrets-action@v4
         with:
-          export-env: true
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+          fetch-depth: 0
+      - name: Upload Configuration
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
+        id: plan-upload
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}
+          speculative: true
 
-      - name: Terraform Init
-        working-directory: terraform/pve
-        run: terraform init
 
-      - name: Terraform Plan
-        working-directory: terraform/pve
-        id: plan
-        run: terraform plan -no-color -out=tfplan
-        continue-on-error: true
-
-      - name: Publish Plan to PR
-        if: always() && github.event_name == 'pull_request'
-        uses: hashicorp/setup-terraform@v3
+      - name: Create Plan Run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+        id: plan-run
         with:
-          cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
-
-      - name: Add Plan Comment to PR
-        if: always() && github.event_name == 'pull_request'
-        uses: actions/github-script@v7
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
+          plan_only: true
+      - name: Get Plan Output
+        uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.0
+        id: plan-output
+        with:
+          plan: ${{ fromJSON(steps.plan-run.outputs.payload).data.relationships.plan.data.id }}
+          
+      - name: Update PR
+        uses: actions/github-script@v6
+        id: plan-comment
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs');
-            const plan = fs.readFileSync('terraform/pve/tfplan', 'utf8');
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            // 1. Retrieve existing bot comments for the PR
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '## Terraform Plan\n```\n' + plan.substring(0, 65000) + '\n```'
+              issue_number: context.issue.number,
             });
-
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('HCP Terraform Plan Output')
+            });
+            const output = `#### HCP Terraform Plan Output
+              \`\`\`
+              Plan: ${{ steps.plan-output.outputs.add }} to add, ${{ steps.plan-output.outputs.change }} to change, ${{ steps.plan-output.outputs.destroy }} to destroy.
+              \`\`\`
+              [HCP Terraform Plan](${{ steps.plan-run.outputs.run_link }})
+              `;
+            // 3. Delete previous comment so PR timeline makes sense
+            if (botComment) {
+              github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+            });
+            }
+            github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+            });
   terraform-apply:
     name: Apply Changes
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: terraform-validate
-    environment:
-      name: production
-      # Requires manual approval for applies to production
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -124,19 +105,25 @@ jobs:
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           TF_API_TOKEN: op://d3HL/Terraform Proxmox GitOps.env/TF_API_TOKEN
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Upload Configuration
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
+        id: apply-upload
         with:
-          cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
-
-      - name: Terraform Init
-        working-directory: terraform/pve
-        run: terraform init
-
-      - name: Terraform Apply
-        working-directory: terraform/pve
-        run: terraform apply -auto-approve
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}      
+      - name: Create Apply Run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+        id: apply-run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.apply-upload.outputs.configuration_version_id }}
+      - name: Apply
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
+        if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
+        id: apply
+        with:
+          run: ${{ steps.apply-run.outputs.run_id }}
+          comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
 
 #  tflint:
  #   name: TFLint
