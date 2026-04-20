@@ -1,0 +1,26 @@
+# Example secrets file - fill in your Proxmox credentials
+# This file should be added to .gitignore
+
+virtual_environment_endpoint = "https://proxmox.example.com:8006"
+virtual_environment_api_token = "your-api-token-here"
+virtual_environment_username = "your-username@pam"
+
+# Optional overrides
+# cluster_name = "d3Omni"
+# control_plane_count = 3
+# worker_count = 3
+# cpu_cores = 4
+# memory_mb = 8192
+# disk_size_gb = 100
+# omni_controller_enabled      = true
+# omni_controller_name         = "omni-controller"
+# omni_controller_ip           = "10.11.11.90"
+# omni_controller_cpu_cores    = 4
+# omni_controller_memory_mb    = 8192
+# omni_controller_disk_size_gb = 120
+# omni_controller_image         = "ghcr.io/siderolabs/omni:v0.47.0"
+# omni_controller_data_path     = "/var/lib/omni"
+# omni_controller_domain        = "omni.example.com"
+# omni_controller_direct_tls_termination = true
+# omni_controller_tls_cert_path = "/etc/omni/tls.crt"
+# omni_controller_tls_key_path  = "/etc/omni/tls.key"
