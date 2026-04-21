@@ -67,7 +67,7 @@ jobs:
           organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           token: ${{ env.TF_API_TOKEN }}
           #speculative: ${{ github.event_name == 'pull_request' }}
-          speculative: ${{ github.event_name == 'push_request' }}
+          speculative:  true
 
       - name: Create Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
@@ -77,7 +77,8 @@ jobs:
           configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
           organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           token: ${{ env.TF_API_TOKEN }}
-          plan_only: ${{ github.event_name == 'pull_request' }}
+          #plan_only: ${{ github.event_name == 'pull_request' }}
+          plan_only: true
 
       - name: Get Plan Output
         if: github.event_name == 'pull_request'
