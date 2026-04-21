@@ -1,0 +1,135 @@
+name: HCP Terraform
+
+on:
+  pull_request:
+    paths:
+      - "terraform/talos/**"
+      - ".github/workflows/hcp-terraform.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "terraform/talos/**"
+      - ".github/workflows/hcp-terraform.yml"
+  workflow_dispatch:
+    inputs:
+      tf_workspace:
+        description: "HCP Terraform workspace name"
+        required: false
+        default: "talos-omni"
+      config_directory:
+        description: "Terraform configuration directory"
+        required: false
+        default: "./terraform/talos"
+      apply:
+        description: "Apply run after creating it"
+        type: boolean
+        required: false
+        default: false
+
+env:
+  TF_CLOUD_ORGANIZATION: d3-org
+  TF_WORKSPACE: ${{ github.event.inputs.tf_workspace || 'talos-omni' }}
+  CONFIG_DIRECTORY: ${{ github.event.inputs.config_directory || './terraform/talos' }}
+  TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  hcp-terraform-run:
+    if: github.repository == 'd3hl/d3-homelab'
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate HCP Terraform inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          [ -n "${TF_CLOUD_ORGANIZATION}" ] || { echo "TF_CLOUD_ORGANIZATION is empty"; exit 1; }
+          [ -n "${TF_WORKSPACE}" ] || { echo "TF_WORKSPACE is empty"; exit 1; }
+          [ -n "${TF_API_TOKEN}" ] || { echo "TF_API_TOKEN is empty (check repository secrets)"; exit 1; }
+          [ -d "${CONFIG_DIRECTORY}" ] || { echo "CONFIG_DIRECTORY not found: ${CONFIG_DIRECTORY}"; ls -la; exit 1; }
+
+      - name: Upload Configuration
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.2
+        id: upload
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}
+          organization: ${{ env.TF_CLOUD_ORGANIZATION }}
+          token: ${{ env.TF_API_TOKEN }}
+          speculative: ${{ github.event_name == 'pull_request' }}
+
+      - name: Create Run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
+        id: run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
+          organization: ${{ env.TF_CLOUD_ORGANIZATION }}
+          token: ${{ env.TF_API_TOKEN }}
+          plan_only: ${{ github.event_name == 'pull_request' }}
+
+      - name: Get Plan Output
+        if: github.event_name == 'pull_request'
+        uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.2
+        id: plan-output
+        with:
+          plan: ${{ fromJSON(steps.run.outputs.payload).data.relationships.plan.data.id }}
+
+      - name: Comment PR with plan summary
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        env:
+          PLAN_ADD: ${{ steps.plan-output.outputs.add }}
+          PLAN_CHANGE: ${{ steps.plan-output.outputs.change }}
+          PLAN_DESTROY: ${{ steps.plan-output.outputs.destroy }}
+          RUN_LINK: ${{ steps.run.outputs.run_link }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(
+              c => c.user.type === "Bot" && c.body.includes("HCP Terraform Plan Output")
+            );
+
+            const body = `#### HCP Terraform Plan Output
+            \`\`\`
+            Plan: ${process.env.PLAN_ADD} to add, ${process.env.PLAN_CHANGE} to change, ${process.env.PLAN_DESTROY} to destroy.
+            \`\`\`
+            [HCP Terraform Run](${process.env.RUN_LINK})`;
+
+            if (existing) {
+              await github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+              });
+            }
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Apply Run
+        if: |
+          github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.apply == 'true')
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.3.2
+        with:
+          run: ${{ steps.run.outputs.run_id }}
+          comment: "Apply from GitHub Actions ${{ github.sha }}"

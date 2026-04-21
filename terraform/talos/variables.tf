@@ -166,8 +166,28 @@ variable "omni_controller_tls_key_path" {
   default     = ""
 }
 
+variable "omni_controller_tls_cert_pem" {
+  type        = string
+  description = "Optional PEM content for Omni TLS certificate written by cloud-init"
+  default     = ""
+  sensitive   = true
+}
+
+variable "omni_controller_tls_key_pem" {
+  type        = string
+  description = "Optional PEM content for Omni TLS private key written by cloud-init"
+  default     = ""
+  sensitive   = true
+}
+
 variable "omni_controller_direct_tls_termination" {
   type        = bool
   description = "Enable direct TLS termination on Omni; requires cert and key paths"
+  default     = true
+}
+
+variable "omni_controller_rotate_tls_on_change" {
+  type        = bool
+  description = "Restart Omni container when TLS PEM content changes"
   default     = true
 }

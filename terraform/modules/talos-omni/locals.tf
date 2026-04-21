@@ -16,6 +16,15 @@ locals {
   omni_controller_target_node = var.omni_controller_proxmox_node != "" ? var.omni_controller_proxmox_node : var.proxmox_nodes[0]
   omni_controller_datastore   = var.omni_controller_datastore_id != "" ? var.omni_controller_datastore_id : var.datastore_id
   omni_controller_template    = var.omni_controller_template_id != 0 ? var.omni_controller_template_id : var.vm_template_id
+  omni_controller_tls_cert_effective_path = var.omni_controller_tls_cert_path != "" ? var.omni_controller_tls_cert_path : (
+    var.omni_controller_tls_cert_pem != "" ? "/etc/omni/tls.crt" : ""
+  )
+  omni_controller_tls_key_effective_path = var.omni_controller_tls_key_path != "" ? var.omni_controller_tls_key_path : (
+    var.omni_controller_tls_key_pem != "" ? "/etc/omni/tls.key" : ""
+  )
+  omni_controller_tls_material_hash = (var.omni_controller_tls_cert_pem != "" || var.omni_controller_tls_key_pem != "") ? sha256(
+    join("\n---\n", [var.omni_controller_tls_cert_pem, var.omni_controller_tls_key_pem])
+  ) : ""
 
   cloud_config_omni_content = templatefile("${path.module}/cloud-config-omni.tpl", {
     cluster_name                  = var.cluster_name
@@ -23,9 +32,13 @@ locals {
     omni_controller_image         = var.omni_controller_image
     omni_controller_data_path     = var.omni_controller_data_path
     omni_controller_domain        = var.omni_controller_domain
-    omni_controller_tls_cert_path = var.omni_controller_tls_cert_path
-    omni_controller_tls_key_path  = var.omni_controller_tls_key_path
+    omni_controller_tls_cert_path = local.omni_controller_tls_cert_effective_path
+    omni_controller_tls_key_path  = local.omni_controller_tls_key_effective_path
+    omni_controller_tls_cert_pem  = var.omni_controller_tls_cert_pem
+    omni_controller_tls_key_pem   = var.omni_controller_tls_key_pem
     omni_controller_direct_tls_termination = var.omni_controller_direct_tls_termination
+    omni_controller_rotate_tls_on_change   = var.omni_controller_rotate_tls_on_change
+    omni_controller_tls_material_hash      = local.omni_controller_tls_material_hash
   })
 }
 

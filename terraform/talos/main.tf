@@ -26,21 +26,24 @@ module "talos_omni" {
   ssh_public_key_path = var.ssh_public_key_path
 
   # Omni controller
-  omni_controller_enabled       = var.omni_controller_enabled
-  omni_controller_name          = var.omni_controller_name
-  omni_controller_ip            = var.omni_controller_ip
-  omni_controller_cpu_cores     = var.omni_controller_cpu_cores
-  omni_controller_memory_mb     = var.omni_controller_memory_mb
-  omni_controller_disk_size_gb  = var.omni_controller_disk_size_gb
-  omni_controller_proxmox_node  = var.omni_controller_proxmox_node
-  omni_controller_datastore_id  = var.omni_controller_datastore_id
-  omni_controller_template_id   = var.omni_controller_template_id
-  omni_controller_image         = var.omni_controller_image
-  omni_controller_data_path     = var.omni_controller_data_path
-  omni_controller_domain        = var.omni_controller_domain
-  omni_controller_tls_cert_path = var.omni_controller_tls_cert_path
-  omni_controller_tls_key_path  = var.omni_controller_tls_key_path
+  omni_controller_enabled                = var.omni_controller_enabled
+  omni_controller_name                   = var.omni_controller_name
+  omni_controller_ip                     = var.omni_controller_ip
+  omni_controller_cpu_cores              = var.omni_controller_cpu_cores
+  omni_controller_memory_mb              = var.omni_controller_memory_mb
+  omni_controller_disk_size_gb           = var.omni_controller_disk_size_gb
+  omni_controller_proxmox_node           = var.omni_controller_proxmox_node
+  omni_controller_datastore_id           = var.omni_controller_datastore_id
+  omni_controller_template_id            = var.omni_controller_template_id
+  omni_controller_image                  = var.omni_controller_image
+  omni_controller_data_path              = var.omni_controller_data_path
+  omni_controller_domain                 = var.omni_controller_domain
+  omni_controller_tls_cert_path          = var.omni_controller_tls_cert_path
+  omni_controller_tls_key_path           = var.omni_controller_tls_key_path
+  omni_controller_tls_cert_pem           = var.omni_controller_tls_cert_pem
+  omni_controller_tls_key_pem            = var.omni_controller_tls_key_pem
   omni_controller_direct_tls_termination = var.omni_controller_direct_tls_termination
+  omni_controller_rotate_tls_on_change   = var.omni_controller_rotate_tls_on_change
 }
 
 

@@ -22,5 +22,16 @@ virtual_environment_username = "your-username@pam"
 # omni_controller_data_path     = "/var/lib/omni"
 # omni_controller_domain        = "omni.example.com"
 # omni_controller_direct_tls_termination = true
+# omni_controller_rotate_tls_on_change   = true
 # omni_controller_tls_cert_path = "/etc/omni/tls.crt"
 # omni_controller_tls_key_path  = "/etc/omni/tls.key"
+# omni_controller_tls_cert_pem  = <<-EOT
+# -----BEGIN CERTIFICATE-----
+# ...
+# -----END CERTIFICATE-----
+# EOT
+# omni_controller_tls_key_pem   = <<-EOT
+# -----BEGIN PRIVATE KEY-----
+# ...
+# -----END PRIVATE KEY-----
+# EOT
