@@ -1,5 +1,4 @@
 name: HCP Terraform
-#test111
 on:
   pull_request:
     paths:
@@ -17,7 +16,7 @@ on:
       tf_workspace:
         description: "HCP Terraform workspace name"
         required: false
-        default: "talos"
+        default: "talos-omni"
       config_directory:
         description: "Terraform configuration directory"
         required: false
@@ -29,9 +28,8 @@ on:
         default: false
 env:
   TF_CLOUD_ORGANIZATION: d3-org
-  #TF_WORKSPACE: ${{ github.event.inputs.tf_workspace || 'talos' }}
-  TF_WORKSPACE: 'talos'
-  CONFIG_DIRECTORY: './terraform/talos'
+  TF_WORKSPACE: ${{ github.event.inputs.tf_workspace || 'talos-omni' }}
+  CONFIG_DIRECTORY: ${{ github.event.inputs.config_directory || './terraform/talos' }}
   TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
 
@@ -66,8 +64,7 @@ jobs:
           directory: ${{ env.CONFIG_DIRECTORY }}
           organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           token: ${{ env.TF_API_TOKEN }}
-          #speculative: ${{ github.event_name == 'pull_request' }}
-          speculative:  true
+          speculative: ${{ github.event_name == 'pull_request' }}
 
       - name: Create Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
@@ -77,8 +74,7 @@ jobs:
           configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
           organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           token: ${{ env.TF_API_TOKEN }}
-          #plan_only: ${{ github.event_name == 'pull_request' }}
-          plan_only: true
+          plan_only: ${{ github.event_name == 'pull_request' }}
 
       - name: Get Plan Output
         if: github.event_name == 'pull_request'
