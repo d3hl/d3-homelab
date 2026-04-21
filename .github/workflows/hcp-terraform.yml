@@ -20,7 +20,7 @@ on:
       config_directory:
         description: "Terraform configuration directory"
         required: false
-        default: "./terraform/talos"
+        default: "./terraform/modules/talos-omni"
       apply:
         description: "Apply run after creating it"
         type: boolean
