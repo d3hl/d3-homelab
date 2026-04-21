@@ -31,19 +31,19 @@ variable "proxmox_nodes" {
 variable "base_ip" {
   type        = string
   description = "Base IP address for the cluster (first octet will be used as starting point)"
-  default     = "10.11.11.100"
+  default     = "10.10.10.100"
 }
 
 variable "gateway" {
   type        = string
   description = "Network gateway IP"
-  default     = "10.11.11.2"
+  default     = "10.10.10.2"
 }
 
 variable "dns_servers" {
   type        = list(string)
   description = "DNS servers for nodes"
-  default     = ["10.11.11.2"]
+  default     = ["10.10.10.2"]
 }
 
 variable "cpu_cores" {
@@ -128,7 +128,7 @@ variable "omni_controller_name" {
 variable "omni_controller_ip" {
   type        = string
   description = "Static management IP to reserve for Omni controller metadata"
-  default     = "10.11.11.90"
+  default     = "10.10.10.90"
 }
 
 variable "omni_controller_cpu_cores" {
