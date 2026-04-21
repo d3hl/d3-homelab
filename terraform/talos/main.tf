@@ -1,5 +1,5 @@
 module "talos_omni" {
-  source = "../modules/talos-omni"
+  source = "./modules/talos-omni"
 
   # Proxmox API credentials
   virtual_environment_endpoint  = var.virtual_environment_endpoint
