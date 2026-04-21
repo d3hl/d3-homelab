@@ -1,5 +1,13 @@
 terraform {
-  required_version = ">= 1.5.0"
+  required_version = "1.14.9"
+  cloud {
+
+    organization = "d3-org"
+
+    workspaces {
+      name = "talos"
+    }
+  }
 
   required_providers {
     proxmox = {
