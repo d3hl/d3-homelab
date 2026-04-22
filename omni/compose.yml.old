@@ -37,14 +37,4 @@ services:
       --initial-users=${INITIAL_USER_EMAILS}
       --sqlite-storage-path=/_out/sqlite/omni.db
       ${AUTH}
-  dex:
-    container_name: dex
-    image: ghcr.io/dexidp/dex:v2.41.1
-    restart: unless-stopped
-    ports:
-      - 5556:5556
-    volumes:
-      - ${PWD}/dex.yaml:/etc/dex/dex.yaml:ro,Z
-      - ${PWD}/server-key.pem:/etc/dex/tls/server-key.pem:ro,Z
-      - ${PWD}/server-chain.pem:/etc/dex/tls/server-chain.pem:ro,Z
-    command: dex serve /etc/dex/dex.yaml
+      
