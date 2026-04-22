@@ -48,3 +48,10 @@ INITIAL_USER_EMAILS=d3tech@pm.me
 # 4. Copy Domain and Client ID below
 
 AUTH=--auth-auth0-enabled=true --auth-auth0-domain=YOUR_AUTH0_DOMAIN.us.auth0.com --auth-auth0-client-id=YOUR_AUTH0_CLIENT_ID
+
+HOST_PUBLIC_IP=10.10.10.40
+HOST_PRIVATE_IP=10.11.11.40
+OMNI_ENDPOINT=omni.d3hl.site
+AUTH_ENDPOINT=auth.d3hl.site
+OMNI_USER_EMAIL="d3@d3hl.site"
+OMNI_USER_PASSWORD="op://d3HL/Terraform Proxmox GitOps.env/password"
