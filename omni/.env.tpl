@@ -28,10 +28,10 @@ ETCD_VOLUME_PATH=/etc/etcd
 
 # Path to SQLite storage directory on host (NEW in v1.4.0 - REQUIRED)
 # This consolidates Discovery service state, Audit logs, Machine logs, and Secondary resources
-SQLITE_STORAGE_PATH=/home/d3/talos-omni/sqlite/
+SQLITE_STORAGE_PATH=/home/d3/sqlite/
 
 # Path to GPG key file (exported with: gpg --export-secret-key --armor)
-ETCD_ENCRYPTION_KEY=/home/d3/talos-omni/omni.asc
+ETCD_ENCRYPTION_KEY=/home/d3/d3-homelab/omni/omni.asc
 
 
 INITIAL_USER_EMAILS=d3tech@pm.me
