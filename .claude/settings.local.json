@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(winget upgrade:*)",
-      "Bash(claude doctor:*)"
+      "Bash(claude doctor:*)",
+      "Bash(ls:*)"
     ]
   }
 }
