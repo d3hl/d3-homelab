@@ -16,5 +16,5 @@ HOST_PUBLIC_IP=10.10.10.40
 HOST_PRIVATE_IP=10.11.11.40
 OMNI_ENDPOINT=omni.d3hl.site
 AUTH_ENDPOINT=auth.d3hl.site
-OMNI_USER_EMAIL="d3@d3hl.site"
+OMNI_USER_EMAIL="d3tech@pm.me"
 OMNI_USER_PASSWORD="op://d3HL/Terraform Proxmox GitOps.env/password"

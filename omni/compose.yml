@@ -9,11 +9,10 @@ services:
     devices:
       - /dev/net/tun
     volumes:
-      - ${SQLITE_STORAGE_PATH}:/_out/sqlite
+      - ./ca.pem:/etc/ssl/certs/ca-certificates.crt:ro
+      - ./server-key.pem:/server-key.pem:ro
+      - ./server-chain.pem:/server-chan.pem:ro
       - ./omni.asc:/omni.asc:ro
-      - ./certs/server-key.pem:/tls.crt:ro
-      - ./certs/server-chain.pem:/tls.key:ro
-      - ./certs/ca.pem:/etc/ssl/certs/ca-certificates.crt:ro
       - $HOME/sqlite:/_out/sqlite:rw
     network_mode: "host"
     cap_add:
@@ -23,8 +22,8 @@ services:
       --name=${NAME}
       --cert=./certs/server-chain.pem
       --key=./certs/server-key.pem
-      --machine-api-cert=./certs/server-chain.pem 
-      --machine-api-key=./certs/server-key.pem
+      --machine-api-cert=/server-chain.pem 
+      --machine-api-key=/server-key.pem
       --machine-api-bind-addr=0.0.0.0:8090
       --private-key-source=file://omni.asc 
       --event-sink-port=8091 
