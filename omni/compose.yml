@@ -20,12 +20,12 @@ services:
     restart: unless-stopped
     command: >
       --name=${NAME}
-      --cert=/server-chain.pem
-      --key=/server-key.pem
-      --machine-api-cert=/server-chain.pem 
-      --machine-api-key=/server-key.pem
+      --cert=/certs/server-chain.pem
+      --key=/certs/server-key.pem
+      --machine-api-cert=/certs/server-chain.pem 
+      --machine-api-key=/certs/server-key.pem
       --machine-api-bind-addr=0.0.0.0:8090
-      --private-key-source=file:///omni.asc 
+      --private-key-source=file:///certs/omni.asc 
       --event-sink-port=8091 
       --bind-addr=0.0.0.0:443
       --k8s-proxy-bind-addr=0.0.0.0:8100 
