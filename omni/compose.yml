@@ -42,7 +42,7 @@ services:
       --auth-oidc-scopes=profile \
       --auth-oidc-scopes=email \
       --sqlite-storage-path=/_out/sqlite/omni.db \
-      --initial-users=${OMNI_USER_EMAIL} \
+      --initial-users=${OMNI_USER_EMAIL}
 
   dex:
     container_name: dex
