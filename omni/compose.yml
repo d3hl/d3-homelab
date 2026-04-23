@@ -19,29 +19,29 @@ services:
       - NET_ADMIN
     restart: unless-stopped
     command: >
-      --name=${NAME} \
-      --cert=/server-chain.pem \
-      --key=/server-key.pem \
-      --machine-api-cert=/server-chain.pem \ 
-      --machine-api-key=/server-key.pem \
-      --machine-api-bind-addr=0.0.0.0:8090 \
-      --private-key-source=file:///omni.asc \
-      --event-sink-port=8091 \
-      --bind-addr=0.0.0.0:443 \
-      --k8s-proxy-bind-addr=0.0.0.0:8100 \
-      --advertised-api-url=https://${OMNI_ENDPOINT}/ \
-      --machine-api-advertised-url=https://${OMNI_ENDPOINT}:8090/ \
-      --siderolink-wireguard-advertised-addr=${HOST_PUBLIC_IP}:50180 \ 
-      --advertised-kubernetes-proxy-url=https://${OMNI_ENDPOINT}:8100/ \ 
-      --auth-auth0-enabled=false \
-      --auth-oidc-enabled=true \
-      --auth-oidc-provider-url=https://${AUTH_ENDPOINT}:5556 \
-      --auth-oidc-client-id=omni \
-      --auth-oidc-client-secret=omni-dex-secret \
-      --auth-oidc-scopes=openid \
-      --auth-oidc-scopes=profile \
-      --auth-oidc-scopes=email \
-      --sqlite-storage-path=/_out/sqlite/omni.db \
+      --name=${NAME} 
+      --cert=/server-chain.pem 
+      --key=/server-key.pem 
+      --machine-api-cert=/server-chain.pem  
+      --machine-api-key=/server-key.pem 
+      --machine-api-bind-addr=0.0.0.0:8090 
+      --private-key-source=file:///omni.asc 
+      --event-sink-port=8091 
+      --bind-addr=0.0.0.0:443 
+      --k8s-proxy-bind-addr=0.0.0.0:8100 
+      --advertised-api-url=https://${OMNI_ENDPOINT}/ 
+      --machine-api-advertised-url=https://${OMNI_ENDPOINT}:8090/ 
+      --siderolink-wireguard-advertised-addr=${HOST_PUBLIC_IP}:50180  
+      --advertised-kubernetes-proxy-url=https://${OMNI_ENDPOINT}:8100/ 
+      --auth-auth0-enabled=false 
+      --auth-oidc-enabled=true 
+      --auth-oidc-provider-url=https://${AUTH_ENDPOINT}:5556 
+      --auth-oidc-client-id=omni 
+      --auth-oidc-client-secret=omni-dex-secret 
+      --auth-oidc-scopes=openid 
+      --auth-oidc-scopes=profile 
+      --auth-oidc-scopes=email 
+      --sqlite-storage-path=/_out/sqlite/omni.db 
       --initial-users=${OMNI_USER_EMAIL}
 
   dex:
