@@ -1,4 +1,4 @@
-issuer: https://$\{AUTH_ENDPOINT\}:5556
+issuer: "op://d3HL/omni_env/Basic/dex.yaml.issuer"
 
 storage:
   type: memory
@@ -15,10 +15,10 @@ staticClients:
     id: omni
     secret: omni-dex-secret
     redirectURIs:
-      - https://$\{OMNI_ENDPOINT\}/oidc/consume
+      - "op://d3HL/omni_env/Basic/dex.yaml.redirect"
 
 staticPasswords:
-  - email: ""
-    username: "admin"
-    preferredUsername: "admin"
-    hash: ""
+  - email: "op://d3HL/omni_env/Basic/email"
+    username: "d3"
+    preferredUsername: "d3"
+    hash: "op://d3HL/Terraform Proxmox GitOps.env/password"
