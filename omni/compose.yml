@@ -9,10 +9,10 @@ services:
     devices:
       - /dev/net/tun
     volumes:
-      - $(pwd)/ca.pem:/etc/ssl/certs/ca-certificates.crt:ro
-      - $(pwd)/server-key.pem:/server-key.pem:ro
-      - $(pwd)/server-chain.pem:/server-chan.pem:ro
-      - $(pwd)/omni.asc:/omni.asc:ro
+      - ./ca.pem:/etc/ssl/certs/ca-certificates.crt:ro
+      - ./server-key.pem:/server-key.pem:ro
+      - ./server-chain.pem:/server-chain.pem:ro
+      - ./omni.asc:/omni.asc:ro
       - $HOME/sqlite:/_out/sqlite:rw
     network_mode: "host"
     cap_add:
