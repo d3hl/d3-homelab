@@ -31,7 +31,7 @@ ETCD_VOLUME_PATH=/etc/etcd
 SQLITE_STORAGE_PATH=/home/d3/sqlite/
 
 # Path to GPG key file (exported with: gpg --export-secret-key --armor)
-ETCD_ENCRYPTION_KEY=/home/d3/d3-homelab/omni/omni.asc
+ETCD_ENCRYPTION_KEY=/home/d3/d3-homelab/omni/certs/omni.asc
 
 
 INITIAL_USER_EMAILS=d3tech@pm.me

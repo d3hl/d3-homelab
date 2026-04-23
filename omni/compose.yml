@@ -9,11 +9,14 @@ services:
     devices:
       - /dev/net/tun
     volumes:
-      - ${ETCD_VOLUME_PATH}:/_out/etcd
+      #- ${ETCD_VOLUME_PATH}:/_out/etcd
       - ${SQLITE_STORAGE_PATH}:/_out/sqlite
       - ${ETCD_ENCRYPTION_KEY}:/omni.asc
       - ${TLS_CERT}:/tls.crt
       - ${TLS_KEY}:/tls.key
+      - ./certs/server-key.pem:/server-key.pem:ro
+      - ./certs/server-chain.pem:/server-chain.pem:ro
+      - $HOME/sqlite:/_out/sqlite:rw
     network_mode: "host"
     cap_add:
       - NET_ADMIN
