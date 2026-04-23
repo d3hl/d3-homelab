@@ -54,6 +54,6 @@ services:
       - 5556:5556
     volumes:
       - ${PWD}/dex.yaml:/etc/dex/dex.yaml:ro
-      - ${PWD}/certs/server-key.pem:/etc/dex/tls/server-key.pem:ro
-      - ${PWD}/certs/server-chain.pem:/etc/dex/tls/server-chain.pem:ro
+      - ${PWD}/server-key.pem:/etc/dex/tls/server-key.pem:ro
+      - ${PWD}/server-chain.pem:/etc/dex/tls/server-chain.pem:ro
     command: dex serve /etc/dex/dex.yaml
