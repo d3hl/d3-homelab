@@ -30,7 +30,7 @@ services:
       --bind-addr=0.0.0.0:443
       --k8s-proxy-bind-addr=0.0.0.0:8100 
       --advertised-api-url=https://${OMNI_ENDPOINT}/ 
-      --siderolink-api-advertised-url=https://${OMNI_ENDPOINT}:8090/ 
+      --machine-api-advertised-url=https://${OMNI_ENDPOINT}:8090/ 
       --siderolink-wireguard-advertised-addr=${HOST_PUBLIC_IP}:50180 
       --advertised-kubernetes-proxy-url=https://${OMNI_ENDPOINT}:8100/ 
       --auth-auth0-enabled=false 
