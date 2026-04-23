@@ -20,8 +20,8 @@ services:
     restart: unless-stopped
     command: >
       --name=${NAME}
-      --cert=./certs/server-chain.pem
-      --key=./certs/server-key.pem
+      --cert=/server-chain.pem
+      --key=/server-key.pem
       --machine-api-cert=/server-chain.pem 
       --machine-api-key=/server-key.pem
       --machine-api-bind-addr=0.0.0.0:8090
