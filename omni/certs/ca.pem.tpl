@@ -1,1 +1,1 @@
-"op://d3HL/omni_env/ca.pem"
+op://d3HL/omni_env/ca.pem

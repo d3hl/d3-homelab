@@ -1,4 +1,4 @@
-issuer: "op://d3HL/omni_env/Basic/dex.yaml.issuer"
+issuer: op://d3HL/omni_env/Basic/dex.yaml.issuer
 
 storage:
   type: memory
@@ -15,7 +15,7 @@ staticClients:
     id: omni
     secret: omni-dex-secret
     redirectURIs:
-      - "op://d3HL/omni_env/Basic/dex.yaml.redirect"
+      - op://d3HL/omni_env/Basic/dex.yaml.redirect
 
 staticPasswords:
   - email: "op://d3HL/omni_env/Basic/email"

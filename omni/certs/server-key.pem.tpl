@@ -1,1 +1,1 @@
-"op://d3HL/omni_env/server-key.pem"
+op://d3HL/omni_env/server-key.pem
