@@ -21,4 +21,4 @@ staticPasswords:
   - email: "op://d3HL/omni_env/Basic/email"
     username: "d3"
     preferredUsername: "d3"
-    hash: "op://d3HL/Terraform Proxmox GitOps.env/password"
+    hash: "op://d3HL/omni_env/Basic/hash_pass_dex.yaml"
