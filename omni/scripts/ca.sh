@@ -8,6 +8,8 @@ cat <<EOF > ca-csr.json
 EOF
 
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+
+#Add the CA to the host’s system trust store so services running on this machine trust certificates signed by it
 sudo cp ca.pem /usr/local/share/ca-certificates/ca.crt
 sudo update-ca-certificates
 
@@ -49,5 +51,6 @@ cfssl gencert \
   -config=ca-config.json \
   -profile=web-server wildcard-csr.json | cfssljson -bare server
 
-  cat server.pem ca.pem > server-chain.pem
-  chmod 644 server*.pem
+#Bundle the server certificate with the CA so clients can verify the full chain:
+cat server.pem ca.pem > server-chain.pem
+chmod 644 server*.pem
