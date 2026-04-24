@@ -2,7 +2,14 @@ module "debian" {
   source                        = "./modules/debian"
   virtual_environment_endpoint  = var.virtual_environment_endpoint
   virtual_environment_api_token = var.virtual_environment_api_token
-  virtual_environment_username  = var.virtual_environment_username
+  virtual_environment_node_name = var.virtual_environment_node_name
+}
+module "nautobot" {
+  source                          = "./modules/nautobot"
+  virtual_environment_endpoint    = var.virtual_environment_endpoint
+  virtual_environment_api_token   = var.virtual_environment_api_token
+  virtual_environment_node10_name = var.virtual_environment_node10_name
+  virtual_environment_node_name   = var.virtual_environment_node_name
 }
 #module "omni" {
 #  source                        = "./resources/omni"

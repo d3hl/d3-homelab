@@ -2,7 +2,7 @@ data "local_file" "ssh_public_key" {
   filename = "/home/d3/.ssh/d3_tf.pub"
 }
 
-resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "nautobot_user_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "cFS"
   node_name    = var.virtual_environment_node_name
@@ -10,7 +10,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   source_raw {
     data = <<-EOF
     #cloud-config
-    hostname: kmd-2
+    hostname: nautobot
     timezone: Asia/Singapore
     users:
       - default
@@ -20,19 +20,20 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
         shell: /bin/bash
         ssh_authorized_keys:
           - ${trimspace(data.local_file.ssh_public_key.content)}
-        password: Abcd1234
         sudo: ALL=(ALL) NOPASSWD:ALL
     package_update: true
     packages:
       - qemu-guest-agent
       - net-tools
       - curl
+      - ceph-common
+      - nfs-common
     runcmd:
       - systemctl enable qemu-guest-agent
       - systemctl start qemu-guest-agent
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "user-data-cloud-config.yaml"
+    file_name = "nautobot-user-data-cloud-config.yaml"
   }
 }

@@ -1,9 +1,6 @@
 variable "virtual_environment_endpoint" {
   type = string
 }
-variable "virtual_environment_username" {
-  type = string
-}
 
 variable "virtual_environment_api_token" {
   description = "The API token for the Proxmox Virtual Environment API"
@@ -15,7 +12,6 @@ variable "virtual_environment_api_token" {
 variable "virtual_environment_node_name" {
   description = "Name of the Proxmox node"
   type        = string
-  default     = "nodeA"
 }
 variable "datastore_id" {
   type        = string
