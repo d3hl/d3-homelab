@@ -43,6 +43,8 @@ services:
       --auth-oidc-scopes=email 
       --sqlite-storage-path=/_out/sqlite/omni.db 
       --initial-users=${OMNI_USER_EMAIL}
+      --eula-accept-name=Jay Dinh
+      --eula-accept-email=d3tech@pm.me
 
   dex:
     container_name: dex
