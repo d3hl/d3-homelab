@@ -13,6 +13,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
     hostname: kmd-2
     timezone: Asia/Singapore
     users:
+      - default
       - name: d3
         groups:
           - sudo
