@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_file" "omni_master_user_data" {
   content_type = "snippets"
-  datastore_id = var.snippets_datastore_id
-  node_name    = var.virtual_environment_node_name
+  datastore_id = var.cfs_datastore_id
+  node_name    = var.virtual_environment_node_nodeB
 
   source_raw {
     data = <<-EOF
@@ -32,7 +32,7 @@ resource "proxmox_virtual_environment_file" "omni_master_user_data" {
 }
 
 resource "proxmox_virtual_environment_cloned_vm" "omni_master" {
-  node_name       = var.virtual_environment_node_name
+  node_name       = var.virtual_environment_node_nodeB
   name            = "omni-master"
   tags            = ["ubuntu", "omni"]
   stop_on_destroy = true
@@ -60,14 +60,6 @@ resource "proxmox_virtual_environment_cloned_vm" "omni_master" {
     }
   }
 
-  initialization {
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-      }
-    }
-    user_data_file_id = proxmox_virtual_environment_file.omni_master_user_data.id
-  }
 }
 
 output "omni_master_vm_id" {

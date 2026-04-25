@@ -45,10 +45,10 @@ source "proxmox-iso" "ubuntu-server-questing" {
     insecure_skip_tls_verify = true
 
     # VM General Settingi
-    node = "pve10"
+    node = "nodeD"
     vm_id = "999"
-    vm_name = "ubuntu-25-template"
-    template_description = "Ubuntu Server questing from Packer"
+    vm_name = "ubuntu-2604"
+    template_description = "Ubuntu Server Resolute from Packer"
 
     # VM System Settings
     qemu_agent = true
@@ -58,18 +58,18 @@ source "proxmox-iso" "ubuntu-server-questing" {
 
     disks {
         type = "virtio"
-        disk_size = "8G"
+        disk_size = "100G"
         storage_pool = "cephVM"
     }
 
     boot_iso {
         type = "scsi"
-        iso_file = "cFS:iso/ubuntu-25.10-live-server-amd64.iso"
+        iso_file = "cFS:iso/ubuntu-26.04-live-server-amd64.iso"
         unmount = true
     }
 
     # VM CPU Settings
-    cores = "3"
+    cores = "2"
     cpu_type = "host"
 
     # VM Memory Settings
@@ -113,13 +113,13 @@ source "proxmox-iso" "ubuntu-server-questing" {
 
 build {
   hcp_packer_registry {
-    bucket_name = "ubuntu-questing"
+    bucket_name = "ubuntu-resolute"
     description = "Image for Proxmox"
 
     bucket_labels = {
       "owner"          = "d3"
       "os"             = "Ubuntu",
-      "ubuntu-version" = "Questing 25.10",
+      "ubuntu-version" = "Resolute 26.04",
     }
 
     build_labels = {
@@ -133,8 +133,8 @@ build {
   #  "source.amazon-ebs.basic-example-west"
   #]
 
-    name = "ubuntu-server-questing"
-    sources = ["source.proxmox-iso.ubuntu-server-questing"]
+    name = "ubuntu-server-resolute"
+    sources = ["source.proxmox-iso.ubuntu-server-resolute"]
 
     ## Cleanup for re-template
     provisioner "shell" {

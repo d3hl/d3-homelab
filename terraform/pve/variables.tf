@@ -33,6 +33,11 @@ variable "virtual_environment_node_nodeA" {
   default     = "nodeA"
 }
 
+variable "virtual_environment_node_nodeB" {
+  description = "Proxmox node A — used for VMs pinned to nodeA"
+  type        = string
+  default     = "nodeB"
+}
 variable "virtual_environment_node_nodeF" {
   description = "Proxmox node F — used for VMs pinned to nodeF"
   type        = string
@@ -45,7 +50,7 @@ variable "datastore_id" {
   default     = "cephVM"
 }
 
-variable "import_datastore_id" {
+variable "cfs_datastore_id" {
   description = "Datastore for cloud-init snippets and disk image imports (shared CephFS)"
   type        = string
   default     = "cFS"

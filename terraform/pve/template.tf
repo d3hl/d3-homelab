@@ -12,7 +12,7 @@ data "local_file" "ssh_public_key" {
 # content_type "import" lets Proxmox treat the file as a disk image for VM import.
 resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image" {
   content_type = "import"
-  datastore_id = var.import_datastore_id
+  datastore_id = var.cfs_datastore_id
   node_name    = var.virtual_environment_node_name
   url          = local.ubuntu_image_url
   file_name    = local.ubuntu_image_name
@@ -20,7 +20,7 @@ resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image" {
 
 resource "proxmox_virtual_environment_file" "ubuntu_template_user_data" {
   content_type = "snippets"
-  datastore_id = var.import_datastore_id
+  datastore_id = var.cfs_datastore_id
   node_name    = var.virtual_environment_node_name
 
   source_raw {
@@ -55,7 +55,7 @@ resource "proxmox_virtual_environment_file" "ubuntu_template_user_data" {
 # vm_id 999 matches the hardcoded clone source used across the project.
 resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   name        = "ubuntu-2604-template"
-  description = "Ubuntu 26.04 LTS Noble — Terraform managed. Clone source for homelab VMs."
+  description = "Ubuntu 26.04 — Terraform managed. Clone source for homelab VMs."
   tags        = ["ubuntu", "template", "resolute"]
   node_name   = var.virtual_environment_node_name
   vm_id       = var.ubuntu_template_vm_id
