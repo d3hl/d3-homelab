@@ -5,9 +5,9 @@ resource "proxmox_cloned_vm" "omni_master" {
   stop_on_destroy = true
 
   clone = {
-    source_vm_id = 9999
-    node_name    = "nodeF"
-    full         = true
+    source_vm_id     = 9999
+    source_node_name = "nodeF"
+    full             = true
   }
 
   # Map-based network devices
