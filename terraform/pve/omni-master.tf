@@ -8,20 +8,22 @@ resource "proxmox_virtual_environment_cloned_vm" "omni_master" {
     source_vm_id = 9999
     full         = true
   }
-  
+
   # Map-based network devices
   network = {
     net0 = {
       bridge = "vmbr0"
       model  = "virtio"
-      tag   = 10
+      tag    = 10
     }
     net1 = {
       bridge = "vmbr0"
       model  = "virtio"
-      tag   = 11
+      tag    = 11
     }
+  }
 }
+
 output "omni_master_vm_id" {
   description = "Proxmox VM ID of omni-master"
   value       = proxmox_virtual_environment_cloned_vm.omni_master.id
