@@ -1,10 +1,12 @@
 
 variable "proxmox_api_url" {
-    type = string
+    type = strinig
+    default = "https://10.10.10.10:8006/api2/json"
 }
 
 variable "proxmox_api_token_id" {
     type = string
+    default = "root@pam!tf"
 }
 
 variable "proxmox_api_token_secret" {
