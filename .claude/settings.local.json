@@ -3,7 +3,9 @@
     "allow": [
       "Bash(winget upgrade:*)",
       "Bash(claude doctor:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(grep -E \"\\\\.tf$|\\\\.md$\")",
+      "mcp__context7__query-docs"
     ]
   }
 }
