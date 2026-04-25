@@ -11,19 +11,19 @@ packer {
     }
 }
 
-variable "proxmox_api_url" {
-    type = string
-}
+#variable "proxmox_api_url" {
+#    type = string
+#}
 
-variable "proxmox_api_token_id" {
-    type = string
-}
+#variable "proxmox_api_token_id" {
+#    type = string
+#}
 
-variable "proxmox_api_token_secret" {
-    type = string
-    sensitive = true
+#variable "proxmox_api_token_secret" {
+#    type = string
+#    sensitive = true
     
-}
+#}
 
 #variables {
 #  temporary_key_pair_name = "my_temp_key"
@@ -45,7 +45,7 @@ source "proxmox-iso" "ubuntu-server-resolute" {
     insecure_skip_tls_verify = true
 
     # VM General Settingi
-    node = "nodeD"
+    node = "nodeF"
     vm_id = "999"
     vm_name = "ubuntu-2604"
     template_description = "Ubuntu Server Resolute from Packer"
