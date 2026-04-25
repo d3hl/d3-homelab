@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_cloned_vm" "omni_master" {
+resource "proxmox_cloned_vm" "omni_master" {
   node_name       = var.virtual_environment_node_nodeB
   name            = "omni-master"
   tags            = ["ubuntu", "omni"]
@@ -6,6 +6,7 @@ resource "proxmox_virtual_environment_cloned_vm" "omni_master" {
 
   clone = {
     source_vm_id = 9999
+    node_name    = "nodeF"
     full         = true
   }
 
