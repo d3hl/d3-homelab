@@ -38,7 +38,7 @@ variable "ssh_authorized_keys" {
     default   = []
 }
 
-source "proxmox-iso" "ubuntu-server-questing" {
+source "proxmox-iso" "ubuntu-server-resolute" {
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
