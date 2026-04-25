@@ -47,7 +47,7 @@ source "proxmox-iso" "ubuntu-server-resolute" {
 
     # VM General Settingi
     node = "nodeF"
-    vm_id = "999"
+    vm_id = "9999"
     vm_name = "ubuntu-2604"
     template_description = "Ubuntu Server Resolute from Packer"
 
@@ -178,8 +178,8 @@ build {
     }
 }
 
-#locals {
-  #  user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
- #   ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
-#})
-#}
+locals {
+    user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
+    ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
+})
+}
