@@ -12,3 +12,9 @@ variable "proxmox_api_token_secret" {
     sensitive = true
     
 }
+
+variable "ssh_authorized_keys" {
+    type      = list(string)
+    sensitive = true
+    default   = []
+}

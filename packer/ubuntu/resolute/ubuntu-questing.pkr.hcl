@@ -32,11 +32,6 @@ packer {
 #  name = var.temporary_key_pair_name
 #}
 
-variable "ssh_authorized_keys" {
-    type      = list(string)
-    sensitive = true
-    default   = []
-}
 
 source "proxmox-iso" "ubuntu-server-resolute" {
     proxmox_url = "${var.proxmox_api_url}"
@@ -127,11 +122,6 @@ build {
       "build-source" = basename(path.cwd)
     }
   }
-
-#  sources = [
- #   "source.amazon-ebs.basic-example-east",
-  #  "source.amazon-ebs.basic-example-west"
-  #]
 
     name = "ubuntu-server-resolute"
     sources = ["source.proxmox-iso.ubuntu-server-resolute"]
