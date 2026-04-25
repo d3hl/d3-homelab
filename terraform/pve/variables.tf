@@ -10,7 +10,7 @@ variable "virtual_environment_api_token" {
 
 
 variable "virtual_environment_node_name" {
-  description = "Default Proxmox node for this workspace (nodeD)"
+  description = "Name of the Proxmox node"
   type        = string
   default     = "nodeD"
 }
@@ -25,18 +25,10 @@ variable "virtual_environment_node_nodeF" {
   default     = "nodeF"
 }
 variable "datastore_id" {
-  description = "Datastore for VM disks (Ceph RBD)"
   type        = string
   description = "Datastore for VM disks"
   default     = "cephVM"
 }
-
-variable "snippets_datastore_id" {
-  description = "Datastore for cloud-init snippets and ISO imports (shared CephFS)"
-  type        = string
-  default     = "cFS"
-}
-
 variable "ubuntu_template" {
   type    = string
   default = "999"
