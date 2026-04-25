@@ -22,7 +22,7 @@ variable "ssh_public_key_file" {
 }
 
 variable "virtual_environment_node_name" {
-  description = "Default Proxmox node (nodeD)"
+  description = "Default Proxmox node for this workspace (nodeD)"
   type        = string
   default     = "nodeD"
 }
@@ -40,13 +40,13 @@ variable "virtual_environment_node_nodeF" {
 }
 
 variable "datastore_id" {
-  description = "Datastore for VM disks"
+  description = "Datastore for VM disks (Ceph RBD)"
   type        = string
   default     = "cephVM"
 }
 
 variable "snippets_datastore_id" {
-  description = "Datastore for cloud-init snippets"
+  description = "Datastore for cloud-init snippets and ISO imports (shared CephFS)"
   type        = string
   default     = "cFS"
 }
