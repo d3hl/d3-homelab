@@ -5,14 +5,18 @@ terraform {
     organization = "d3-org"
     workspaces {
       project = "homelab"
-      name    = "komodo"
+      name    = "pve"
     }
   }
 
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.102.0"
+      version = ">= 0.103.0"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = ">= 2.5.0"
     }
   }
 }
@@ -25,6 +29,7 @@ provider "proxmox" {
   ssh {
     agent    = true
     username = var.virtual_environment_username
+
     node {
       name    = "nodeA"
       address = "10.10.10.18"
@@ -42,5 +47,4 @@ provider "proxmox" {
       address = "10.10.10.10"
     }
   }
-
 }
