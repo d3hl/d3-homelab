@@ -11,19 +11,25 @@ packer {
     }
 }
 
-#variable "proxmox_api_url" {
-#    type = string
-#}
+variable "proxmox_api_url" {
+    type = string
+}
 
-#variable "proxmox_api_token_id" {
-#    type = string
-#}
+variable "proxmox_api_token_id" {
+    type = string
+}
 
-#variable "proxmox_api_token_secret" {
-#    type = string
-#    sensitive = true
+variable "proxmox_api_token_secret" {
+    type = string
+    sensitive = true
     
-#}
+}
+variable "ssh_authorized_keys" {
+    type      = list(string)
+    sensitive = true
+    default   = []
+}
+
 
 #variables {
 #  temporary_key_pair_name = "my_temp_key"
@@ -172,8 +178,8 @@ build {
     }
 }
 
-locals {
-    user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
-    ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
-})
-}
+#locals {
+  #  user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
+ #   ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
+#})
+#}
