@@ -27,5 +27,5 @@ resource "proxmox_cloned_vm" "omni_master" {
 
 output "omni_master_vm_id" {
   description = "Proxmox VM ID of omni-master"
-  value       = proxmox_virtual_environment_cloned_vm.omni_master.id
+  value       = proxmox_cloned_vm.omni_master.id
 }
