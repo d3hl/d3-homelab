@@ -50,7 +50,7 @@ services:
     container_name: dex
     image: ghcr.io/dexidp/dex:v2.41.1
     restart: unless-stopped
-    user: "1002:1002"
+    user: "1000:1000"
     ports:
       - 5556:5556
     volumes:
