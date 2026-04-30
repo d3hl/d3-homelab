@@ -122,9 +122,7 @@ virtual_environment_api_token = var.virtual_environment_api_token
 virtual_environment_username  = var.virtual_environment_username
 ```
 
-VMs are **cloned** from a template (ID `999`), never built from scratch. Cloud-init standardizes packages: `qemu-guest-agent`, `net-tools`, `curl`.
-
-CI/CD uses **Terrateam** (`.terrateam/` config) for automated plan/apply on PRs via a self-hosted GitHub Actions runner (`.github/workflows/tf.yml`).
+VMs are **cloned** from a template (ID `999`), never built from scratch. Never clone from modules.
 
 ## Ansible
 
