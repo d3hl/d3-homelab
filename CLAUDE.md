@@ -27,7 +27,7 @@ These are hardcoded across the codebase — verify they still hold when making c
 
 ## Proxmox
 Manage 4-node Proxmox VE cluster with CEPH storage, VLAN networking, and cloud-init automation.
-
+Secrets are injected from **1Password** using the `op` CLI.
 * Available Tools * 
 
 Python Scripts (uv-based)
