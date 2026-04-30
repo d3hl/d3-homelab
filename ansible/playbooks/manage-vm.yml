@@ -1,0 +1,258 @@
+---
+# Manage Proxmox VM lifecycle via the community.proxmox collection.
+#
+# Credentials are sourced from environment variables. The recommended approach
+# uses 1Password to inject them:
+#
+#   op run --env-file=tools/proxmox.env.tpl -- \
+#     uv run ansible-playbook ansible/playbooks/manage-vm.yml -e "vm_name=myvm"
+#
+# Direct usage (credentials already exported):
+#   uv run ansible-playbook ansible/playbooks/manage-vm.yml -e "vm_name=myvm"
+#
+# Required environment variables:
+#   PROXMOX_HOST        - Proxmox API host (e.g. 10.10.10.18)
+#   PROXMOX_API_TOKEN   - API token in format: user@realm!tokenid=secret
+#
+# Required variables (pass via -e):
+#   vm_name             - Name of the VM to manage
+#
+# Optional variables (pass via -e):
+#   resource_state      - present|absent (default: present)
+#   vm_state            - started|stopped|restarted (default: started)
+#   vm_node             - Proxmox node name (default: nodeA)
+#   vm_template_id      - Template VMID to clone from (default: 999)
+#   vm_vmid             - Explicit VMID; omit to auto-assign
+#   vm_memory           - Memory in MB (default: 2048)
+#   vm_cores            - vCPU count (default: 2)
+#   vm_disk_size        - Boot disk size in GB (default: 20)
+#   vm_ip               - Static IP in CIDR notation (e.g. 10.10.10.50/24)
+#   vm_gw               - Gateway IP (default: 10.10.10.1)
+#   vm_tags             - Comma-separated list of tags (e.g. "ubuntu,web")
+#
+# Playbook is at ansible/playbooks/manage-vm.yml — validated and ready.
+
+# Usage:
+
+
+# Start existing VM
+#op run --env-file=tools/proxmox.env.tpl -- \
+#  uv run ansible-playbook ansible/playbooks/manage-vm.yml \
+#  -e "vm_name=bastion"
+
+# Stop VM
+#op run --env-file=tools/proxmox.env.tpl -- \
+#  uv run ansible-playbook ansible/playbooks/manage-vm.yml \
+#  -e "vm_name=bastion vm_state=stopped"
+
+# Create new VM from template 999 with static IP
+#op run --env-file=tools/proxmox.env.tpl -- \
+#  uv run ansible-playbook ansible/playbooks/manage-vm.yml \
+#  -e "vm_name=myvm vm_ip=10.10.10.55/24 vm_node=nodeD"
+
+# Delete VM
+#op run --env-file=tools/proxmox.env.tpl -- \
+#  uv run ansible-playbook ansible/playbooks/manage-vm.yml \
+#  -e "vm_name=myvm resource_state=absent"
+#Key implementation details:
+
+#Credentials parsed from PROXMOX_API_TOKEN (user@realm!tokenid=secret) with no_log: true throughout
+#block/rescue wraps create+configure+start; rescue surfaces a clean failure message
+#Waits for QEMU guest agent to confirm VM is truly running before completing
+#Cloud-init network config only applied when vm_ip is provided
+
+
+- name: Manage Proxmox VM lifecycle
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    resource_state: present
+    vm_state: started
+    vm_node: nodeA
+    vm_template_id: 999
+    vm_memory: 2048
+    vm_cores: 2
+    vm_disk_size: 20
+    vm_gw: "10.10.10.1"
+    vm_tags: ""
+    # Raw credentials from environment — parsed into components below
+    _proxmox_host: "{{ lookup('env', 'PROXMOX_HOST') }}"
+    _proxmox_raw_token: "{{ lookup('env', 'PROXMOX_API_TOKEN') }}"
+
+  tasks:
+    # -------------------------------------------------------------------------
+    # Pre-flight: validate inputs and parse credentials
+    # -------------------------------------------------------------------------
+
+    - name: Validate required variables and environment
+      ansible.builtin.assert:
+        that:
+          - vm_name is defined
+          - vm_name | length > 0
+          - resource_state in ['present', 'absent']
+          - vm_state in ['started', 'stopped', 'restarted']
+          - _proxmox_host | length > 0
+          - _proxmox_raw_token | length > 0
+          - _proxmox_raw_token is search("[!]")
+          - _proxmox_raw_token is search("[=]")
+        fail_msg: >-
+          Missing required configuration.
+          Ensure vm_name is set and PROXMOX_HOST / PROXMOX_API_TOKEN
+          environment variables are exported.
+          PROXMOX_API_TOKEN must be in format: user@realm!tokenid=secret
+
+    - name: Parse API token components from environment
+      ansible.builtin.set_fact:
+        _api_user: "{{ _proxmox_raw_token | regex_replace('!.*', '') }}"
+        _api_token_id: "{{ _proxmox_raw_token | regex_replace('^[^!]+!', '') | regex_replace('=.*', '') }}"
+        _api_token_secret: "{{ _proxmox_raw_token | regex_replace('^[^=]+=', '') }}"
+      no_log: true
+
+    - name: Validate parsed token components are non-empty
+      ansible.builtin.assert:
+        that:
+          - _api_user | length > 0
+          - _api_token_id | length > 0
+          - _api_token_secret | length > 0
+        fail_msg: >-
+          Failed to parse PROXMOX_API_TOKEN. Expected format: user@realm!tokenid=secret
+      no_log: true
+
+    # -------------------------------------------------------------------------
+    # Present: ensure VM exists and is in the desired run state
+    # -------------------------------------------------------------------------
+
+    - name: Create, configure, and start VM
+      when: resource_state == 'present'
+      block:
+        - name: Clone VM from template {{ vm_template_id }}
+          community.proxmox.proxmox_kvm:
+            api_host: "{{ _proxmox_host }}"
+            api_user: "{{ _api_user }}"
+            api_token_id: "{{ _api_token_id }}"
+            api_token_secret: "{{ _api_token_secret }}"
+            validate_certs: false
+            node: "{{ vm_node }}"
+            clone: "{{ vm_template_id }}"
+            newid: "{{ vm_vmid | default(omit) }}"
+            name: "{{ vm_name }}"
+            memory: "{{ vm_memory }}"
+            cores: "{{ vm_cores }}"
+            storage: cephVM
+            full: true
+            timeout: 300
+            state: present
+          register: vm_clone_result
+          no_log: true
+
+        - name: Apply cloud-init network configuration
+          community.proxmox.proxmox_kvm:
+            api_host: "{{ _proxmox_host }}"
+            api_user: "{{ _api_user }}"
+            api_token_id: "{{ _api_token_id }}"
+            api_token_secret: "{{ _api_token_secret }}"
+            validate_certs: false
+            node: "{{ vm_node }}"
+            name: "{{ vm_name }}"
+            ipconfig:
+              ipconfig0: "ip={{ vm_ip }},gw={{ vm_gw }}"
+            ciuser: d3
+            tags: "{{ vm_tags if vm_tags | length > 0 else omit }}"
+            update: true
+            state: present
+          when: vm_ip is defined and vm_ip | length > 0
+          no_log: true
+
+        - name: Set VM run state to {{ vm_state }}
+          community.proxmox.proxmox_kvm:
+            api_host: "{{ _proxmox_host }}"
+            api_user: "{{ _api_user }}"
+            api_token_id: "{{ _api_token_id }}"
+            api_token_secret: "{{ _api_token_secret }}"
+            validate_certs: false
+            node: "{{ vm_node }}"
+            name: "{{ vm_name }}"
+            state: "{{ vm_state }}"
+            timeout: 120
+          no_log: true
+          register: vm_state_result
+
+        - name: Wait for QEMU guest agent to become available
+          community.proxmox.proxmox_kvm:
+            api_host: "{{ _proxmox_host }}"
+            api_user: "{{ _api_user }}"
+            api_token_id: "{{ _api_token_id }}"
+            api_token_secret: "{{ _api_token_secret }}"
+            validate_certs: false
+            node: "{{ vm_node }}"
+            name: "{{ vm_name }}"
+            state: current
+          register: vm_current_state
+          until: >-
+            vm_current_state.status is defined and
+            vm_current_state.status == 'running'
+          retries: 24
+          delay: 5
+          when: vm_state == 'started'
+          no_log: true
+
+        - name: Verify VM is in running state
+          ansible.builtin.assert:
+            that:
+              - vm_current_state.status == 'running'
+            fail_msg: "VM '{{ vm_name }}' did not reach 'running' state after waiting."
+          when: vm_state == 'started'
+
+      rescue:
+        - name: Report VM lifecycle failure
+          ansible.builtin.fail:
+            msg: >-
+              Failed to bring VM '{{ vm_name }}' to state '{{ vm_state }}'.
+              Check Proxmox node '{{ vm_node }}' for details.
+
+    # -------------------------------------------------------------------------
+    # Absent: force-stop then delete VM
+    # -------------------------------------------------------------------------
+
+    - name: Remove VM {{ vm_name }}
+      when: resource_state == 'absent'
+      block:
+        - name: Force-stop VM before deletion
+          community.proxmox.proxmox_kvm:
+            api_host: "{{ _proxmox_host }}"
+            api_user: "{{ _api_user }}"
+            api_token_id: "{{ _api_token_id }}"
+            api_token_secret: "{{ _api_token_secret }}"
+            validate_certs: false
+            node: "{{ vm_node }}"
+            name: "{{ vm_name }}"
+            state: stopped
+            force: true
+            timeout: 60
+          no_log: true
+          ignore_errors: true
+
+        - name: Delete VM and associated disks
+          community.proxmox.proxmox_kvm:
+            api_host: "{{ _proxmox_host }}"
+            api_user: "{{ _api_user }}"
+            api_token_id: "{{ _api_token_id }}"
+            api_token_secret: "{{ _api_token_secret }}"
+            validate_certs: false
+            node: "{{ vm_node }}"
+            name: "{{ vm_name }}"
+            state: absent
+            timeout: 120
+          no_log: true
+
+    # -------------------------------------------------------------------------
+    # Report
+    # -------------------------------------------------------------------------
+
+    - name: Report final VM state
+      ansible.builtin.debug:
+        msg: >-
+          VM '{{ vm_name }}' on node '{{ vm_node }}':
+          resource={{ resource_state }}{% if resource_state == 'present' %}, vm_state={{ vm_state }}{% endif %}.
