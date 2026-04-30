@@ -54,7 +54,7 @@
 #op run --env-file=tools/proxmox.env.tpl -- \
 #  uv run ansible-playbook ansible/playbooks/manage-vm.yml \
 #  -e "vm_name=myvm resource_state=absent"
-#Key implementation details:
+#Key implementation details:.
 
 #Credentials parsed from PROXMOX_API_TOKEN (user@realm!tokenid=secret) with no_log: true throughout
 #block/rescue wraps create+configure+start; rescue surfaces a clean failure message
