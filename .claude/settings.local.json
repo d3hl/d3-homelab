@@ -5,7 +5,13 @@
       "Bash(claude doctor:*)",
       "Bash(ls:*)",
       "mcp__context7__resolve-library-id",
-      "mcp__context7__query-docs"
+      "mcp__context7__query-docs",
+      "Read(//c/Users/phong.dinh/Github/d3-homelab/**)",
+      "Bash(uv run *)",
+      "PowerShell(head -30)",
+      "PowerShell(cd C:\\\\Users\\\\phong.dinh\\\\Github\\\\d3-homelab && Get-Content tools\\\\proxmox.env | ForEach-Object { $parts = $_ -split '=', 2; [System.Environment]::SetEnvironmentVariable\\($parts[0], $parts[1]\\) }; $env:PROXMOX_HOST)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.local\\\\bin\\\\uv.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"C:\\\\ProgramData\\\\chocolatey\\\\bin\\\\uv.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:USERPROFILE\\\\scoop\\\\shims\\\\uv.exe\" -ErrorAction SilentlyContinue; \\(Get-Command pip -ErrorAction SilentlyContinue\\).Source)",
+      "PowerShell(ssh -i \"$env:USERPROFILE\\\\.ssh\\\\d3_tf\" -o IdentitiesOnly=yes d3@10.10.10.18 \"ceph crash ls-new\" 2>&1)"
     ]
   },
   "enabledPlugins": {
