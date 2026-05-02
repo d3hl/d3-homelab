@@ -5,7 +5,7 @@ resource "proxmox_cloned_vm" "omni_master" {
   stop_on_destroy = true
 
   clone = {
-    source_vm_id     = 9999
+    source_vm_id     = var.ubuntu_template_vm_id
     source_node_name = "nodeF"
     full             = true
   }

@@ -59,5 +59,5 @@ variable "cfs_datastore_id" {
 variable "ubuntu_template_vm_id" {
   description = "VM ID assigned to the Ubuntu template; cloned by all workspace VMs"
   type        = number
-  default     = 999
+  default     = 9999
 }
