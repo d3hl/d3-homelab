@@ -8,6 +8,7 @@ resource "proxmox_cloned_vm" "k1" {
     source_vm_id = var.ubuntu_template_vm_id
     source_node_name = "nodeF"
     full         = true
+    pool_id = proxmox_virtual_environment_pool.komodo_pool.id
   }
 }
 
@@ -21,6 +22,7 @@ resource "proxmox_cloned_vm" "k2" {
     source_vm_id = var.ubuntu_template_vm_id
     source_node_name = "nodeF"
     full         = true
+    pool_id = proxmox_virtual_environment_pool.komodo_pool.id
   }
 }
 
@@ -34,6 +36,7 @@ resource "proxmox_cloned_vm" "k3" {
     source_vm_id = var.ubuntu_template_vm_id
     source_node_name = "nodeF"
     full         = true
+    pool_id = proxmox_virtual_environment_pool.komodo_pool.id
   }
 }
 resource "proxmox_cloned_vm" "k4" {
@@ -46,6 +49,7 @@ resource "proxmox_cloned_vm" "k4" {
     source_vm_id = var.ubuntu_template_vm_id
     source_node_name = "nodeF"
     full         = true
+    pool_id = proxmox_virtual_environment_pool.komodo_pool.id
   }
 }
 resource "proxmox_virtual_environment_pool" "komodo_pool" {
@@ -53,22 +57,6 @@ resource "proxmox_virtual_environment_pool" "komodo_pool" {
   comment = "Komodo k-cluster VMs"
 }
 
-resource "proxmox_pool_membership" "vm_membership_k1" {
-  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
-  vm_id   = proxmox_cloned_vm.k1.id
-}
-resource "proxmox_pool_membership" "vm_membership_k2" {
-  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
-  vm_id   = proxmox_cloned_vm.k2.id
-}
-resource "proxmox_pool_membership" "vm_membership_k3" {
-  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
-  vm_id   = proxmox_cloned_vm.k3.id
-}
-resource "proxmox_pool_membership" "vm_membership_k4" {
-  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
-  vm_id   = proxmox_cloned_vm.k4.id
-}
 #Output
 output "k_cluster_vm_ids" {
   description = "Proxmox VM IDs for k1, k2, k3, k4"
@@ -78,4 +66,8 @@ output "k_cluster_vm_ids" {
     k3 = proxmox_cloned_vm.k3.id
     k4 = proxmox_cloned_vm.k4.id
   }
+}
+output "pool_vm_ids" {
+  description = "Proxmox VM IDs in komodo-pool"
+  value = proxmox_virtual_environment_pool.komodo_pool.id
 }
