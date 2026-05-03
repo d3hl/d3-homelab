@@ -50,7 +50,7 @@ resource "proxmox_pool_membership" "vm_membership_k3" {
   pool_id = proxmox_virtual_environment_pool.komodo_pool.id
   vm_id   = proxmox_cloned_vm.k3.id
 }
-
+#Output
 output "k_cluster_vm_ids" {
   description = "Proxmox VM IDs for k1, k2, k3"
   value = {
