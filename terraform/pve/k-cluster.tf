@@ -1,8 +1,3 @@
-resource "proxmox_virtual_environment_pool" "komodo_pool" {
-  pool_id = "komodo-pool"
-  comment = "Komodo k-cluster VMs"
-}
-
 resource "proxmox_cloned_vm" "k1" {
   node_name       = var.virtual_environment_node_nodeA
   name            = "k1"
@@ -40,6 +35,23 @@ resource "proxmox_cloned_vm" "k3" {
     source_vm_id = var.ubuntu_template_vm_id
     full         = true
   }
+}
+resource "proxmox_virtual_environment_pool" "komodo_pool" {
+  pool_id = "komodo-pool"
+  comment = "Komodo k-cluster VMs"
+}
+
+resource "proxmox_pool_membership" "vm_membership" {
+  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
+  vm_id   = proxmox_cloned_vm.k1.id
+}
+resource "proxmox_pool_membership" "vm_membership_k2" {
+  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
+  vm_id   = proxmox_cloned_vm.k2.id
+}
+resource "proxmox_pool_membership" "vm_membership_k3" {
+  pool_id = proxmox_virtual_environment_pool.komodo_pool.id
+  vm_id   = proxmox_cloned_vm.k3.id
 }
 
 output "k_cluster_vm_ids" {
