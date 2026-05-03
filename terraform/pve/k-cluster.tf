@@ -37,7 +37,7 @@ resource "proxmox_cloned_vm" "k3" {
   }
 }
 resource "proxmox_cloned_vm" "k4" {
-  node_name       = var.virtual_environment_node_name
+  node_name       = var.virtual_environment_node_nodeF
   name            = "k4"
   tags            = ["ubuntu","komodo"]
   stop_on_destroy = true
