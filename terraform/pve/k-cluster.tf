@@ -6,6 +6,7 @@ resource "proxmox_cloned_vm" "k1" {
 
   clone = {
     source_vm_id = var.ubuntu_template_vm_id
+    source_node_name = "nodeF"
     full         = true
   }
 }
@@ -18,6 +19,7 @@ resource "proxmox_cloned_vm" "k2" {
 
   clone = {
     source_vm_id = var.ubuntu_template_vm_id
+    source_node_name = "nodeF"
     full         = true
   }
 }
@@ -30,6 +32,7 @@ resource "proxmox_cloned_vm" "k3" {
 
   clone = {
     source_vm_id = var.ubuntu_template_vm_id
+    source_node_name = "nodeF"
     full         = true
   }
 }
