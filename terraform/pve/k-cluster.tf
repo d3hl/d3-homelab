@@ -1,7 +1,6 @@
 resource "proxmox_cloned_vm" "k1" {
   node_name       = var.virtual_environment_node_nodeA
   name            = "k1"
-  pool_id         = proxmox_virtual_environment_pool.komodo_pool.id
   tags            = ["ubuntu","komodo"]
   stop_on_destroy = true
 
@@ -14,7 +13,6 @@ resource "proxmox_cloned_vm" "k1" {
 resource "proxmox_cloned_vm" "k2" {
   node_name       = var.virtual_environment_node_nodeB
   name            = "k2"
-  pool_id         = proxmox_virtual_environment_pool.komodo_pool.id
   tags            = ["ubuntu","komodo"]
   stop_on_destroy = true
 
@@ -25,9 +23,8 @@ resource "proxmox_cloned_vm" "k2" {
 }
 
 resource "proxmox_cloned_vm" "k3" {
-  node_name       = var.virtual_environment_node_nodeD
+  node_name       = var.virtual_environment_node_name
   name            = "k3"
-  pool_id         = proxmox_virtual_environment_pool.komodo_pool.id
   tags            = ["ubuntu","komodo"]
   stop_on_destroy = true
 
@@ -41,7 +38,7 @@ resource "proxmox_virtual_environment_pool" "komodo_pool" {
   comment = "Komodo k-cluster VMs"
 }
 
-resource "proxmox_pool_membership" "vm_membership" {
+resource "proxmox_pool_membership" "vm_membership_k1" {
   pool_id = proxmox_virtual_environment_pool.komodo_pool.id
   vm_id   = proxmox_cloned_vm.k1.id
 }
