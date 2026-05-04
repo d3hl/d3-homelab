@@ -1,0 +1,13 @@
+virtual_environment_endpoint  = "https://10.10.10.10:8006/"
+virtual_environment_api_token = "terraform@pve!provider=REPLACE_WITH_TOKEN_SECRET"
+virtual_environment_username  = "d3"
+
+virtual_environment_node_name  = "nodeD"
+virtual_environment_node_nodeA = "nodeA"
+virtual_environment_node_nodeB = "nodeB"
+virtual_environment_node_nodeF = "nodeF"
+
+datastore_id          = "cephVM"
+cfs_datastore_id      = "cFS"
+ubuntu_template_vm_id = 9999
+ssh_public_key_file   = "/home/d3/.ssh/d3_tf.pub"
