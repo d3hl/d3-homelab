@@ -3,4 +3,4 @@
     - Run "docker compose up" 
 
 # Troubleshoot
-    - git clean -fd && git pull origin main
+    - Clean git tree and pull again:  git clean -fd && git pull origin main
