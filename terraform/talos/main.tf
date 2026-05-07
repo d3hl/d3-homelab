@@ -1,18 +1,20 @@
-# Download the Talos metal ISO to a Proxmox storage node.
-# The ISO is shared across all VMs; only one copy is needed.
+# Upload the Omni-registered Talos ISO to Proxmox storage.
+# Generate this ISO AFTER Omni is running:
+#   omnictl download iso --arch amd64 --output talos-omni-amd64.iso
+# Then set var.omni_iso_url to a reachable URL or upload manually.
 resource "proxmox_download_file" "talos_iso" {
   content_type = "iso"
   datastore_id = var.iso_datastore_id
   node_name    = var.iso_node
-  url          = "https://factory.talos.dev/image/0adff2c778cb465251187dbe20eb4ee05d86d9c3593892863721bcb5615af08c/1.12.6/nocloud-amd64.iso"
-  file_name    = "talos-nocloud-amd64-uefi.iso"
+  url          = var.omni_iso_url
+  file_name    = "talos-omni-amd64.iso"
 }
 
 # Control plane VMs.
 # UEFI boot order: OVMF tries virtio0 first; since the disk has no EFI boot
-# entry on first run, it falls through to the secureboot ISO on ide2. After
-# Talos installs itself, it writes an EFI boot entry to virtio0 and subsequent
-# reboots boot from disk automatically.
+# entry on first run, it falls through to the Omni ISO on ide2. Talos installs
+# itself, writes an EFI boot entry to virtio0, and phones home to Omni via
+# SideroLink. Subsequent reboots boot from disk automatically.
 resource "proxmox_virtual_environment_vm" "controlplane" {
   for_each = var.controlplane_nodes
 
@@ -30,15 +32,12 @@ resource "proxmox_virtual_environment_vm" "controlplane" {
     dedicated = var.controlplane_memory_mb
   }
 
-  # EFI vars disk — required for OVMF. Pre-enroll Secure Boot keys so the
-  # secureboot-signed Talos ISO is accepted without manual key enrollment.
   efi_disk {
     datastore_id      = var.datastore_id
     type              = "4m"
     pre_enrolled_keys = true
   }
 
-  # Empty boot disk — Talos installs here after receiving its machine config.
   disk {
     datastore_id = var.datastore_id
     interface    = "virtio0"
@@ -47,7 +46,6 @@ resource "proxmox_virtual_environment_vm" "controlplane" {
     size         = var.controlplane_disk_size_gb
   }
 
-  # Talos secureboot ISO for the initial maintenance-mode boot.
   cdrom {
     enabled   = true
     file_id   = proxmox_download_file.talos_iso.id
