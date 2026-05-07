@@ -6,5 +6,5 @@ export AUTH_ENDPOINT=auth.d3hl.site
 export OMNI_USER_EMAIL="d3tech@pm.me"
 
 bash ./scripts/cfssl.sh
-bash ./ca.sh
-bash ./setup-gbg.sh 
+bash ./scripts/ca.sh
+bash ./scripts/setup-gbg.sh
