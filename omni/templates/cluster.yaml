@@ -1,0 +1,24 @@
+kind: Cluster
+name: example
+kubernetes:
+  version: <kubernetes-version>
+talos:
+  version: <talos-version>
+---
+kind: ControlPlane
+machines:
+  - <control-plane-machine-uuid-1>
+---
+kind: Workers
+machines:
+  - <worker-machine-uuid>
+---
+kind: Machine
+name: <control-plane-machine-uuid>
+install:
+  disk: /dev/<disk>
+---
+kind: Machine
+name: <worker-machine-uuid>
+install:
+  disk: /dev/<disk>
