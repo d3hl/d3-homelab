@@ -1,9 +1,9 @@
+# Basic
 NAME=omni
 OMNI_IMG_TAG="op://d3HL/omni_env/OMNI_IMG_TAG"
+OMNI_ACCOUNT_UUID=$(uuidgen)
 OMNI_DOMAIN_NAME="op://d3HL/omni_env/OMNI_DOMAIN_NAME"
 
-TLS_CERT="op://d3HL/omni_env/TLS_CERT"
-TLS_KEY="op://d3HL/omni_env/TLS_KEY"
 
 # Path to SQLite storage directory on host (NEW in v1.4.0 - REQUIRED)
 # This consolidates Discovery service state, Audit logs, Machine logs, and Secondary resources

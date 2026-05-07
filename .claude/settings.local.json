@@ -13,7 +13,8 @@
       "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.local\\\\bin\\\\uv.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"C:\\\\ProgramData\\\\chocolatey\\\\bin\\\\uv.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:USERPROFILE\\\\scoop\\\\shims\\\\uv.exe\" -ErrorAction SilentlyContinue; \\(Get-Command pip -ErrorAction SilentlyContinue\\).Source)",
       "PowerShell(ssh -i \"$env:USERPROFILE\\\\.ssh\\\\d3_tf\" -o IdentitiesOnly=yes d3@10.10.10.18 \"ceph crash ls-new\" 2>&1)",
       "Bash(npx ctx7@latest *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(node *)"
     ]
   },
   "enabledPlugins": {
