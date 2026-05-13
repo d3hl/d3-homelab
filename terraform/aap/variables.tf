@@ -33,6 +33,7 @@ variable "node_name" {
 variable "rhel_qcow2" {
   description = "URL to the RHEL 10 KVM qcow2 guest image (Red Hat subscription required)"
   type        = string
+  default = "rhel-10"
 }
 
 variable "vm_ip" {

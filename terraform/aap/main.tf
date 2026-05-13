@@ -6,7 +6,7 @@ resource "proxmox_download_file" "rhel10_qcow2" {
   datastore_id = var.iso_datastore_id
   node_name    = var.node_name
   url          = var.rhel_qcow2
-  file_name    = "rhel-10.0-x86_64-kvm.qcow2"
+  file_name    = "rhel-10.0-x86_64.qcow2"
 }
 
 resource "proxmox_virtual_environment_vm" "aap_server" {
