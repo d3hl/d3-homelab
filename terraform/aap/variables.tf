@@ -1,6 +1,6 @@
 variable "OP_SERVICE_ACCOUNT_TOKEN" {
-  type    = string
-  default = ""
+  type      = string
+  sensitive = true
 }
 
 variable "datastore_id" {

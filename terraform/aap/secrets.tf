@@ -1,10 +1,9 @@
-# Reads Proxmox API credentials from 1Password.
+# op://d3HL/proxmox_env
 # Expected item structure (Login category):
-#   Title    : var.op_proxmox_item  (default: "proxmox_env")
-#   URL      : https://10.10.10.10:8006/
-#   Password : terraform@pve!tf-token=<secret>   (full token string)
+#   URL      → proxmox provider endpoint
+#   Password → terraform@pve!tf-token=<secret>  (full API token string)
 data "onepassword_item" "proxmox" {
-  vault = d3HL
-  uuid  = gcqkndemtvypm5725liriyadhi
+  vault = "d3HL"
+  title = "proxmox_env"
 }
 
