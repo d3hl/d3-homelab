@@ -14,7 +14,10 @@
       "PowerShell(ssh -i \"$env:USERPROFILE\\\\.ssh\\\\d3_tf\" -o IdentitiesOnly=yes d3@10.10.10.18 \"ceph crash ls-new\" 2>&1)",
       "Bash(npx ctx7@latest *)",
       "Bash(git *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "PowerShell(npx ctx7@latest docs /websites/developer_hashicorp_terraform_cloud-docs \"provision new VM resource running RHEL enterprise 10\" 2>&1)",
+      "Bash(grep -E \"\\\\.tfvars$|\\\\.tfvars\\\\.json$\")",
+      "PowerShell(npx ctx7@latest docs /websites/developer_1password \"Terraform provider service account authentication data sources\" 2>&1)"
     ]
   },
   "enabledPlugins": {
