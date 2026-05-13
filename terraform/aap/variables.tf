@@ -1,11 +1,7 @@
 variable "OP_SERVICE_ACCOUNT_TOKEN" {
   type = string
 }
-variable "op_vault" {
-  description = "1Password vault name or UUID containing homelab credentials"
-  type        = string
-  default     = "d3hl"
-}
+
 variable "datastore_id" {
   description = "Datastore for VM disks (Ceph RBD)"
   type        = string

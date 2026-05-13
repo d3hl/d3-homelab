@@ -4,7 +4,7 @@
 #   URL      : https://10.10.10.10:8006/
 #   Password : terraform@pve!tf-token=<secret>   (full token string)
 data "onepassword_item" "proxmox" {
-  vault = var.op_vault
+  vault = d3HL
   uuid  = gcqkndemtvypm5725liriyadhi
 }
 
