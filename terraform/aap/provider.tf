@@ -24,6 +24,7 @@ terraform {
 # Authenticates via OP_SERVICE_ACCOUNT_TOKEN environment variable.
 # Set this as a sensitive workspace env var in HCP Terraform — never in .tfvars.
 provider "onepassword" {
+  service_account_token = var.OP_SERVICE_ACCOUNT_TOKEN
 }
 
 provider "proxmox" {
