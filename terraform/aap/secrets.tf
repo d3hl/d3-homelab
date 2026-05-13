@@ -8,8 +8,3 @@ data "onepassword_item" "proxmox" {
   title = var.op_proxmox_item
 }
 
-# op://d3HLPRV/d3_ops/public key
-data "onepassword_item" "d3_ops" {
-  vault = "d3HLPRV"
-  title = "d3_ops"
-}
