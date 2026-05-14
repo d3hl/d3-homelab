@@ -17,7 +17,8 @@
       "Bash(node *)",
       "PowerShell(npx ctx7@latest docs /websites/developer_hashicorp_terraform_cloud-docs \"provision new VM resource running RHEL enterprise 10\" 2>&1)",
       "Bash(grep -E \"\\\\.tfvars$|\\\\.tfvars\\\\.json$\")",
-      "PowerShell(npx ctx7@latest docs /websites/developer_1password \"Terraform provider service account authentication data sources\" 2>&1)"
+      "PowerShell(npx ctx7@latest docs /websites/developer_1password \"Terraform provider service account authentication data sources\" 2>&1)",
+      "PowerShell(op item *)"
     ]
   },
   "enabledPlugins": {
