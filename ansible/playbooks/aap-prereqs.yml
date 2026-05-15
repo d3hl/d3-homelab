@@ -1,0 +1,206 @@
+---
+# Pre-configure RHEL 9 VMs before running the AAP installer.
+#
+# Usage:
+#   ansible-playbook -i inventory/aap.ini playbooks/aap-prereqs.yml \
+#     -e rhsm_username=<rhn-user> -e rhsm_password=<rhn-pass> \
+#     --ask-vault-pass
+#
+# Run this against all four VMs (gateway, controller, hub, db) before
+# running the AAP installer's ./setup.sh.
+
+- name: Common RHEL 9 baseline for all AAP nodes
+  hosts: automationgateway:automationcontroller:automationhub:database
+  become: true
+  gather_facts: true
+
+  vars:
+    rhsm_username: ""
+    rhsm_password: ""
+    # AAP 2.5 requires these repos on RHEL 9
+    aap_repos:
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+      - ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+
+  tasks:
+    - name: Register with RHSM
+      community.general.redhat_subscription:
+        state: present
+        username: "{{ rhsm_username }}"
+        password: "{{ rhsm_password }}"
+        auto_attach: true
+      when: rhsm_username | length > 0
+
+    - name: Enable required repos
+      community.general.rhsm_repository:
+        name: "{{ aap_repos }}"
+        state: enabled
+      when: rhsm_username | length > 0
+
+    - name: Install common packages
+      ansible.builtin.dnf:
+        name:
+          - qemu-guest-agent
+          - python3
+          - python3-pip
+          - firewalld
+          - chrony
+        state: present
+        update_cache: true
+
+    - name: Start and enable services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - qemu-guest-agent
+        - firewalld
+        - chronyd
+
+    - name: Set SELinux to enforcing
+      ansible.posix.selinux:
+        policy: targeted
+        state: enforcing
+
+    - name: Set hostname from inventory
+      ansible.builtin.hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: Ensure /etc/hosts has all AAP nodes
+      ansible.builtin.blockinfile:
+        path: /etc/hosts
+        marker: "# {mark} AAP NODES"
+        block: |
+          10.10.10.50 aap-gateway
+          10.10.10.51 aap-controller
+          10.10.10.52 aap-hub
+          10.10.10.53 aap-db
+
+- name: Open firewall ports on Gateway
+  hosts: automationgateway
+  become: true
+  tasks:
+    - name: Allow gateway ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+        immediate: true
+      loop:
+        - 80/tcp
+        - 443/tcp
+        - 8443/tcp
+
+- name: Open firewall ports on Controller
+  hosts: automationcontroller
+  become: true
+  tasks:
+    - name: Allow controller ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+        immediate: true
+      loop:
+        - 80/tcp
+        - 443/tcp
+        - 8443/tcp
+        - 27199/tcp   # Receptor mesh
+
+- name: Open firewall ports on Hub
+  hosts: automationhub
+  become: true
+  tasks:
+    - name: Allow hub ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+        immediate: true
+      loop:
+        - 80/tcp
+        - 443/tcp
+        - 8080/tcp    # Pulp content API
+
+- name: Install and harden PostgreSQL on DB node
+  hosts: database
+  become: true
+  tasks:
+    - name: Install PostgreSQL 15
+      ansible.builtin.dnf:
+        name:
+          - postgresql-server
+          - postgresql-contrib
+          - python3-psycopg2
+        state: present
+
+    - name: Initialize PostgreSQL cluster
+      ansible.builtin.command: postgresql-setup --initdb
+      args:
+        creates: /var/lib/pgsql/data/PG_VERSION
+
+    - name: Start and enable PostgreSQL
+      ansible.builtin.systemd:
+        name: postgresql
+        state: started
+        enabled: true
+
+    - name: Open PostgreSQL firewall port (from AAP subnet only)
+      ansible.posix.firewalld:
+        rich_rule: "rule family=ipv4 source address=10.10.10.0/24 port port=5432 protocol=tcp accept"
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: Configure pg_hba.conf to allow AAP nodes
+      ansible.builtin.blockinfile:
+        path: /var/lib/pgsql/data/pg_hba.conf
+        marker: "# {mark} AAP DATABASES"
+        block: |
+          host    awx              awx              10.10.10.51/32    md5
+          host    automationhub    automationhub    10.10.10.52/32    md5
+          host    gateway          gateway          10.10.10.50/32    md5
+      notify: Reload PostgreSQL
+
+    - name: Create AAP databases and users
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - awx
+        - automationhub
+        - gateway
+
+    - name: Create PostgreSQL users
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "{{ item.name }}"
+        password: "{{ item.password }}"
+        role_attr_flags: NOSUPERUSER,NOCREATEROLE,NOCREATEDB
+        state: present
+      loop:
+        - { name: awx,            password: "{{ awx_db_password }}" }
+        - { name: automationhub,  password: "{{ hub_db_password }}" }
+        - { name: gateway,        password: "{{ gateway_db_password }}" }
+      no_log: true
+
+    - name: Grant database privileges
+      become_user: postgres
+      community.postgresql.postgresql_privs:
+        db: "{{ item.db }}"
+        privs: ALL
+        type: database
+        role: "{{ item.role }}"
+      loop:
+        - { db: awx,           role: awx }
+        - { db: automationhub, role: automationhub }
+        - { db: gateway,       role: gateway }
+
+  handlers:
+    - name: Reload PostgreSQL
+      ansible.builtin.systemd:
+        name: postgresql
+        state: reloaded
