@@ -44,6 +44,7 @@ variable "cfs_datastore_id" {
 variable "rhel9_template_vm_id" {
   description = "VM ID of the RHEL 9 cloud-init template to clone AAP VMs from"
   type        = number
+  default     = 99999
 }
 
 variable "rhel9_template_node" {

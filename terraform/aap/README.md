@@ -46,7 +46,7 @@ Terraform — terraform/aap/
   # 1. Prerequisites — create a RHEL 9 cloud-init template in Proxmox first
   #    (download RHEL 9 qcow2 from access.redhat.com, import, set VM ID)
 
-  # 2. Provision VMs
+  # 2. Provision VMts
   cd terraform/aap
   terraform init
   terraform apply -var-file="../../secrets.tfvars" -var="rhel9_template_vm_id=<id>"
