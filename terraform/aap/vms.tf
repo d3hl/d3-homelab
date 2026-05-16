@@ -29,7 +29,7 @@ resource "proxmox_cloned_vm" "aap_gateway" {
   disk = {
     virtio0 = {
       datastore_id = var.datastore_id
-      size         = 30
+      size_gb      =30
       discard      = "on"
       iothread     = true
     }
@@ -62,7 +62,7 @@ resource "proxmox_cloned_vm" "aap_controller" {
   disk = {
     virtio0 = {
       datastore_id = var.datastore_id
-      size         = 60
+      size_gb      =60
       discard      = "on"
       iothread     = true
     }
@@ -95,7 +95,7 @@ resource "proxmox_cloned_vm" "aap_hub" {
   disk = {
     virtio0 = {
       datastore_id = var.datastore_id
-      size         = 100
+      size_gb      =100
       discard      = "on"
       iothread     = true
     }
@@ -128,7 +128,7 @@ resource "proxmox_cloned_vm" "aap_db" {
   disk = {
     virtio0 = {
       datastore_id = var.datastore_id
-      size         = 40
+      size_gb      =40
       discard      = "on"
       iothread     = true
     }

@@ -1,0 +1,35 @@
+FROM registry.redhat.io/rhel9/rhel-bootc:latest
+
+RUN dnf -y install \
+      ansible-core \
+      buildah \
+      chrony \
+      cloud-init \
+      crun \
+      firewalld \
+      gzip \
+      openssh-server \
+      podman \
+      postgresql-contrib \
+      postgresql-server \
+      python3 \
+      python3-libselinux \
+      python3-policycoreutils \
+      python3-psycopg2 \
+      qemu-guest-agent \
+      rsync \
+      skopeo \
+      sudo \
+      tar \
+      unzip \
+    && dnf clean all
+
+RUN systemctl enable \
+      chronyd.service \
+      cloud-init.service \
+      firewalld.service \
+      qemu-guest-agent.service \
+      sshd.service
+
+CMD ["/sbin/init"]
+

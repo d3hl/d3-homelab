@@ -1,0 +1,35 @@
+---
+aap_dns_domain: homelab.local
+
+aap_host_entries:
+  - ip: 10.10.10.60
+    names:
+      - aap-gateway.homelab.local
+      - aap-gateway
+  - ip: 10.10.10.61
+    names:
+      - aap-controller.homelab.local
+      - aap-controller
+  - ip: 10.10.10.62
+    names:
+      - aap-hub.homelab.local
+      - aap-hub
+  - ip: 10.10.10.63
+    names:
+      - aap-db.homelab.local
+      - aap-db
+
+aap_firewall_ports:
+  gateway:
+    - 80/tcp
+    - 443/tcp
+  controller:
+    - 80/tcp
+    - 443/tcp
+    - 27199/tcp
+  hub:
+    - 80/tcp
+    - 443/tcp
+  database:
+    - 5432/tcp
+
