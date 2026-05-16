@@ -73,10 +73,10 @@
         path: /etc/hosts
         marker: "# {mark} AAP NODES"
         block: |
-          10.10.10.50 aap-gateway
-          10.10.10.51 aap-controller
-          10.10.10.52 aap-hub
-          10.10.10.53 aap-db
+          10.10.10.60 aap-gateway
+          10.10.10.61 aap-controller
+          10.10.10.62 aap-hub
+          10.10.10.63 aap-db
 
 - name: Open firewall ports on Gateway
   hosts: automationgateway
