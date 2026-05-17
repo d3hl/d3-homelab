@@ -54,11 +54,11 @@ automationhub_pg_password='op://d3HLPRV/AAP Hub DB/password'
 automationhub_pg_sslmode='prefer'
 
 # ── Gateway PostgreSQL connection ─────────────────────────────────────────────
-# automationgateway_pg_host='10.10.10.63'
-# automationgateway_pg_port=5432
-# automationgateway_pg_database='gateway'
-# automationgateway_pg_username='gateway'
-# automationgateway_pg_password='<gateway-db-password>'
+automationgateway_pg_host='10.10.10.63'
+automationgateway_pg_port=5432
+automationgateway_pg_database='gateway'
+automationgateway_pg_username='gateway'
+automationgateway_pg_password='op://d3HLPRV/AAP Gateway DB/password'
 
 # ── TLS ───────────────────────────────────────────────────────────────────────
 # Defaults to self-signed. Set paths to use your own certs.
