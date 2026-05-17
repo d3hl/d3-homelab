@@ -1,5 +1,0 @@
-[[customizations.user]]
-name = "d3"
-key = "ssh-rsa REPLACE_WITH_/home/d3/.ssh/d3_tf.pub_CONTENT"
-groups = ["wheel"]
-

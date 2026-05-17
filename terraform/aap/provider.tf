@@ -5,7 +5,7 @@ terraform {
     organization = "d3-org"
     workspaces {
       project = "homelab"
-      name    = "aap-image-mode"
+      name    = "aap-container"
     }
   }
 
@@ -13,6 +13,10 @@ terraform {
     proxmox = {
       source  = "bpg/proxmox"
       version = "~> 0.104"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = ">= 2.5.0"
     }
   }
 }
@@ -44,4 +48,3 @@ provider "proxmox" {
     }
   }
 }
-
