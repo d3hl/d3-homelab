@@ -214,7 +214,7 @@
     - name: Grant database privileges
       become_user: postgres
       community.postgresql.postgresql_privs:
-        db: "{{ item.db }}"
+        database: "{{ item.db }}"
         privs: ALL
         type: database
         role: "{{ item.role }}"
