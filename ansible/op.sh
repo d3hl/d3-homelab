@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-op inject -i aap.ini -o aap-rendered.ini
+op inject -i ./inventory/aap.tpl -o ./inventory/aap.ini
