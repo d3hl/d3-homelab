@@ -8,18 +8,17 @@
 #   ansible-vault encrypt_string '<value>' --name '<var>'
 
 [automationgateway]
-10.10.10.60 ansible_user=d3
-
+sg-hl-aap-gw ansible_host=10.10.10.60
 [automationcontroller]
-10.10.10.61 ansible_user=d3
-
+sg-hl-aap-ct ansible_host=10.10.10.61
 [automationhub]
-10.10.10.62 ansible_user=d3
+sg-hl-aap-hub ansible_host=10.10.10.62
 
 [database]
-10.10.10.63 ansible_user=d3
+sg-hl-aap-db ansible_host=10.10.10.63 ansible_user=d3
 
 [all:vars]
+ansible_user=d3
 ansible_become=true
 ansible_ssh_private_key_file=/home/d3/.ssh/d3ops
 ansible_python_interpreter=/usr/bin/python3
