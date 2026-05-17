@@ -128,12 +128,7 @@
   hosts: database
   become: true
   tasks:
-    - name: Enable PostgreSQL 15 AppStream module
-      ansible.builtin.command: dnf module enable postgresql:15 -y
-      register: dnf_module_out
-      changed_when: "'Nothing to do' not in dnf_module_out.stdout"
-
-    - name: Install PostgreSQL 15
+    - name: Install PostgreSQL
       ansible.builtin.dnf:
         name:
           - postgresql-server
