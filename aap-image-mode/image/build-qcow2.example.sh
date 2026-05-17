@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-IMAGE="${IMAGE:-localhost/aap-rhel9-bootc:homelab}"
+IMAGE="${IMAGE:-localhost/aap-rhel10-bootc:homelab}"
 CONFIG="${CONFIG:-image/bootc-image-builder.config.toml}"
 OUTPUT_DIR="${OUTPUT_DIR:-output}"
 
@@ -22,8 +22,7 @@ podman run \
   --security-opt label=type:unconfined_t \
   -v "$(pwd)/${CONFIG}:/config.toml:ro" \
   -v "$(pwd)/${OUTPUT_DIR}:/output" \
-  registry.redhat.io/rhel9/bootc-image-builder:latest \
+  registry.redhat.io/rhel10/bootc-image-builder:latest \
   --type qcow2 \
   --config /config.toml \
   "${IMAGE}"
-

@@ -1,10 +1,10 @@
 variable "virtual_environment_endpoint" {
-  description = "Proxmox API endpoint URL (e.g. https://10.10.10.10:8006/)"
+  description = "Proxmox API endpoint URL, for example https://10.10.10.10:8006/"
   type        = string
 }
 
 variable "virtual_environment_api_token" {
-  description = "Proxmox API token (format: user@realm!tokenid=secret)"
+  description = "Proxmox API token in user@realm!tokenid=secret format"
   type        = string
   sensitive   = true
 }
@@ -15,71 +15,93 @@ variable "virtual_environment_username" {
   default     = "d3"
 }
 
-variable "ssh_public_key_file" {
-  description = "Path to the SSH public key injected into VMs via cloud-init"
+variable "rhel_bootc_template_vm_id" {
+  description = "Proxmox template VM ID created from the RHEL bootc QCOW2"
+  type        = number
+  default     = 9906
+}
+
+variable "rhel_bootc_template_node" {
+  description = "Proxmox node where the RHEL bootc template resides"
   type        = string
-  default     = "/home/d3/.ssh/d3_tf.pub"
+  default     = "nodeF"
 }
 
 variable "virtual_environment_node_name" {
-  description = "Default Proxmox node for AAP VMs"
+  description = "Default Proxmox node for AAP image-mode VMs"
   type        = string
   default     = "nodeD"
 }
 
 variable "datastore_id" {
-  description = "Datastore for VM disks (Ceph RBD)"
+  description = "Datastore for VM disks"
   type        = string
   default     = "cephVM"
 }
 
-variable "cfs_datastore_id" {
-  description = "Datastore for cloud-init snippets (shared CephFS)"
+variable "network_bridge" {
+  description = "Proxmox bridge for AAP VMs"
   type        = string
-  default     = "cFS"
-}
-
-# AAP requires RHEL 9 — create a RHEL 9 cloud-init template in Proxmox first,
-# then set this to that template's VM ID.
-variable "rhel9_template_vm_id" {
-  description = "VM ID of the RHEL 9 cloud-init template to clone AAP VMs from"
-  type        = number
-  default     = 99999
-}
-
-variable "rhel9_template_node" {
-  description = "Proxmox node where the RHEL 9 template resides"
-  type        = string
-  default     = "nodeF"
-}
-
-# Static IPs — reserve these in your router or DHCP server before applying.
-variable "aap_gateway_ip" {
-  description = "Static IP for aap-gateway (Platform Gateway)"
-  type        = string
-  default     = "10.10.10.50/24"
-}
-
-variable "aap_controller_ip" {
-  description = "Static IP for aap-controller (Automation Controller)"
-  type        = string
-  default     = "10.10.10.51/24"
-}
-
-variable "aap_hub_ip" {
-  description = "Static IP for aap-hub (Automation Hub)"
-  type        = string
-  default     = "10.10.10.52/24"
-}
-
-variable "aap_db_ip" {
-  description = "Static IP for aap-db (External PostgreSQL)"
-  type        = string
-  default     = "10.10.10.53/24"
+  default     = "vmbr0"
 }
 
 variable "network_gateway" {
-  description = "Default gateway for all AAP VMs"
+  description = "Default gateway for AAP VMs"
   type        = string
   default     = "10.10.10.1"
+}
+
+variable "network_vlan_tag" {
+  description = "Optional VLAN tag. Leave null for untagged vmbr0 traffic."
+  type        = number
+  default     = null
+}
+
+variable "aap_dns_domain" {
+  description = "Internal DNS suffix for AAP FQDNs"
+  type        = string
+  default     = "d3hl.site"
+}
+
+variable "aap_nodes" {
+  description = "AAP image-mode VM sizing and addressing"
+  type = map(object({
+    role     = string
+    ip       = string
+    cores    = number
+    memory   = number
+    disk     = number
+    node     = optional(string)
+    template = optional(number)
+  }))
+  default = {
+    gateway = {
+      role   = "gateway"
+      ip     = "10.10.10.60/24"
+      cores  = 4
+      memory = 16384
+      disk   = 60
+    }
+    controller = {
+      role   = "controller-eda"
+      ip     = "10.10.10.61/24"
+      cores  = 4
+      memory = 32768
+      disk   = 80
+    }
+    hub = {
+      role   = "hub"
+      ip     = "10.10.10.62/24"
+      cores  = 4
+      memory = 16384
+      disk   = 100
+    }
+    db = {
+      role   = "database"
+      ip     = "10.10.10.63/24"
+      cores  = 4
+      memory = 16384
+      disk   = 80
+    }
+  }
 }

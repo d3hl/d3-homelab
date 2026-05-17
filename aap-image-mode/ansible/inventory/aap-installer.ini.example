@@ -3,19 +3,19 @@
 # then vault or otherwise protect the real secret-bearing copy.
 
 [automationgateway]
-aap-gateway.homelab.local
+aap-gateway.d3hl.site
 
 [automationcontroller]
-aap-controller.homelab.local
+aap-controller.d3hl.site
 
 [automationhub]
-aap-hub.homelab.local
+aap-hub.d3hl.site
 
 [automationeda]
-aap-controller.homelab.local
+aap-controller.d3hl.site
 
 [database]
-aap-db.homelab.local
+aap-db.d3hl.site
 
 [all:vars]
 ansible_user=d3
@@ -36,20 +36,19 @@ registry_password=<vault_or_replace>
 redis_mode=standalone
 
 gateway_admin_password=<vault_or_replace>
-gateway_pg_host=aap-db.homelab.local
+gateway_pg_host=aap-db.d3hl.site
 gateway_pg_password=<vault_or_replace>
 
 controller_admin_password=<vault_or_replace>
-controller_pg_host=aap-db.homelab.local
+controller_pg_host=aap-db.d3hl.site
 controller_pg_password=<vault_or_replace>
 controller_percent_memory_capacity=0.5
 
 hub_admin_password=<vault_or_replace>
-hub_pg_host=aap-db.homelab.local
+hub_pg_host=aap-db.d3hl.site
 hub_pg_password=<vault_or_replace>
 hub_seed_collections=false
 
 eda_admin_password=<vault_or_replace>
-eda_pg_host=aap-db.homelab.local
+eda_pg_host=aap-db.d3hl.site
 eda_pg_password=<vault_or_replace>
-

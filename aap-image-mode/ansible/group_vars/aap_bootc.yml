@@ -1,22 +1,22 @@
 ---
-aap_dns_domain: homelab.local
+aap_dns_domain: d3hl.site
 
 aap_host_entries:
   - ip: 10.10.10.60
     names:
-      - aap-gateway.homelab.local
+      - aap-gateway.d3hl.site
       - aap-gateway
   - ip: 10.10.10.61
     names:
-      - aap-controller.homelab.local
+      - aap-controller.d3hl.site
       - aap-controller
   - ip: 10.10.10.62
     names:
-      - aap-hub.homelab.local
+      - aap-hub.d3hl.site
       - aap-hub
   - ip: 10.10.10.63
     names:
-      - aap-db.homelab.local
+      - aap-db.d3hl.site
       - aap-db
 
 aap_firewall_ports:
@@ -32,4 +32,3 @@ aap_firewall_ports:
     - 443/tcp
   database:
     - 5432/tcp
-

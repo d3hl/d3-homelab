@@ -2,7 +2,7 @@
 set -euo pipefail
 
 VM_ID="${VM_ID:-9906}"
-VM_NAME="${VM_NAME:-rhel9-aap-bootc-template}"
+VM_NAME="${VM_NAME:-rhel10-aap-bootc-template}"
 NODE_STORAGE="${NODE_STORAGE:-cephVM}"
 SNIPPET_STORAGE="${SNIPPET_STORAGE:-cFS}"
 QCOW2_PATH="${QCOW2_PATH:-output/qcow2/disk.qcow2}"
@@ -22,4 +22,3 @@ qm set "${VM_ID}" --ide2 "${SNIPPET_STORAGE}:cloudinit"
 qm set "${VM_ID}" --boot order=scsi0
 qm set "${VM_ID}" --serial0 socket --vga serial0
 qm template "${VM_ID}"
-

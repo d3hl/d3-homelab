@@ -1,67 +1,80 @@
-Terraform — terraform/aap/                                                                    
-                                                                                                  
-  ┌──────────────┬──────────────────────────────────────────────────────────────────────┐
-  │     File     │                               Purpose                                │
-  ├──────────────┼──────────────────────────────────────────────────────────────────────┤
-  │ provider.tf  │ bpg/proxmox 0.104, Terraform Cloud workspace d3-org/homelab/aap      │
-  ├──────────────┼──────────────────────────────────────────────────────────────────────┤
-  │ variables.tf │ All inputs, including rhel9_template_vm_id (required, no default)    │
-  ├──────────────┼──────────────────────────────────────────────────────────────────────┤
-  │ vms.tf       │ 4 VMs: gateway, controller, hub, db — with static IPs via cloud-init │
-  ├──────────────┼──────────────────────────────────────────────────────────────────────┤
-  │ outputs.tf   │ VM IDs + assigned IPs                                                │
-  └──────────────┴──────────────────────────────────────────────────────────────────────┘
+# AAP Image Mode Terraform
 
-  Assigned IPs (add to secrets.tfvars):
-  rhel9_template_vm_id = <your RHEL 9 template ID>
-  # All other vars are shared with the pve workspace:
-  virtual_environment_endpoint  = "..."
-  virtual_environment_api_token = "..."
+This Terraform root provisions the Red Hat Ansible Automation Platform image-mode VMs for the homelab. It expects a RHEL 10 bootc Proxmox template to already exist, then clones four AAP nodes from it.
 
-  VM specs:
+## Workspace
 
-  ┌────────────────┬──────┬───────┬────────┬─────────────┐
-  │       VM       │ vCPU │  RAM  │  Disk  │     IP      │
-  ├────────────────┼──────┼───────┼────────┼─────────────┤
-  │ aap-gateway    │ 2    │ 4 GB  │ 30 GB  │ 10.10.10.60 │
-  ├────────────────┼──────┼───────┼────────┼─────────────┤
-  │ aap-controller │ 4    │ 16 GB │ 60 GB  │ 10.10.10.61 │
-  ├────────────────┼──────┼───────┼────────┼─────────────┤
-  │ aap-hub        │ 4    │ 8 GB  │ 100 GB │ 10.10.10.62 │
-  ├────────────────┼──────┼───────┼────────┼─────────────┤
-  │ aap-db         │ 2    │ 8 GB  │ 40 GB  │ 10.10.10.63 │
-  └────────────────┴──────┴───────┴────────┴─────────────┘
+- HCP Terraform organization: `d3-org`
+- HCP Terraform project: `homelab`
+- HCP Terraform workspace: `aap-image-mode`
+- Provider: `bpg/proxmox` `~> 0.104`
 
-  Ansible — 3 files
+## Homelab Defaults
 
-  - ansible/inventory/aap.ini — Drop-in inventory for the AAP installer's ./setup.sh (fill in
-  registry creds + passwords before use)
-  - ansible/playbooks/aap-prereqs.yml — Runs before the AAP installer: RHSM registration, repo
-  enablement, firewall rules, PostgreSQL setup with 3 databases and users
-  - ansible/group_vars/aap.yml — DB password stubs (vault-encrypt these)
+| Setting | Default |
+|---|---|
+| Proxmox API endpoint | `var.virtual_environment_endpoint` |
+| Proxmox API token | `var.virtual_environment_api_token` |
+| SSH user | `d3` |
+| Default VM node | `nodeD` |
+| RHEL bootc template node | `nodeF` |
+| RHEL bootc template VM ID | `9906` |
+| VM datastore | `cephVM` |
+| Network bridge | `vmbr0` |
+| Gateway | `10.10.10.1` |
+| DNS domain | `d3hl.site` |
 
-  ---
-  Deployment order
+## VM Layout
 
-  # 1. Prerequisites — create a RHEL 9 cloud-init template in Proxmox first
-  #    (download RHEL 9 qcow2 from access.redhat.com, import, set VM ID)
+| Key | VM name | FQDN | IP | Size |
+|---|---|---|---:|---:|
+| `gateway` | `aap-gateway` | `aap-gateway.d3hl.site` | `10.10.10.60/24` | 4 vCPU / 16 GB / 60 GB |
+| `controller` | `aap-controller` | `aap-controller.d3hl.site` | `10.10.10.61/24` | 4 vCPU / 32 GB / 80 GB |
+| `hub` | `aap-hub` | `aap-hub.d3hl.site` | `10.10.10.62/24` | 4 vCPU / 16 GB / 100 GB |
+| `db` | `aap-db` | `aap-db.d3hl.site` | `10.10.10.63/24` | 4 vCPU / 16 GB / 80 GB |
 
-  # 2. Provision VMts
-  cd terraform/aap
-  terraform init
-  terraform apply -var-file="../../secrets.tfvars" -var="rhel9_template_vm_id=<id>"
+All VMs are tagged with `rhel10`, `bootc`, `aap`, and their role. They are placed in the Proxmox pool `aap-image-mode`.
 
-  # 3. Pre-configure nodes
-  cd ansible
-  ansible-playbook -i inventory/aap.ini playbooks/aap-prereqs.yml \
-    -e rhsm_username=<rhn-user> -e rhsm_password=<rhn-pass> \
-    --ask-vault-pass
+## Prerequisite
 
-  # 4. Run AAP installer (download from access.redhat.com)
-  tar xzf ansible-automation-platform-setup-bundle-*.tar.gz
-  cd ansible-automation-platform-setup-bundle-*/
-  ./setup.sh -i /path/to/ansible/inventory/aap.ini
+Build and import the RHEL 10 bootc template first from the repo-level image-mode workflow:
 
-  One prerequisite not automated: you need a RHEL 9 cloud-init template in Proxmox before step 2.
-  Download the RHEL 9 KVM guest image from https://access.redhat.com, import it with qm
-  importdisk, and note the VM ID for rhel9_template_vm_id.
+```bash
+cd aap-image-mode
+cp image/bootc-image-builder.config.toml.example image/bootc-image-builder.config.toml
+# Add /home/d3/.ssh/d3_tf.pub content to image/bootc-image-builder.config.toml
+./image/build-qcow2.example.sh
+./image/proxmox-import.example.sh
+```
+
+The import script defaults to VM ID `9906`, matching `var.rhel_bootc_template_vm_id`.
+
+## Run
+
+From this directory:
+
+```bash
+terraform init
+terraform fmt
+terraform validate
+terraform plan -var-file="../../secrets.tfvars"
+terraform apply -var-file="../../secrets.tfvars"
+```
+
+Required sensitive values are expected to come from `../../secrets.tfvars` or HCP Terraform workspace variables:
+
+```hcl
+virtual_environment_endpoint  = "https://10.10.10.10:8006/"
+virtual_environment_api_token = "terraform@pve!provider=REPLACE_WITH_TOKEN_SECRET"
+```
+
+Override `aap_nodes` if you need to change sizing, IPs, target nodes, or per-node template IDs.
+
+## Outputs
+
+- `aap_image_mode_vm_ids`
+- `aap_image_mode_fqdns`
+- `aap_image_mode_ips`
+
+After Terraform finishes, continue with the Ansible preflight and Red Hat AAP containerized installer inventory under `aap-image-mode/ansible`.
+
