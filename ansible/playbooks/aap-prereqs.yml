@@ -145,6 +145,17 @@
         group: postgres
         mode: "0700"
 
+    - name: Check if PostgreSQL cluster is already initialized
+      ansible.builtin.stat:
+        path: /var/lib/pgsql/data/PG_VERSION
+      register: pg_version_file
+
+    - name: Remove incomplete PostgreSQL data directory
+      ansible.builtin.file:
+        path: /var/lib/pgsql/data
+        state: absent
+      when: not pg_version_file.stat.exists
+
     - name: Initialize PostgreSQL cluster
       ansible.builtin.command: /usr/bin/postgresql-setup --initdb --unit postgresql
       args:
