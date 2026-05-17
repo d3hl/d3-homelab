@@ -1,5 +1,6 @@
 {
     "ansible.python.interpreterPath": "c:\\Users\\phong.dinh\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
-    "ansible.mcpServer.enabled": true
+    "ansible.mcpServer.enabled": true,
+    "ansible.ansible.reuseTerminal": true
 }
 
