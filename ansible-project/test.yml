@@ -1,0 +1,8 @@
+---
+- name: Install neccessary packages for onboarding.
+  hosts: pve
+  become: true
+#  become_user: root
+  gather_facts: no
+  roles:
+    - pve
