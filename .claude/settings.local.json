@@ -24,7 +24,8 @@
       "Bash(Sort-Object)",
       "PowerShell(npx ctx7@latest docs \"/websites/redhat_en_red_hat_ansible_automation_platform_2_5\" \"containerized installation small homelab setup\")",
       "Bash(Get-ChildItem -Path . -Directory)",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "Bash(op item *)"
     ]
   },
   "enabledPlugins": {
