@@ -22,6 +22,7 @@
 [all:vars]
 ansible_become=true
 ansible_ssh_private_key_file=/home/d3/.ssh/d3ops
+ansible_python_interpreter=/usr/bin/python3
 
 # ── Registry ─────────────────────────────────────────────────────────────────
 # Red Hat registry credentials (registry.redhat.io)
