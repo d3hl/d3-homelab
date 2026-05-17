@@ -129,10 +129,9 @@
   become: true
   tasks:
     - name: Enable PostgreSQL 15 AppStream module
-      community.general.dnf_module:
-        name: postgresql
-        stream: "15"
-        state: enabled
+      ansible.builtin.command: dnf module enable postgresql:15 -y
+      register: dnf_module_out
+      changed_when: "'Nothing to do' not in dnf_module_out.stdout"
 
     - name: Install PostgreSQL 15
       ansible.builtin.dnf:
