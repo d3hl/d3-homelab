@@ -134,6 +134,7 @@
           - postgresql-server
           - postgresql-contrib
           - python3-psycopg2
+          - glibc-langpack-en
         state: present
 
     - name: Ensure PostgreSQL home directory exists with correct ownership
@@ -148,6 +149,9 @@
       ansible.builtin.command: /usr/bin/postgresql-setup --initdb --unit postgresql
       args:
         creates: /var/lib/pgsql/data/PG_VERSION
+      environment:
+        LANG: en_US.UTF-8
+        LC_ALL: en_US.UTF-8
 
     - name: Start and enable PostgreSQL
       ansible.builtin.systemd:
