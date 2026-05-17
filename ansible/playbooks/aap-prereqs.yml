@@ -128,6 +128,11 @@
   hosts: database
   become: true
   tasks:
+    - name: Enable PostgreSQL 15 AppStream module
+      ansible.builtin.dnf:
+        name: "@postgresql:15"
+        state: present
+
     - name: Install PostgreSQL 15
       ansible.builtin.dnf:
         name:
@@ -137,7 +142,7 @@
         state: present
 
     - name: Initialize PostgreSQL cluster
-      ansible.builtin.command: postgresql-setup --initdb
+      ansible.builtin.command: /usr/bin/postgresql-setup --initdb --unit postgresql
       args:
         creates: /var/lib/pgsql/data/PG_VERSION
 
@@ -159,9 +164,9 @@
         path: /var/lib/pgsql/data/pg_hba.conf
         marker: "# {mark} AAP DATABASES"
         block: |
-          host    awx              awx              10.10.10.51/32    md5
-          host    automationhub    automationhub    10.10.10.52/32    md5
-          host    gateway          gateway          10.10.10.50/32    md5
+          host    awx              awx              10.10.10.61/32    md5
+          host    automationhub    automationhub    10.10.10.62/32    md5
+          host    gateway          gateway          10.10.10.60/32    md5
       notify: Reload PostgreSQL
 
     - name: Create AAP databases and users
