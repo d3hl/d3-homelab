@@ -136,6 +136,14 @@
           - python3-psycopg2
         state: present
 
+    - name: Ensure PostgreSQL home directory exists with correct ownership
+      ansible.builtin.file:
+        path: /var/lib/pgsql
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: "0700"
+
     - name: Initialize PostgreSQL cluster
       ansible.builtin.command: /usr/bin/postgresql-setup --initdb --unit postgresql
       args:
