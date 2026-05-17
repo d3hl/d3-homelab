@@ -1,5 +1,5 @@
 ---
-# Pre-configure RHEL 9 VMs before running the AAP installer.
+# Pre-configure RHEL 10 VMs before running the AAP installer.
 #
 # Usage:
 #   ansible-playbook -i inventory/aap.ini playbooks/aap-prereqs.yml \
@@ -9,7 +9,7 @@
 # Run this against all four VMs (gateway, controller, hub, db) before
 # running the AAP installer's ./setup.sh.
 
-- name: Common RHEL 9 baseline for all AAP nodes
+- name: Common RHEL 10 baseline for all AAP nodes
   hosts: automationgateway:automationcontroller:automationhub:database
   become: true
   gather_facts: true
@@ -17,11 +17,11 @@
   vars:
     rhsm_username: ""
     rhsm_password: ""
-    # AAP 2.5 requires these repos on RHEL 9
+    # AAP 2.5 requires these repos on RHEL 10
     aap_repos:
-      - rhel-9-for-x86_64-baseos-rpms
-      - rhel-9-for-x86_64-appstream-rpms
-      - ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+      - rhel-10-for-x86_64-baseos-rpms
+      - rhel-10-for-x86_64-appstream-rpms
+      - ansible-automation-platform-2.5-for-rhel-10-x86_64-rpms
 
   tasks:
     - name: Register with RHSM
@@ -39,7 +39,7 @@
       when: rhsm_username | length > 0
 
     - name: Install common packages
-      ansible.builtin.dnf:
+      ansible.builtin.dnf5:
         name:
           - qemu-guest-agent
           - python3
@@ -129,7 +129,7 @@
   become: true
   tasks:
     - name: Install PostgreSQL
-      ansible.builtin.dnf:
+      ansible.builtin.dnf5:
         name:
           - postgresql-server
           - postgresql-contrib
