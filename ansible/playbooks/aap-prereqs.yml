@@ -135,6 +135,7 @@
           - postgresql-contrib
           - python3-psycopg2
           - glibc-langpack-en
+          - acl
         state: present
 
     - name: Ensure PostgreSQL home directory exists with correct ownership
