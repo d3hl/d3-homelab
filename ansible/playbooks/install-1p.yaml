@@ -1,6 +1,6 @@
 ---
 - name: Install 1Password CLI 
-  hosts: 10.10.10.29 
+  hosts: loalhost 
   gather_facts: no
   roles:
     - 1passwordsetup
