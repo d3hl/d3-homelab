@@ -4,7 +4,7 @@ data "local_file" "ssh_public_key" {
 
 resource "proxmox_virtual_environment_pool" "aap" {
   pool_id = "aap"
-  comment = "Ansible Automation Platform 2.6 containerized"
+  comment = "Ansible Automation Platform 2.6 containerized all-in-one"
 }
 
 resource "proxmox_virtual_environment_file" "aap_user_data" {
@@ -19,6 +19,7 @@ resource "proxmox_virtual_environment_file" "aap_user_data" {
     hostname: aap
     fqdn: aap.${var.aap_dns_domain}
     manage_etc_hosts: true
+    package_update: false
     users:
       - default
       - name: d3
@@ -30,6 +31,7 @@ resource "proxmox_virtual_environment_file" "aap_user_data" {
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
       - systemctl enable --now qemu-guest-agent
+      - hostnamectl set-hostname aap.${var.aap_dns_domain}
     EOF
   }
 }
@@ -37,12 +39,12 @@ resource "proxmox_virtual_environment_file" "aap_user_data" {
 resource "proxmox_cloned_vm" "aap" {
   node_name       = var.virtual_environment_node_name
   name            = "aap"
-  tags            = ["rhel9", "aap", "container"]
+  tags            = ["rhel10", "aap26", "container", "all-in-one"]
   stop_on_destroy = true
 
   clone = {
-    source_vm_id     = var.rhel9_template_vm_id
-    source_node_name = var.rhel9_template_node
+    source_vm_id     = var.rhel10_template_vm_id
+    source_node_name = var.rhel10_template_node
     full             = true
     pool_id          = proxmox_virtual_environment_pool.aap.id
   }

@@ -33,21 +33,21 @@ variable "cfs_datastore_id" {
   default     = "cFS"
 }
 
-# Create a RHEL 9 cloud-init template in Proxmox and set this to its VM ID.
-variable "rhel9_template_vm_id" {
-  description = "VM ID of the RHEL 9 cloud-init template to clone from"
+# Create a RHEL 10 cloud-init template in Proxmox and set this to its VM ID.
+variable "rhel10_template_vm_id" {
+  description = "VM ID of the RHEL 10 cloud-init template to clone from"
   type        = number
   default     = 99999
 }
 
-variable "rhel9_template_node" {
-  description = "Proxmox node where the RHEL 9 template resides"
+variable "rhel10_template_node" {
+  description = "Proxmox node where the RHEL 10 template resides"
   type        = string
   default     = "nodeF"
 }
 
 variable "aap_ip" {
-  description = "Static IP/prefix for the AAP container-mode VM (CIDR notation)"
+  description = "Static IP/prefix for the AAP 2.6 containerized all-in-one VM (CIDR notation)"
   type        = string
   default     = "10.10.10.60/24"
 }
@@ -70,24 +70,24 @@ variable "network_vlan_tag" {
   default     = null
 }
 
-# AAP 2.6 containerized all-in-one minimum: 4 vCPU / 16 GB.
-# Recommended for controller + hub + EDA + gateway + bundled DB: 8 vCPU / 24 GB.
+# AAP 2.6 containerized all-in-one host for gateway, controller, hub, EDA, and database.
+# Keep this above the small-test minimum; hub image cache and execution environments grow quickly.
 variable "aap_cores" {
-  description = "vCPU count for the AAP container-mode VM"
+  description = "vCPU count for the AAP 2.6 containerized all-in-one VM"
   type        = number
   default     = 8
 }
 
 variable "aap_memory" {
-  description = "RAM in MiB for the AAP container-mode VM"
+  description = "RAM in MiB for the AAP 2.6 containerized all-in-one VM"
   type        = number
   default     = 24576
 }
 
 variable "aap_disk_size" {
-  description = "Root disk size in GiB (execution environments and hub image cache add up fast)"
+  description = "Root disk size in GiB for RHEL 10, AAP containers, execution environments, and hub image cache"
   type        = number
-  default     = 100
+  default     = 160
 }
 
 variable "aap_dns_domain" {

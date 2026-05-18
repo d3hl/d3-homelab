@@ -1,5 +1,4 @@
-# AAP 2.5 Containerized Installation — Single Controller + Hub + External DB
-# Topology: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/assembly-platform-install-scenario
+# AAP 2.6 Containerized Installation - all-in-one on RHEL 10
 #
 # Usage (from inside the extracted AAP installer bundle):
 #   ./setup.sh -i /path/to/this/aap.ini
@@ -8,14 +7,19 @@
 #   ansible-vault encrypt_string '<value>' --name '<var>'
 
 [automationgateway]
-sg-hl-aap-gw ansible_host=10.10.10.60
+aap ansible_host=10.10.10.60
+
 [automationcontroller]
-sg-hl-aap-ct ansible_host=10.10.10.61
+aap ansible_host=10.10.10.60
+
 [automationhub]
-sg-hl-aap-hub ansible_host=10.10.10.62
+aap ansible_host=10.10.10.60
+
+[automationedacontroller]
+aap ansible_host=10.10.10.60
 
 [database]
-sg-hl-aap-db ansible_host=10.10.10.63 ansible_user=d3
+aap ansible_host=10.10.10.60
 
 [all:vars]
 ansible_user=d3
@@ -38,7 +42,7 @@ automationhub_admin_password='op://d3HLPRV/AAP Hub Admin/password'
 redis_mode=standalone
 
 # ── Shared PostgreSQL connection (controller database) ───────────────────────
-pg_host='10.10.10.63'
+pg_host='10.10.10.60'
 pg_port='5432'
 pg_database='awx'
 pg_username='awx'
@@ -46,7 +50,7 @@ pg_password='op://d3HLPRV/AAP Controller DB/password'
 pg_sslmode='prefer'
 
 # ── Hub PostgreSQL connection ─────────────────────────────────────────────────
-automationhub_pg_host='10.10.10.63'
+automationhub_pg_host='10.10.10.60'
 automationhub_pg_port=5432
 automationhub_pg_database='automationhub'
 automationhub_pg_username='automationhub'
@@ -54,11 +58,18 @@ automationhub_pg_password='op://d3HLPRV/AAP Hub DB/password'
 automationhub_pg_sslmode='prefer'
 
 # ── Gateway PostgreSQL connection ─────────────────────────────────────────────
-automationgateway_pg_host='10.10.10.63'
+automationgateway_pg_host='10.10.10.60'
 automationgateway_pg_port=5432
 automationgateway_pg_database='gateway'
 automationgateway_pg_username='gateway'
 automationgateway_pg_password='op://d3HLPRV/AAP Gateway DB/password'
+
+# ── EDA PostgreSQL connection ─────────────────────────────────────────────────
+automationedacontroller_pg_host='10.10.10.60'
+automationedacontroller_pg_port=5432
+automationedacontroller_pg_database='eda'
+automationedacontroller_pg_username='eda'
+automationedacontroller_pg_password='op://d3HLPRV/AAP EDA DB/password'
 
 # ── TLS ───────────────────────────────────────────────────────────────────────
 # Defaults to self-signed. Set paths to use your own certs.

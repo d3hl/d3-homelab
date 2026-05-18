@@ -6,22 +6,21 @@
 #     -e rhsm_username=<rhn-user> -e rhsm_password=<rhn-pass> \
 #     --ask-vault-pass
 #
-# Run this against all four VMs (gateway, controller, hub, db) before
-# running the AAP installer's ./setup.sh.
+# Run this against the all-in-one AAP VM before running the AAP installer.
 
 - name: Common RHEL 10 baseline for all AAP nodes
-  hosts: automationgateway:automationcontroller:automationhub:database
+  hosts: automationgateway
   become: true
   gather_facts: true
 
   vars:
     rhsm_username: ""
     rhsm_password: ""
-    # AAP 2.5 requires these repos on RHEL 10
+    # AAP 2.6 containerized all-in-one on RHEL 10.
     aap_repos:
       - rhel-10-for-x86_64-baseos-rpms
       - rhel-10-for-x86_64-appstream-rpms
-      - ansible-automation-platform-2.5-for-rhel-10-x86_64-rpms
+      - ansible-automation-platform-2.6-for-rhel-10-x86_64-rpms
 
   tasks:
     - name: Register with RHSM
@@ -46,6 +45,7 @@
           - python3-pip
           - firewalld
           - chrony
+          - podman
         state: present
         update_cache: true
 
@@ -73,16 +73,13 @@
         path: /etc/hosts
         marker: "# {mark} AAP NODES"
         block: |
-          10.10.10.60 aap-gateway
-          10.10.10.61 aap-controller
-          10.10.10.62 aap-hub
-          10.10.10.63 aap-db
+          10.10.10.60 aap aap.d3hl.site
 
-- name: Open firewall ports on Gateway
+- name: Open firewall ports on AAP all-in-one host
   hosts: automationgateway
   become: true
   tasks:
-    - name: Allow gateway ports
+    - name: Allow AAP service ports
       ansible.posix.firewalld:
         port: "{{ item }}"
         permanent: true
@@ -92,39 +89,10 @@
         - 80/tcp
         - 443/tcp
         - 8443/tcp
+        - 8080/tcp
+        - 27199/tcp
 
-- name: Open firewall ports on Controller
-  hosts: automationcontroller
-  become: true
-  tasks:
-    - name: Allow controller ports
-      ansible.posix.firewalld:
-        port: "{{ item }}"
-        permanent: true
-        state: enabled
-        immediate: true
-      loop:
-        - 80/tcp
-        - 443/tcp
-        - 8443/tcp
-        - 27199/tcp   # Receptor mesh
-
-- name: Open firewall ports on Hub
-  hosts: automationhub
-  become: true
-  tasks:
-    - name: Allow hub ports
-      ansible.posix.firewalld:
-        port: "{{ item }}"
-        permanent: true
-        state: enabled
-        immediate: true
-      loop:
-        - 80/tcp
-        - 443/tcp
-        - 8080/tcp    # Pulp content API
-
-- name: Install and harden PostgreSQL on DB node
+- name: Install and harden PostgreSQL on AAP all-in-one host
   hosts: database
   become: true
   tasks:
@@ -183,9 +151,10 @@
         path: /var/lib/pgsql/data/pg_hba.conf
         marker: "# {mark} AAP DATABASES"
         block: |
-          host    awx              awx              10.10.10.61/32    md5
-          host    automationhub    automationhub    10.10.10.62/32    md5
+          host    awx              awx              10.10.10.60/32    md5
+          host    automationhub    automationhub    10.10.10.60/32    md5
           host    gateway          gateway          10.10.10.60/32    md5
+          host    eda              eda              10.10.10.60/32    md5
       notify: Reload PostgreSQL
 
     - name: Create AAP databases and users
@@ -197,6 +166,7 @@
         - awx
         - automationhub
         - gateway
+        - eda
 
     - name: Create PostgreSQL users
       become_user: postgres
@@ -209,6 +179,7 @@
         - { name: awx,            password: "{{ pg_password }}" }
         - { name: automationhub,  password: "{{ automationhub_pg_password }}" }
         - { name: gateway,        password: "{{ automationgateway_pg_password }}" }
+        - { name: eda,            password: "{{ automationedacontroller_pg_password }}" }
       no_log: true
 
     - name: Grant database privileges
@@ -222,6 +193,7 @@
         - { db: awx,           role: awx }
         - { db: automationhub, role: automationhub }
         - { db: gateway,       role: gateway }
+        - { db: eda,           role: eda }
 
   handlers:
     - name: Reload PostgreSQL
