@@ -12,12 +12,7 @@ on:
       - "terraform/aap/**"
       - ".github/workflows/hcp-terraform-aap.yml"
   workflow_dispatch:
-    inputs:
-      apply:
-        description: "Apply the HCP Terraform run"
-        type: boolean
-        required: false
-        default: false
+    inputs: {}
 
 env:
   TF_CLOUD_ORGANIZATION: d3-org
@@ -128,7 +123,7 @@ jobs:
       - name: Apply run
         if: |
           github.event_name == 'push' ||
-          (github.event_name == 'workflow_dispatch' && inputs.apply)
+          github.event_name == 'workflow_dispatch'
         uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.3.2
         with:
           token: ${{ env.TF_API_TOKEN }}
