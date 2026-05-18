@@ -18,7 +18,15 @@
       "PowerShell(npx ctx7@latest docs /websites/developer_hashicorp_terraform_cloud-docs \"provision new VM resource running RHEL enterprise 10\" 2>&1)",
       "Bash(grep -E \"\\\\.tfvars$|\\\\.tfvars\\\\.json$\")",
       "PowerShell(npx ctx7@latest docs /websites/developer_1password \"Terraform provider service account authentication data sources\" 2>&1)",
-      "PowerShell(op item *)"
+      "PowerShell(op item *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\phong.dinh\\\\Github\\\\d3-homelab\\\\ansible\" -Recurse -Force)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "PowerShell(npx ctx7@latest docs \"/websites/redhat_en_red_hat_ansible_automation_platform_2_5\" \"containerized installation small homelab setup\")",
+      "Bash(Get-ChildItem -Path . -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(op item *)",
+      "Bash(ssh *)"
     ]
   },
   "enabledPlugins": {

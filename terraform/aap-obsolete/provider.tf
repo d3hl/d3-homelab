@@ -5,7 +5,7 @@ terraform {
     organization = "d3-org"
     workspaces {
       project = "homelab"
-      name    = "aap-container"
+      name    = "aap"
     }
   }
 

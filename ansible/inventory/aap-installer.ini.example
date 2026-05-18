@@ -1,0 +1,54 @@
+# Red Hat AAP 2.6 containerized installer inventory for the homelab image-mode VMs.
+# Copy this file beside the extracted AAP installer bundle, replace placeholders,
+# then vault or otherwise protect the real secret-bearing copy.
+
+[automationgateway]
+aap-gateway.d3hl.site
+
+[automationcontroller]
+aap-controller.d3hl.site
+
+[automationhub]
+aap-hub.d3hl.site
+
+[automationeda]
+aap-controller.d3hl.site
+
+[database]
+aap-db.d3hl.site
+
+[all:vars]
+ansible_user=d3
+ansible_become=true
+ansible_ssh_private_key_file=/home/d3/.ssh/d3_tf
+
+postgresql_admin_username=postgres
+postgresql_admin_password=<vault_or_replace>
+
+# Online install pulls images from Red Hat registries.
+registry_username=<rhn_or_registry_service_account>
+registry_password=<vault_or_replace>
+
+# For bundled/disconnected installs, comment registry_username/password and set:
+# bundle_install=true
+# bundle_dir=/path/to/bundle
+
+redis_mode=standalone
+
+gateway_admin_password=<vault_or_replace>
+gateway_pg_host=aap-db.d3hl.site
+gateway_pg_password=<vault_or_replace>
+
+controller_admin_password=<vault_or_replace>
+controller_pg_host=aap-db.d3hl.site
+controller_pg_password=<vault_or_replace>
+controller_percent_memory_capacity=0.5
+
+hub_admin_password=<vault_or_replace>
+hub_pg_host=aap-db.d3hl.site
+hub_pg_password=<vault_or_replace>
+hub_seed_collections=false
+
+eda_admin_password=<vault_or_replace>
+eda_pg_host=aap-db.d3hl.site
+eda_pg_password=<vault_or_replace>

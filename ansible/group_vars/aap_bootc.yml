@@ -1,0 +1,34 @@
+---
+aap_dns_domain: d3hl.site
+
+aap_host_entries:
+  - ip: 10.10.10.60
+    names:
+      - aap-gateway.d3hl.site
+      - aap-gateway
+  - ip: 10.10.10.61
+    names:
+      - aap-controller.d3hl.site
+      - aap-controller
+  - ip: 10.10.10.62
+    names:
+      - aap-hub.d3hl.site
+      - aap-hub
+  - ip: 10.10.10.63
+    names:
+      - aap-db.d3hl.site
+      - aap-db
+
+aap_firewall_ports:
+  gateway:
+    - 80/tcp
+    - 443/tcp
+  controller:
+    - 80/tcp
+    - 443/tcp
+    - 27199/tcp
+  hub:
+    - 80/tcp
+    - 443/tcp
+  database:
+    - 5432/tcp

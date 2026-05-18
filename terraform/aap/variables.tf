@@ -1,66 +1,97 @@
-variable "OP_SERVICE_ACCOUNT_TOKEN" {
-  type      = string
-  sensitive = true
+variable "virtual_environment_endpoint" {
+  description = "Proxmox API endpoint URL (e.g. https://10.10.10.10:8006/)"
+  type        = string
+}
+
+variable "virtual_environment_api_token" {
+  description = "Proxmox API token (format: user@realm!tokenid=secret)"
+  type        = string
+  sensitive   = true
+}
+
+variable "virtual_environment_username" {
+  description = "Username for Proxmox SSH operations"
+  type        = string
+  default     = "d3"
+}
+
+variable "virtual_environment_node_name" {
+  description = "Proxmox node to deploy the AAP VM on"
+  type        = string
+  default     = "nodeD"
 }
 
 variable "datastore_id" {
-  description = "Datastore for VM disks (Ceph RBD)"
+  description = "Datastore for the VM disk (Ceph RBD)"
   type        = string
   default     = "cephVM"
 }
 
-variable "iso_datastore_id" {
-  description = "Datastore for qcow2 image download and cloud-init snippets (CephFS)"
+variable "cfs_datastore_id" {
+  description = "Datastore for cloud-init snippets (shared CephFS)"
   type        = string
   default     = "cFS"
 }
 
-variable "node_name" {
-  description = "Proxmox node to deploy the AAP server on"
+# Create a RHEL 9 cloud-init template in Proxmox and set this to its VM ID.
+variable "rhel9_template_vm_id" {
+  description = "VM ID of the RHEL 9 cloud-init template to clone from"
+  type        = number
+  default     = 99999
+}
+
+variable "rhel9_template_node" {
+  description = "Proxmox node where the RHEL 9 template resides"
   type        = string
   default     = "nodeF"
 }
-# RHEL 10 KVM guest image — download from Red Hat Customer Portal (subscription required).
-# Host it on an internal HTTP server or pass a pre-signed Red Hat URL.
-# Image name: rhel-10.0-x86_64-kvm.qcow2
-variable "rhel_qcow2" {
-  description = "URL to the RHEL 10 KVM qcow2 guest image (Red Hat subscription required)"
+
+variable "aap_ip" {
+  description = "Static IP/prefix for the AAP container-mode VM (CIDR notation)"
   type        = string
-  default     = "rhel-10"
+  default     = "10.10.10.60/24"
 }
 
-variable "vm_ip" {
-  description = "Static IP address for the AAP server in CIDR notation (e.g. 10.10.10.50/24)"
+variable "network_gateway" {
+  description = "Default gateway for the AAP VM"
   type        = string
-  default     = "10.10.10.49/24"
+  default     = "10.10.10.1"
 }
 
-variable "vm_gateway" {
-  description = "Default gateway for the AAP server"
+variable "network_bridge" {
+  description = "Proxmox bridge for the AAP VM"
   type        = string
-  default     = "10.10.10.2"
+  default     = "vmbr0"
 }
 
-variable "vm_id" {
-  description = "Proxmox VM ID (0 = auto-assign)"
+variable "network_vlan_tag" {
+  description = "VLAN tag; null for untagged traffic"
   type        = number
-  default     = 0
+  default     = null
 }
 
-variable "cpu_cores" {
-  description = "vCPU cores for the AAP server (Red Hat minimum: 4)"
+# AAP 2.6 containerized all-in-one minimum: 4 vCPU / 16 GB.
+# Recommended for controller + hub + EDA + gateway + bundled DB: 8 vCPU / 24 GB.
+variable "aap_cores" {
+  description = "vCPU count for the AAP container-mode VM"
   type        = number
   default     = 8
 }
 
-variable "memory_mb" {
-  description = "Memory in MB for the AAP server (Red Hat minimum: 16384)"
+variable "aap_memory" {
+  description = "RAM in MiB for the AAP container-mode VM"
   type        = number
-  default     = 32768
+  default     = 24576
 }
 
-variable "disk_size_gb" {
-  description = "Root disk size in GB"
+variable "aap_disk_size" {
+  description = "Root disk size in GiB (execution environments and hub image cache add up fast)"
   type        = number
   default     = 100
+}
+
+variable "aap_dns_domain" {
+  description = "Internal DNS domain for the AAP VM FQDN"
+  type        = string
+  default     = "d3hl.site"
 }

@@ -1,0 +1,21 @@
+---
+# group_vars/aap.yml — variables shared by all nodes in the [aap] groups
+# Sensitive values should be encrypted with ansible-vault:
+#   ansible-vault encrypt_string '<value>' --name '<var_name>'
+
+ansible_user: d3
+ansible_become: true
+ansible_become_method: sudo
+
+# DB passwords — set and vault-encrypt these before running aap-prereqs.yml
+awx_db_password: !vault |
+  # ansible-vault encrypt_string '<your-password>' --name 'awx_db_password'
+  REPLACE_WITH_VAULT_ENCRYPTED_VALUE
+
+hub_db_password: !vault |
+  # ansible-vault encrypt_string '<your-password>' --name 'hub_db_password'
+  REPLACE_WITH_VAULT_ENCRYPTED_VALUE
+
+gateway_db_password: !vault |
+  # ansible-vault encrypt_string '<your-password>' --name 'gateway_db_password'
+  REPLACE_WITH_VAULT_ENCRYPTED_VALUE
