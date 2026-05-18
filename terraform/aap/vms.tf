@@ -28,13 +28,13 @@ resource "proxmox_cloned_vm" "aap" {
   disk = {
     virtio0 = {
       datastore_id = var.datastore_id
-      size         = var.aap_disk_size
+      size_gb      = var.aap_disk_size
       discard      = "on"
       iothread     = true
     }
   }
 
-  network_device = {
+  network = {
     net0 = {
       bridge = var.network_bridge
       model  = "virtio"

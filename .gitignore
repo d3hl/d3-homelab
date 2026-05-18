@@ -39,3 +39,6 @@ terraform.rc
 # Ansible Workflows plugin state (auto-added)
 .claude/ansible-workflows.local.md
 .claude/ansible-workflows.*.bundle.md
+
+# Local AAP installer inventories can contain registry and admin passwords.
+ansible/inventory/inventory-growth.local.ini

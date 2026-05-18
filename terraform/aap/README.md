@@ -37,7 +37,7 @@ Trigger behavior:
 
 - Pull requests touching `terraform/aap/**` create a speculative plan and comment the summary on the PR.
 - Pushes to `main` touching `terraform/aap/**` create and apply a run.
-- Manual `workflow_dispatch` creates a run, and applies only when `apply=true`.
+- Manual `workflow_dispatch` creates and applies a run.
 
 Defaults:
 
@@ -53,11 +53,19 @@ Defaults:
 
 ## Post-Provision
 
-Render or create `ansible/inventory/aap.ini` from `ansible/inventory/aap.tpl`, then run:
+Use an ignored local copy of the AAP growth inventory for installer secrets:
 
 ```bash
 cd ansible
-ansible-playbook -i inventory/aap.ini playbooks/aap-prereqs.yml --ask-vault-pass
+cp inventory/inventory-growth.ini inventory/inventory-growth.local.ini
 ```
 
-After that, run the Red Hat AAP 2.6 containerized installer bundle using the same inventory.
+Populate `inventory/inventory-growth.local.ini` from Ansible Vault, 1Password, or another local secret source. Do not commit the local inventory.
+
+After the VM is provisioned and the Red Hat AAP 2.6 containerized installer bundle is available on the AAP host, run the installer from the extracted installer directory:
+
+```bash
+ansible-playbook -i inventory-growth.local.ini ansible.containerized_installer.install
+```
+
+For the deployment checklist and preflight helper, see `docs/aap-deployment-test-plan.md`.
