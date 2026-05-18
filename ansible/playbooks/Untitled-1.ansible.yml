@@ -1,0 +1,8 @@
+---
+- name: mount cephfs drive 
+  hosts: komodo
+ # become: true
+  become_method: su
+  gather_facts: yes
+  roles:
+    - cephfs
